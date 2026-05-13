@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合併島嶼矩陣閃電計算器</title>
+
+    <style>
+        :root {
+            --bg-a: #fff6df;
+            --bg-b: #dff6ff;
+            --bg-c: #ffe4ef;
+            --card: rgba(255, 255, 255, 0.88);
+            --text: #263238;
+            --muted: #6b7280;
+            --primary: #ff8a00;
+            --primary-dark: #e46f00;
+            --pink: #ff4f88;
+            --blue: #25a7ff;
+            --green: #18a66a;
+            --danger: #ef4444;
+            --shadow: 0 18px 48px rgba(30, 41, 59, 0.16);
+            --radius-xl: 30px;
+            --cell-size: 72px;
+            --board-gap: 8px;
+            --board-max-size: calc((var(--cell-size) * 7) + (var(--board-gap) * 6));
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(255, 194, 92, 0.7), transparent 26%),
+                radial-gradient(circle at 90% 8%, rgba(69, 193, 255, 0.55), transparent 28%),
+                radial-gradient(circle at 50% 100%, rgba(255, 89, 143, 0.28), transparent 34%),
+                linear-gradient(135deg, var(--bg-a), var(--bg-b) 56%, var(--bg-c));
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.28) 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+            z-index: -1;
+        }
+
+        body.is-dragging {
+            user-select: none;
+            cursor: grabbing;
+        }
+
+        .app {
+            width: min(1220px, calc(100% - 24px));
+            margin: 0 auto;
+            padding: 24px 0 56px;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            border-radius: var(--radius-xl);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 249, 235, 0.88));
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            box-shadow: var(--shadow);
+        }
+
+        .hero::after {
+            content: "⚡";
+            position: absolute;
+            right: 28px;
+            top: 4px;
+            font-size: 112px;
+            opacity: 0.12;
+            transform: rotate(12deg);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 138, 0, 0.13);
+            color: var(--primary-dark);
+            font-weight: 900;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(32px, 5vw, 56px);
+            line-height: 1.05;
+            letter-spacing: -1.2px;
+        }
+
+        .hero p {
+            margin: 14px 0 0;
+            max-width: 850px;
+            color: #4b5563;
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .toolbar {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 12px;
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: var(--radius-xl);
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(14px);
+            align-items: end;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 900;
+            color: #374151;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            height: 46px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(107, 114, 128, 0.24);
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+            transition: 0.16s ease;
+        }
+
+        input:focus {
+            border-color: rgba(255, 138, 0, 0.88);
+            box-shadow: 0 0 0 4px rgba(255, 138, 0, 0.14);
+        }
+
+        .fixed-goal {
+            min-height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 138, 0, 0.2);
+            background: rgba(255, 255, 255, 0.72);
+            color: #374151;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .fixed-goal strong {
+            color: var(--primary-dark);
+            font-size: 16px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            align-items: end;
+        }
+
+        button {
+            min-height: 46px;
+            border: 0;
+            border-radius: 14px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-weight: 950;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--pink));
+            box-shadow: 0 12px 24px rgba(255, 79, 136, 0.22);
+            transition: transform 0.14s ease, box-shadow 0.14s ease, opacity 0.14s ease;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 30px rgba(255, 79, 136, 0.28);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-blue {
+            background: linear-gradient(135deg, #25a7ff, #5d6bff);
+            box-shadow: 0 12px 24px rgba(37, 167, 255, 0.18);
+        }
+
+        .btn-soft {
+            background: rgba(255, 255, 255, 0.85);
+            color: #374151;
+            border: 1px solid rgba(107, 114, 128, 0.18);
+            box-shadow: none;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff7676, #ef4444);
+        }
+
+        .btn-danger.active {
+            outline: 4px solid rgba(239, 68, 68, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 330px;
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .panel {
+            border-radius: var(--radius-xl);
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.76);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(14px);
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        .panel-head {
+            padding: 18px 20px 14px;
+            border-bottom: 1px solid rgba(255, 138, 0, 0.16);
+        }
+
+        .panel-title {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 950;
+        }
+
+        .panel-desc {
+            margin: 7px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .panel-body {
+            padding: 18px 20px 20px;
+        }
+
+        .palette-wrap {
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+
+        .palette {
+            display: flex;
+            gap: 12px;
+            min-height: 112px;
+            align-items: center;
+        }
+
+        .token {
+            position: relative;
+            flex: 0 0 auto;
+            width: 76px;
+            height: 92px;
+            border-radius: 22px;
+            display: grid;
+            place-items: center;
+            cursor: grab;
+            user-select: none;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.78);
+            box-shadow: 0 12px 24px rgba(30, 41, 59, 0.16);
+            transition: transform 0.16s ease, box-shadow 0.16s ease, outline 0.16s ease, opacity 0.16s ease;
+            isolation: isolate;
+            touch-action: none;
+        }
+
+        .token::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: 17px;
+            background: rgba(255, 255, 255, 0.15);
+            z-index: -1;
+        }
+
+        .token:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 18px 30px rgba(30, 41, 59, 0.2);
+        }
+
+        .token:active {
+            cursor: grabbing;
+            transform: scale(0.98);
+        }
+
+        .token.selected {
+            outline: 5px solid rgba(255, 138, 0, 0.32);
+            transform: translateY(-3px);
+        }
+
+        .token.dragging-source {
+            opacity: 0.38;
+        }
+
+        .token-icon {
+            font-size: 32px;
+            line-height: 1;
+            filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.18));
+        }
+
+        .token-power {
+            position: absolute;
+            left: 8px;
+            top: 7px;
+            padding: 2px 7px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 950;
+            color: rgba(255, 255, 255, 0.96);
+            background: rgba(0, 0, 0, 0.18);
+        }
+
+        .token-value {
+            position: absolute;
+            left: 7px;
+            right: 7px;
+            bottom: 7px;
+            height: 23px;
+            display: grid;
+            place-items: center;
+            border-radius: 999px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.2);
+            font-size: 12px;
+            font-weight: 950;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .drag-ghost {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.92;
+            transform: translate(-50%, -50%) scale(0.95);
+            box-shadow: 0 24px 46px rgba(30, 41, 59, 0.28);
+        }
+
+        .board-tools {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 14px 0;
+        }
+
+        .tip {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .board-wrap {
+            width: 100%;
+            overflow: visible;
+            padding: 12px;
+            border-radius: var(--radius-xl);
+            background:
+                linear-gradient(135deg, rgba(116, 216, 255, 0.3), rgba(255, 197, 100, 0.22));
+            border: 1px solid rgba(255, 255, 255, 0.74);
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: var(--board-gap);
+            width: min(100%, var(--board-max-size));
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        .cell {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            min-width: 0;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, 0.55);
+            border: 2px dashed rgba(255, 138, 0, 0.26);
+            transition: 0.14s ease;
+            position: relative;
+        }
+
+        .cell:hover,
+        .cell.drag-over {
+            background: rgba(255, 255, 255, 0.92);
+            border-color: rgba(255, 138, 0, 0.85);
+            transform: translateY(-1px);
+        }
+
+        .cell.filled {
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.72);
+            background: rgba(255, 255, 255, 0.72);
+        }
+
+        .cell .token {
+            width: 82%;
+            height: 82%;
+            border-radius: 24%;
+            box-shadow: 0 8px 18px rgba(30, 41, 59, 0.14);
+        }
+
+        .cell .token::before {
+            inset: 10%;
+            border-radius: 22%;
+        }
+
+        .cell .token-icon {
+            font-size: clamp(16px, 4.8vw, 27px);
+        }
+
+        .cell .token-power {
+            font-size: clamp(6px, 1.8vw, 9px);
+            left: 8%;
+            top: 8%;
+            padding: 1px 5px;
+        }
+
+        .cell .token-value {
+            height: 24%;
+            left: 8%;
+            right: 8%;
+            bottom: 8%;
+            font-size: clamp(6px, 1.7vw, 10px);
+        }
+
+        .cell-remove {
+            position: absolute;
+            right: -6px;
+            top: -6px;
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            display: none;
+            place-items: center;
+            color: #fff;
+            background: var(--danger);
+            font-size: 12px;
+            font-weight: 950;
+            box-shadow: 0 6px 12px rgba(239, 68, 68, 0.28);
+            pointer-events: none;
+        }
+
+        .cell.filled:hover .cell-remove {
+            display: grid;
+        }
+
+        .result-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .result-card {
+            position: relative;
+            overflow: hidden;
+            padding: 16px;
+            min-height: 94px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            box-shadow: 0 10px 26px rgba(30, 41, 59, 0.08);
+        }
+
+        .result-card::after {
+            content: "";
+            position: absolute;
+            right: -28px;
+            top: -28px;
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            background: rgba(255, 138, 0, 0.12);
+        }
+
+        .result-label {
+            position: relative;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 950;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            position: relative;
+            font-size: 30px;
+            font-weight: 950;
+            letter-spacing: -0.8px;
+            font-variant-numeric: tabular-nums;
+            word-break: break-word;
+        }
+
+        .result-note {
+            position: relative;
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .result-card.missing .result-value {
+            color: var(--danger);
+        }
+
+        .result-card.done .result-value {
+            color: var(--green);
+        }
+
+        .progress-box {
+            margin-top: 12px;
+            padding: 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.76);
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 13px;
+            font-weight: 950;
+            margin-bottom: 10px;
+        }
+
+        .progress-track {
+            height: 14px;
+            border-radius: 999px;
+            background: rgba(107, 114, 128, 0.14);
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--primary), var(--pink), var(--blue));
+            transition: width 0.18s ease;
+        }
+
+        .placed-list {
+            margin-top: 14px;
+            padding: 14px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.76);
+        }
+
+        .placed-list h3 {
+            margin: 0 0 10px;
+            font-size: 15px;
+        }
+
+        .mini-line {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(107, 114, 128, 0.12);
+            font-size: 13px;
+        }
+
+        .mini-line:last-child {
+            border-bottom: 0;
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 22px;
+            transform: translateX(-50%) translateY(30px);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 30;
+            padding: 12px 16px;
+            border-radius: 999px;
+            color: #fff;
+            background: rgba(31, 41, 55, 0.94);
+            box-shadow: 0 12px 28px rgba(31, 41, 55, 0.22);
+            font-weight: 900;
+            transition: 0.2s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 1050px) {
+            .toolbar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar>.button-row {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            :root {
+                --board-gap: 5px;
+            }
+
+            .app {
+                width: min(100% - 12px, 1220px);
+                padding-top: 12px;
+                padding-bottom: 32px;
+            }
+
+            .hero,
+            .toolbar,
+            .panel {
+                border-radius: 22px;
+            }
+
+            .hero {
+                padding: 20px;
+            }
+
+            .hero h1 {
+                font-size: 33px;
+            }
+
+            .hero p {
+                font-size: 14px;
+                line-height: 1.65;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr;
+                padding: 14px;
+            }
+
+            .toolbar>.button-row {
+                grid-column: auto;
+            }
+
+            .button-row {
+                flex-wrap: wrap;
+            }
+
+            button {
+                flex: 1;
+            }
+
+            .panel-head,
+            .panel-body {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .palette {
+                gap: 10px;
+                min-height: 100px;
+            }
+
+            .palette>.token {
+                width: 68px;
+                height: 86px;
+            }
+
+            .board-tools {
+                align-items: stretch;
+            }
+
+            .board-tools .button-row {
+                width: 100%;
+            }
+
+            .board-wrap {
+                padding: 8px;
+                border-radius: 18px;
+                overflow: visible;
+            }
+
+            .cell {
+                border-radius: 12px;
+                border-width: 1.5px;
+            }
+
+            .cell .token {
+                width: 84%;
+                height: 84%;
+                border-width: 1.5px;
+            }
+
+            .cell-remove {
+                width: 16px;
+                height: 16px;
+                right: -4px;
+                top: -4px;
+                font-size: 10px;
+            }
+
+            .result-value {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 390px) {
+            :root {
+                --board-gap: 4px;
+            }
+
+            .app {
+                width: min(100% - 8px, 1220px);
+            }
+
+            .panel-head,
+            .panel-body {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .board-wrap {
+                padding: 6px;
+            }
+
+            .cell {
+                border-radius: 10px;
+            }
+
+            .cell .token-power {
+                padding: 0 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="app">
+        <section class="hero">
+            <div class="hero-badge">⚡ 合併島嶼工具</div>
+            <h1>矩陣式閃電計算器</h1>
+            <p>
+                下方固定為 7 × 7 共 49 格，最終目標件數固定為 1。
+                輸入這次活動共有幾階後，上方會產生對應 2 的次方物件。
+                把物件拖曳或點選放到矩陣中，就能即時計算目前折算值與還缺多少閃電。
+            </p>
+        </section>
+
+        <section class="toolbar">
+            <div class="field">
+                <label for="levelCount">共有幾階</label>
+                <input id="levelCount" type="number" min="1" max="30" step="1" value="10">
+            </div>
+
+            <div class="field">
+                <label>最終目標件數</label>
+                <div class="fixed-goal">
+                    <span>固定</span>
+                    <strong>1 件</strong>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button id="buildBtn">重新產生</button>
+            </div>
+        </section>
+
+        <section class="main-layout">
+            <section class="panel">
+                <div class="panel-head">
+                    <h2 class="panel-title">🧩 可拖拉物件</h2>
+                    <p class="panel-desc">
+                        上方物件是模板，不會被消耗。手機與桌機都可以拖曳；也可以先點選物件，再點矩陣格子放入。
+                    </p>
+                </div>
+
+                <div class="panel-body">
+                    <div class="palette-wrap">
+                        <div id="palette" class="palette"></div>
+                    </div>
+
+                    <div class="board-tools">
+                        <div class="tip" id="hintText">
+                            操作提示：拖拉物件到格子，或點選物件後點格子。連點同一格兩下可刪除。
+                        </div>
+
+                        <div class="button-row">
+                            <button id="deleteModeBtn" class="btn-danger">刪除模式</button>
+                            <button id="clearBtn" class="btn-soft">清空矩陣</button>
+                            <button id="copyBtn" class="btn-blue">複製結果</button>
+                        </div>
+                    </div>
+
+                    <div class="board-wrap">
+                        <div id="board" class="board"></div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="panel">
+                <div class="panel-head">
+                    <h2 class="panel-title">📊 即時計算</h2>
+                    <p class="panel-desc">
+                        矩陣內每個物件都會依照它的階級折算成閃電。
+                    </p>
+                </div>
+
+                <div class="panel-body">
+                    <div class="result-list">
+                        <div class="result-card">
+                            <div class="result-label">目標需求</div>
+                            <div id="targetValue" class="result-value">1,024</div>
+                            <div id="targetNote" class="result-note">第 10 階 × 1 件</div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-label">目前矩陣折算</div>
+                            <div id="currentValue" class="result-value">0</div>
+                            <div id="placedNote" class="result-note">目前放入 0 個物件</div>
+                        </div>
+
+                        <div id="missingCard" class="result-card missing">
+                            <div class="result-label">還缺閃電</div>
+                            <div id="missingValue" class="result-value">1,024</div>
+                            <div id="missingNote" class="result-note">尚未完成</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-box">
+                        <div class="progress-top">
+                            <span id="progressText">完成度 0%</span>
+                            <span id="statusText">未完成</span>
+                        </div>
+                        <div class="progress-track">
+                            <div id="progressBar" class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="placed-list">
+                        <h3>矩陣統計</h3>
+                        <div id="statsList"></div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <div id="toast" class="toast">已完成</div>
+
+    <script>
+        var FIXED_ROWS = 7;
+        var FIXED_COLS = 7;
+        var FIXED_GOAL_COUNT = 1;
+        var DOUBLE_TAP_MS = 360;
+        var DRAG_THRESHOLD = 8;
+
+        var paletteEl = document.getElementById("palette");
+        var boardEl = document.getElementById("board");
+        var levelCountInput = document.getElementById("levelCount");
+
+        var buildBtn = document.getElementById("buildBtn");
+        var clearBtn = document.getElementById("clearBtn");
+        var copyBtn = document.getElementById("copyBtn");
+        var deleteModeBtn = document.getElementById("deleteModeBtn");
+
+        var targetValueEl = document.getElementById("targetValue");
+        var targetNoteEl = document.getElementById("targetNote");
+        var currentValueEl = document.getElementById("currentValue");
+        var placedNoteEl = document.getElementById("placedNote");
+        var missingCardEl = document.getElementById("missingCard");
+        var missingValueEl = document.getElementById("missingValue");
+        var missingNoteEl = document.getElementById("missingNote");
+        var progressTextEl = document.getElementById("progressText");
+        var statusTextEl = document.getElementById("statusText");
+        var progressBarEl = document.getElementById("progressBar");
+        var statsListEl = document.getElementById("statsList");
+        var hintTextEl = document.getElementById("hintText");
+        var toastEl = document.getElementById("toast");
+
+        var icons = [
+            "🐚", "🪸", "🌺", "🦪", "💎", "🔮", "🪙", "💍", "🪞", "👑",
+            "🧿", "⭐", "🌙", "☀️", "🍀", "🍄", "🥥", "🏝️", "🧜", "🦀",
+            "🐠", "🐙", "🦜", "🎁", "🏺", "🪄", "🧭", "🛡️", "💫", "⚜️"
+        ];
+
+        var gradients = [
+            ["#ff9a3d", "#ff4f88"],
+            ["#25a7ff", "#5d6bff"],
+            ["#19c37d", "#10b981"],
+            ["#a855f7", "#ec4899"],
+            ["#f97316", "#facc15"],
+            ["#14b8a6", "#38bdf8"],
+            ["#fb7185", "#f43f5e"],
+            ["#8b5cf6", "#6366f1"],
+            ["#06b6d4", "#2563eb"],
+            ["#84cc16", "#22c55e"]
+        ];
+
+        var state = {
+            levelCount: 10,
+            goalCount: FIXED_GOAL_COUNT,
+            rows: FIXED_ROWS,
+            cols: FIXED_COLS,
+            selectedLevel: null,
+            deleteMode: false,
+            items: [],
+            board: []
+        };
+
+        var toastTimer = null;
+        var lastTapIndex = null;
+        var lastTapAt = 0;
+        var suppressNextClick = false;
+
+        var pointerDrag = {
+            active: false,
+            started: false,
+            pointerId: null,
+            startX: 0,
+            startY: 0,
+            level: null,
+            from: null,
+            cellIndex: null,
+            sourceEl: null,
+            ghostEl: null,
+            overCell: null
+        };
+
+        function sanitizeInt(value, min, max, fallback) {
+            var n = Number(value);
+            if (!Number.isFinite(n)) return fallback;
+            n = Math.floor(n);
+            if (n < min) return min;
+            if (n > max) return max;
+            return n;
+        }
+
+        function pow2(exp) {
+            return 1n << BigInt(exp);
+        }
+
+        function formatBigInt(value) {
+            var text = value.toString();
+            return text.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function shuffleArray(arr) {
+            var copy = arr.slice();
+            for (var i = copy.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = copy[i];
+                copy[i] = copy[j];
+                copy[j] = temp;
+            }
+            return copy;
+        }
+
+        function createItems(levelCount) {
+            var shuffledIcons = shuffleArray(icons);
+            var result = [];
+
+            for (var i = 1; i <= levelCount; i++) {
+                var gradient = gradients[(i - 1) % gradients.length];
+
+                result.push({
+                    level: i,
+                    icon: shuffledIcons[(i - 1) % shuffledIcons.length],
+                    from: gradient[0],
+                    to: gradient[1]
+                });
+            }
+
+            return result;
+        }
+
+        function getItemByLevel(level) {
+            for (var i = 0; i < state.items.length; i++) {
+                if (state.items[i].level === level) {
+                    return state.items[i];
+                }
+            }
+            return null;
+        }
+
+        function createTokenElement(item, mode, cellIndex) {
+            var token = document.createElement("div");
+            token.className = "token";
+            token.draggable = false;
+            token.dataset.level = String(item.level);
+            token.dataset.mode = mode;
+
+            if (typeof cellIndex === "number") {
+                token.dataset.cellIndex = String(cellIndex);
+            }
+
+            token.style.background = "linear-gradient(135deg, " + item.from + ", " + item.to + ")";
+
+            if (state.selectedLevel === item.level && mode === "palette") {
+                token.classList.add("selected");
+            }
+
+            var power = document.createElement("div");
+            power.className = "token-power";
+            power.textContent = "2^" + item.level;
+
+            var icon = document.createElement("div");
+            icon.className = "token-icon";
+            icon.textContent = item.icon;
+
+            var value = document.createElement("div");
+            value.className = "token-value";
+            value.textContent = formatBigInt(pow2(item.level));
+
+            token.appendChild(power);
+            token.appendChild(icon);
+            token.appendChild(value);
+
+            token.addEventListener("pointerdown", function (event) {
+                if (event.button !== undefined && event.button !== 0) return;
+                if (state.deleteMode) return;
+
+                startPointerDrag(event, {
+                    from: mode,
+                    level: item.level,
+                    cellIndex: typeof cellIndex === "number" ? cellIndex : null,
+                    sourceEl: token
+                });
+            });
+
+            if (mode === "palette") {
+                token.addEventListener("click", function () {
+                    if (suppressNextClick) {
+                        suppressNextClick = false;
+                        return;
+                    }
+
+                    if (state.selectedLevel === item.level) {
+                        state.selectedLevel = null;
+                        hintTextEl.textContent = "已取消選取。你可以拖拉物件到格子，或點選物件後點格子。";
+                    } else {
+                        state.selectedLevel = item.level;
+                        state.deleteMode = false;
+                        deleteModeBtn.classList.remove("active");
+                        hintTextEl.textContent = "已選取第 " + item.level + " 階，點擊矩陣格子即可放入。";
+                    }
+
+                    renderPalette();
+                });
+            }
+
+            return token;
+        }
+
+        function renderPalette() {
+            paletteEl.innerHTML = "";
+
+            for (var i = 0; i < state.items.length; i++) {
+                paletteEl.appendChild(createTokenElement(state.items[i], "palette"));
+            }
+        }
+
+        function renderBoard() {
+            boardEl.innerHTML = "";
+            boardEl.style.gridTemplateColumns = "repeat(7, minmax(0, 1fr))";
+
+            for (var i = 0; i < state.board.length; i++) {
+                var cell = document.createElement("div");
+                cell.className = "cell";
+                cell.dataset.index = String(i);
+
+                var level = state.board[i];
+
+                if (level !== null) {
+                    cell.classList.add("filled");
+
+                    var item = getItemByLevel(level);
+                    if (item) {
+                        cell.appendChild(createTokenElement(item, "cell", i));
+                    }
+
+                    var remove = document.createElement("div");
+                    remove.className = "cell-remove";
+                    remove.textContent = "×";
+                    cell.appendChild(remove);
+                }
+
+                cell.addEventListener("click", function () {
+                    if (suppressNextClick) {
+                        suppressNextClick = false;
+                        return;
+                    }
+
+                    var index = Number(this.dataset.index);
+                    var now = Date.now();
+
+                    if (state.deleteMode) {
+                        removeCell(index);
+                        return;
+                    }
+
+                    var isSameCell = lastTapIndex === index;
+                    var isFastEnough = now - lastTapAt <= DOUBLE_TAP_MS;
+                    var hasItem = state.board[index] !== null;
+                    var noSelectedItem = state.selectedLevel === null;
+
+                    if (isSameCell && isFastEnough && hasItem && noSelectedItem) {
+                        lastTapIndex = null;
+                        lastTapAt = 0;
+                        removeCell(index);
+                        return;
+                    }
+
+                    lastTapIndex = index;
+                    lastTapAt = now;
+
+                    if (state.selectedLevel !== null) {
+                        state.board[index] = state.selectedLevel;
+                        renderBoard();
+                        recalc();
+                    }
+                });
+
+                cell.addEventListener("dblclick", function () {
+                    var index = Number(this.dataset.index);
+                    removeCell(index);
+                });
+
+                boardEl.appendChild(cell);
+            }
+        }
+
+        function startPointerDrag(event, payload) {
+            pointerDrag.active = true;
+            pointerDrag.started = false;
+            pointerDrag.pointerId = event.pointerId;
+            pointerDrag.startX = event.clientX;
+            pointerDrag.startY = event.clientY;
+            pointerDrag.level = payload.level;
+            pointerDrag.from = payload.from;
+            pointerDrag.cellIndex = payload.cellIndex;
+            pointerDrag.sourceEl = payload.sourceEl;
+            pointerDrag.ghostEl = null;
+            pointerDrag.overCell = null;
+
+            try {
+                payload.sourceEl.setPointerCapture(event.pointerId);
+            } catch (err) { }
+
+            document.addEventListener("pointermove", onPointerMove, { passive: false });
+            document.addEventListener("pointerup", onPointerUp, { passive: false });
+            document.addEventListener("pointercancel", cancelPointerDrag, { passive: false });
+        }
+
+        function onPointerMove(event) {
+            if (!pointerDrag.active || event.pointerId !== pointerDrag.pointerId) return;
+
+            var dx = event.clientX - pointerDrag.startX;
+            var dy = event.clientY - pointerDrag.startY;
+            var distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (!pointerDrag.started && distance < DRAG_THRESHOLD) return;
+
+            event.preventDefault();
+
+            if (!pointerDrag.started) {
+                beginVisualDrag(event.clientX, event.clientY);
+            }
+
+            moveGhost(event.clientX, event.clientY);
+            updateOverCell(event.clientX, event.clientY);
+        }
+
+        function onPointerUp(event) {
+            if (!pointerDrag.active || event.pointerId !== pointerDrag.pointerId) return;
+
+            if (pointerDrag.started) {
+                event.preventDefault();
+
+                var cell = getCellFromPoint(event.clientX, event.clientY);
+
+                if (cell) {
+                    var targetIndex = Number(cell.dataset.index);
+                    placeDraggedItem(targetIndex);
+                }
+
+                suppressNextClick = true;
+            }
+
+            cleanupPointerDrag();
+        }
+
+        function cancelPointerDrag() {
+            cleanupPointerDrag();
+        }
+
+        function beginVisualDrag(x, y) {
+            pointerDrag.started = true;
+            document.body.classList.add("is-dragging");
+
+            if (pointerDrag.sourceEl) {
+                pointerDrag.sourceEl.classList.add("dragging-source");
+            }
+
+            var item = getItemByLevel(pointerDrag.level);
+            if (!item) return;
+
+            var ghost = createTokenElement(item, "ghost");
+            ghost.classList.add("drag-ghost");
+            ghost.style.width = pointerDrag.sourceEl ? pointerDrag.sourceEl.offsetWidth + "px" : "70px";
+            ghost.style.height = pointerDrag.sourceEl ? pointerDrag.sourceEl.offsetHeight + "px" : "70px";
+            ghost.style.pointerEvents = "none";
+
+            document.body.appendChild(ghost);
+            pointerDrag.ghostEl = ghost;
+            moveGhost(x, y);
+        }
+
+        function moveGhost(x, y) {
+            if (!pointerDrag.ghostEl) return;
+            pointerDrag.ghostEl.style.left = x + "px";
+            pointerDrag.ghostEl.style.top = y + "px";
+        }
+
+        function getCellFromPoint(x, y) {
+            var el = document.elementFromPoint(x, y);
+            if (!el) return null;
+            return el.closest ? el.closest(".cell") : null;
+        }
+
+        function updateOverCell(x, y) {
+            var cell = getCellFromPoint(x, y);
+
+            if (pointerDrag.overCell && pointerDrag.overCell !== cell) {
+                pointerDrag.overCell.classList.remove("drag-over");
+            }
+
+            if (cell) {
+                cell.classList.add("drag-over");
+            }
+
+            pointerDrag.overCell = cell;
+        }
+
+        function placeDraggedItem(targetIndex) {
+            if (pointerDrag.from === "cell" && typeof pointerDrag.cellIndex === "number") {
+                var oldIndex = pointerDrag.cellIndex;
+                var movingLevel = state.board[oldIndex];
+
+                if (movingLevel === null) return;
+
+                state.board[oldIndex] = null;
+                state.board[targetIndex] = movingLevel;
+            } else {
+                state.board[targetIndex] = pointerDrag.level;
+            }
+
+            state.selectedLevel = null;
+            renderPalette();
+            renderBoard();
+            recalc();
+        }
+
+        function cleanupPointerDrag() {
+            document.removeEventListener("pointermove", onPointerMove);
+            document.removeEventListener("pointerup", onPointerUp);
+            document.removeEventListener("pointercancel", cancelPointerDrag);
+
+            if (pointerDrag.overCell) {
+                pointerDrag.overCell.classList.remove("drag-over");
+            }
+
+            if (pointerDrag.sourceEl) {
+                pointerDrag.sourceEl.classList.remove("dragging-source");
+            }
+
+            if (pointerDrag.ghostEl && pointerDrag.ghostEl.parentNode) {
+                pointerDrag.ghostEl.parentNode.removeChild(pointerDrag.ghostEl);
+            }
+
+            document.body.classList.remove("is-dragging");
+
+            pointerDrag.active = false;
+            pointerDrag.started = false;
+            pointerDrag.pointerId = null;
+            pointerDrag.level = null;
+            pointerDrag.from = null;
+            pointerDrag.cellIndex = null;
+            pointerDrag.sourceEl = null;
+            pointerDrag.ghostEl = null;
+            pointerDrag.overCell = null;
+        }
+
+        function buildGame() {
+            state.levelCount = sanitizeInt(levelCountInput.value, 1, 30, 10);
+            state.goalCount = FIXED_GOAL_COUNT;
+            state.rows = FIXED_ROWS;
+            state.cols = FIXED_COLS;
+            state.selectedLevel = null;
+            state.deleteMode = false;
+
+            levelCountInput.value = String(state.levelCount);
+
+            state.items = createItems(state.levelCount);
+            state.board = [];
+
+            for (var i = 0; i < state.rows * state.cols; i++) {
+                state.board.push(null);
+            }
+
+            lastTapIndex = null;
+            lastTapAt = 0;
+
+            deleteModeBtn.classList.remove("active");
+            hintTextEl.textContent = "操作提示：固定 7 × 7 矩陣。手機與桌機都可拖拉；連點同一格兩下可刪除。";
+
+            renderPalette();
+            renderBoard();
+            recalc();
+            showToast("已重新產生 7 × 7 矩陣");
+        }
+
+        function clearBoard() {
+            for (var i = 0; i < state.board.length; i++) {
+                state.board[i] = null;
+            }
+
+            lastTapIndex = null;
+            lastTapAt = 0;
+
+            renderBoard();
+            recalc();
+            showToast("矩陣已清空");
+        }
+
+        function removeCell(index) {
+            if (state.board[index] === null) return;
+
+            state.board[index] = null;
+            renderBoard();
+            recalc();
+            showToast("已移除物件");
+        }
+
+        function getBoardTotal() {
+            var total = 0n;
+
+            for (var i = 0; i < state.board.length; i++) {
+                var level = state.board[i];
+
+                if (level !== null) {
+                    total += pow2(level);
+                }
+            }
+
+            return total;
+        }
+
+        function getPlacedCount() {
+            var count = 0;
+
+            for (var i = 0; i < state.board.length; i++) {
+                if (state.board[i] !== null) count++;
+            }
+
+            return count;
+        }
+
+        function getLevelStats() {
+            var stats = {};
+
+            for (var i = 0; i < state.board.length; i++) {
+                var level = state.board[i];
+
+                if (level !== null) {
+                    if (!stats[level]) stats[level] = 0;
+                    stats[level]++;
+                }
+            }
+
+            return stats;
+        }
+
+        function getPercent(current, target) {
+            if (target <= 0n) return 0;
+
+            var capped = current > target ? target : current;
+            var basisPoints = Number((capped * 10000n) / target);
+
+            return basisPoints / 100;
+        }
+
+        function renderStats(stats) {
+            statsListEl.innerHTML = "";
+
+            var hasAny = false;
+
+            for (var level = state.levelCount; level >= 1; level--) {
+                if (stats[level]) {
+                    hasAny = true;
+
+                    var line = document.createElement("div");
+                    line.className = "mini-line";
+
+                    var left = document.createElement("span");
+                    left.textContent = "第 " + level + " 階 × " + stats[level];
+
+                    var right = document.createElement("strong");
+                    right.textContent = formatBigInt(pow2(level) * BigInt(stats[level]));
+
+                    line.appendChild(left);
+                    line.appendChild(right);
+                    statsListEl.appendChild(line);
+                }
+            }
+
+            if (!hasAny) {
+                var empty = document.createElement("div");
+                empty.className = "tip";
+                empty.textContent = "目前矩陣內還沒有放入任何物件。";
+                statsListEl.appendChild(empty);
+            }
+        }
+
+        function recalc() {
+            state.levelCount = sanitizeInt(levelCountInput.value, 1, 30, state.levelCount);
+            state.goalCount = FIXED_GOAL_COUNT;
+
+            var target = pow2(state.levelCount) * BigInt(FIXED_GOAL_COUNT);
+            var current = getBoardTotal();
+            var missing = target > current ? target - current : 0n;
+            var over = current > target ? current - target : 0n;
+            var percent = getPercent(current, target);
+            var placedCount = getPlacedCount();
+            var stats = getLevelStats();
+
+            targetValueEl.textContent = formatBigInt(target);
+            targetNoteEl.textContent = "第 " + state.levelCount + " 階 × 1 件";
+
+            currentValueEl.textContent = formatBigInt(current);
+            placedNoteEl.textContent = "目前放入 " + placedCount + " 個物件";
+
+            missingValueEl.textContent = formatBigInt(missing);
+
+            if (missing === 0n) {
+                missingCardEl.classList.remove("missing");
+                missingCardEl.classList.add("done");
+
+                if (over > 0n) {
+                    missingNoteEl.textContent = "已超過 " + formatBigInt(over) + " 閃電";
+                } else {
+                    missingNoteEl.textContent = "剛好完成";
+                }
+
+                statusTextEl.textContent = "已完成";
+            } else {
+                missingCardEl.classList.add("missing");
+                missingCardEl.classList.remove("done");
+                missingNoteEl.textContent = "還需要補 " + formatBigInt(missing) + " 閃電";
+                statusTextEl.textContent = "未完成";
+            }
+
+            progressTextEl.textContent = "完成度 " + percent.toFixed(2).replace(".00", "") + "%";
+            progressBarEl.style.width = Math.min(percent, 100) + "%";
+
+            renderStats(stats);
+        }
+
+        function toggleDeleteMode() {
+            state.deleteMode = !state.deleteMode;
+
+            if (state.deleteMode) {
+                state.selectedLevel = null;
+                deleteModeBtn.classList.add("active");
+                hintTextEl.textContent = "刪除模式已開啟：點擊矩陣內任一格即可清除。";
+            } else {
+                deleteModeBtn.classList.remove("active");
+                hintTextEl.textContent = "刪除模式已關閉。你可以繼續拖拉或點選物件放入。";
+            }
+
+            renderPalette();
+        }
+
+        function copyResult() {
+            var target = targetValueEl.textContent;
+            var current = currentValueEl.textContent;
+            var missing = missingValueEl.textContent;
+            var percent = progressTextEl.textContent.replace("完成度 ", "");
+            var status = statusTextEl.textContent;
+
+            var text =
+                "【合併島嶼矩陣計算】\n" +
+                "共有階數：" + state.levelCount + "\n" +
+                "矩陣大小：7 × 7\n" +
+                "最終目標件數：1\n" +
+                "目標需求：" + target + "\n" +
+                "目前折算：" + current + "\n" +
+                "還缺閃電：" + missing + "\n" +
+                "完成度：" + percent + "\n" +
+                "狀態：" + status;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function () {
+                    showToast("結果已複製");
+                }).catch(function () {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            var textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.style.position = "fixed";
+            textarea.style.left = "-9999px";
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+
+            try {
+                document.execCommand("copy");
+                showToast("結果已複製");
+            } catch (err) {
+                showToast("複製失敗，請手動截圖");
+            }
+
+            document.body.removeChild(textarea);
+        }
+
+        function showToast(message) {
+            toastEl.textContent = message;
+            toastEl.classList.add("show");
+
+            clearTimeout(toastTimer);
+
+            toastTimer = setTimeout(function () {
+                toastEl.classList.remove("show");
+            }, 1600);
+        }
+
+        buildBtn.addEventListener("click", buildGame);
+        clearBtn.addEventListener("click", clearBoard);
+        copyBtn.addEventListener("click", copyResult);
+        deleteModeBtn.addEventListener("click", toggleDeleteMode);
+        levelCountInput.addEventListener("change", buildGame);
+
+        buildGame();
+    </script>
+</body>
+
+</html>
