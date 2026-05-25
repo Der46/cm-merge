@@ -1112,12 +1112,13 @@
             var shuffledIcons = shuffleArray(icons);
             var result = [];
 
-            for (var i = 1; i <= levelCount; i++) {
-                var gradient = gradients[(i - 1) % gradients.length];
+            for (var i = 0; i <= levelCount; i++) {
+                var index = i;
+                var gradient = gradients[index % gradients.length];
 
                 result.push({
                     level: i,
-                    icon: shuffledIcons[(i - 1) % shuffledIcons.length],
+                    icon: shuffledIcons[index % shuffledIcons.length],
                     from: gradient[0],
                     to: gradient[1]
                 });
@@ -1566,7 +1567,7 @@
 
             var hasAny = false;
 
-            for (var level = state.levelCount; level >= 1; level--) {
+            for (var level = state.levelCount; level >= 0; level--) {
                 if (stats[level]) {
                     hasAny = true;
 
