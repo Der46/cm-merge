@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>合併島嶼矩陣閃電計算器</title>
+    <title data-i18n="pageTitle">合併島嶼矩陣閃電計算器</title>
 
     <style>
         :root {
@@ -119,7 +119,7 @@
 
         .toolbar {
             display: grid;
-            grid-template-columns: 1fr 1fr auto;
+            grid-template-columns: 0.8fr 1fr 1fr auto;
             gap: 12px;
             margin-top: 18px;
             padding: 18px;
@@ -153,6 +153,25 @@
         }
 
         input:focus {
+            border-color: rgba(255, 138, 0, 0.88);
+            box-shadow: 0 0 0 4px rgba(255, 138, 0, 0.14);
+        }
+
+        select {
+            width: 100%;
+            height: 46px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(107, 114, 128, 0.24);
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 850;
+            outline: none;
+            transition: 0.16s ease;
+        }
+
+        select:focus {
             border-color: rgba(255, 138, 0, 0.88);
             box-shadow: 0 0 0 4px rgba(255, 138, 0, 0.14);
         }
@@ -882,9 +901,9 @@
 <body>
     <main class="app">
         <section class="hero">
-            <div class="hero-badge">⚡ 合併島嶼工具</div>
-            <h1>矩陣式閃電計算器</h1>
-            <p>
+            <div class="hero-badge" data-i18n="heroBadge">⚡ 合併島嶼工具</div>
+            <h1 data-i18n="heroTitle">矩陣式閃電計算器</h1>
+            <p data-i18n="heroDesc">
                 下方固定為 7 × 7 共 49 格，最終目標件數固定為 1。
                 輸入這次活動共有幾階後，上方會產生對應 2 的次方物件。
                 把物件拖曳或點選放到矩陣中，就能即時計算目前折算值與還缺多少閃電。
@@ -893,34 +912,43 @@
 
         <section class="toolbar">
             <div class="field">
-                <label for="levelCount">共有幾階</label>
+                <label for="languageSelect" data-i18n="languageLabel">語言</label>
+                <select id="languageSelect">
+                    <option value="zh-Hant">繁體中文</option>
+                    <option value="en">English</option>
+                    <option value="vi">Tiếng Việt</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="levelCount" data-i18n="levelCountLabel">共有幾階</label>
                 <input id="levelCount" type="number" min="1" max="30" step="1" value="10">
             </div>
 
             <div class="field">
-                <label>最終目標件數</label>
+                <label data-i18n="finalGoalLabel">最終目標件數</label>
                 <div class="fixed-goal">
-                    <span>固定</span>
-                    <strong>1 件</strong>
+                    <span data-i18n="fixedText">固定</span>
+                    <strong data-i18n="oneItem">1 件</strong>
                 </div>
             </div>
 
             <div class="button-row">
-                <button id="buildBtn">重新產生</button>
+                <button id="buildBtn" data-i18n="buildBtn">重新產生</button>
             </div>
         </section>
 
         <section class="main-layout">
             <section class="panel">
                 <div class="panel-head">
-                    <h2 class="panel-title">🧩 可拖拉物件</h2>
-                    <p class="panel-desc">
+                    <h2 class="panel-title" data-i18n="paletteTitle">🧩 可拖拉物件</h2>
+                    <p class="panel-desc" data-i18n="paletteDesc">
                         上方物件是模板，不會被消耗。手機與桌機都可以拖曳；也可以先點選物件，再點矩陣格子放入。
                     </p>
                 </div>
 
                 <div class="panel-body">
-                    <div class="palette-scroll-note">
+                    <div class="palette-scroll-note" data-i18n="mobileScrollNote">
                         手機操作：左右滑動可瀏覽圖案；要拖到矩陣時，請按住圖案後往下拖。
                     </div>
 
@@ -929,14 +957,14 @@
                     </div>
 
                     <div class="board-tools">
-                        <div class="tip" id="hintText">
+                        <div class="tip" id="hintText" data-i18n="hintDefault">
                             操作提示：拖拉物件到格子，或點選物件後點格子。連點同一格兩下可刪除。
                         </div>
 
                         <div class="button-row">
-                            <button id="deleteModeBtn" class="btn-danger">刪除模式</button>
-                            <button id="clearBtn" class="btn-soft">清空矩陣</button>
-                            <button id="copyBtn" class="btn-blue">複製結果</button>
+                            <button id="deleteModeBtn" class="btn-danger" data-i18n="deleteModeBtn">刪除模式</button>
+                            <button id="clearBtn" class="btn-soft" data-i18n="clearBtn">清空矩陣</button>
+                            <button id="copyBtn" class="btn-blue" data-i18n="copyBtn">複製結果</button>
                         </div>
                     </div>
 
@@ -948,8 +976,8 @@
 
             <aside class="panel">
                 <div class="panel-head">
-                    <h2 class="panel-title">📊 即時計算</h2>
-                    <p class="panel-desc">
+                    <h2 class="panel-title" data-i18n="resultTitle">📊 即時計算</h2>
+                    <p class="panel-desc" data-i18n="resultDesc">
                         矩陣內每個物件都會依照它的階級折算成閃電。
                     </p>
                 </div>
@@ -957,28 +985,28 @@
                 <div class="panel-body">
                     <div class="result-list">
                         <div class="result-card">
-                            <div class="result-label">目標需求</div>
+                            <div class="result-label" data-i18n="targetDemand">目標需求</div>
                             <div id="targetValue" class="result-value">1,024</div>
                             <div id="targetNote" class="result-note">第 10 階 × 1 件</div>
                         </div>
 
                         <div class="result-card">
-                            <div class="result-label">目前矩陣折算</div>
+                            <div class="result-label" data-i18n="currentTotal">目前矩陣折算</div>
                             <div id="currentValue" class="result-value">0</div>
                             <div id="placedNote" class="result-note">目前放入 0 個物件</div>
                         </div>
 
                         <div id="missingCard" class="result-card missing">
-                            <div class="result-label">還缺閃電</div>
+                            <div class="result-label" data-i18n="missingLightning">還缺閃電</div>
                             <div id="missingValue" class="result-value">1,024</div>
-                            <div id="missingNote" class="result-note">尚未完成</div>
+                            <div id="missingNote" class="result-note" data-i18n="missingNotDone">尚未完成</div>
                         </div>
                     </div>
 
                     <div class="progress-box">
                         <div class="progress-top">
                             <span id="progressText">完成度 0%</span>
-                            <span id="statusText">未完成</span>
+                            <span id="statusText" data-i18n="notDone">未完成</span>
                         </div>
                         <div class="progress-track">
                             <div id="progressBar" class="progress-bar"></div>
@@ -986,57 +1014,74 @@
                     </div>
 
                     <div class="placed-list">
-                        <h3>矩陣統計</h3>
+                        <h3 data-i18n="statsTitle">矩陣統計</h3>
                         <div id="statsList"></div>
                     </div>
                 </div>
             </aside>
+
         </section>
 
-        <div class="footer">
+        <div class="footer" data-i18n="footer">
             &copy; Coin999 - 長長久久 隊伍
         </div>
     </main>
 
-    <div id="toast" class="toast">已完成</div>
+    <div id="toast" class="toast" data-i18n="toastDone">已完成</div>
 
     <script>
-        var FIXED_ROWS = 7;
-        var FIXED_COLS = 7;
-        var FIXED_GOAL_COUNT = 1;
-        var DOUBLE_TAP_MS = 360;
-        var DRAG_THRESHOLD = 8;
+        let i18n = {};
+        let currentLang = localStorage.getItem("mergeIslandLang") || "zh-Hant";
 
-        var paletteEl = document.getElementById("palette");
-        var boardEl = document.getElementById("board");
-        var levelCountInput = document.getElementById("levelCount");
+        const t = (key) => {
+            if (i18n[currentLang] && i18n[currentLang][key]) {
+                return i18n[currentLang][key];
+            }
 
-        var buildBtn = document.getElementById("buildBtn");
-        var clearBtn = document.getElementById("clearBtn");
-        var copyBtn = document.getElementById("copyBtn");
-        var deleteModeBtn = document.getElementById("deleteModeBtn");
+            if (i18n["zh-Hant"] && i18n["zh-Hant"][key]) {
+                return i18n["zh-Hant"][key];
+            }
 
-        var targetValueEl = document.getElementById("targetValue");
-        var targetNoteEl = document.getElementById("targetNote");
-        var currentValueEl = document.getElementById("currentValue");
-        var placedNoteEl = document.getElementById("placedNote");
-        var missingCardEl = document.getElementById("missingCard");
-        var missingValueEl = document.getElementById("missingValue");
-        var missingNoteEl = document.getElementById("missingNote");
-        var progressTextEl = document.getElementById("progressText");
-        var statusTextEl = document.getElementById("statusText");
-        var progressBarEl = document.getElementById("progressBar");
-        var statsListEl = document.getElementById("statsList");
-        var hintTextEl = document.getElementById("hintText");
-        var toastEl = document.getElementById("toast");
+            return key;
+        };
 
-        var icons = [
+        const FIXED_ROWS = 7;
+        const FIXED_COLS = 7;
+        const FIXED_GOAL_COUNT = 1;
+        const DOUBLE_TAP_MS = 360;
+        const DRAG_THRESHOLD = 8;
+
+        const paletteEl = document.getElementById("palette");
+        const boardEl = document.getElementById("board");
+        const levelCountInput = document.getElementById("levelCount");
+        const languageSelect = document.getElementById("languageSelect");
+
+        const buildBtn = document.getElementById("buildBtn");
+        const clearBtn = document.getElementById("clearBtn");
+        const copyBtn = document.getElementById("copyBtn");
+        const deleteModeBtn = document.getElementById("deleteModeBtn");
+
+        const targetValueEl = document.getElementById("targetValue");
+        const targetNoteEl = document.getElementById("targetNote");
+        const currentValueEl = document.getElementById("currentValue");
+        const placedNoteEl = document.getElementById("placedNote");
+        const missingCardEl = document.getElementById("missingCard");
+        const missingValueEl = document.getElementById("missingValue");
+        const missingNoteEl = document.getElementById("missingNote");
+        const progressTextEl = document.getElementById("progressText");
+        const statusTextEl = document.getElementById("statusText");
+        const progressBarEl = document.getElementById("progressBar");
+        const statsListEl = document.getElementById("statsList");
+        const hintTextEl = document.getElementById("hintText");
+        const toastEl = document.getElementById("toast");
+
+        const icons = [
             "🐚", "🪸", "🌺", "🦪", "💎", "🔮", "🪙", "💍", "🪞", "👑",
             "🧿", "⭐", "🌙", "☀️", "🍀", "🍄", "🥥", "🏝️", "🧜", "🦀",
             "🐠", "🐙", "🦜", "🎁", "🏺", "🪄", "🧭", "🛡️", "💫", "⚜️"
         ];
 
-        var gradients = [
+        const gradients = [
             ["#ff9a3d", "#ff4f88"],
             ["#25a7ff", "#5d6bff"],
             ["#19c37d", "#10b981"],
@@ -1049,23 +1094,24 @@
             ["#84cc16", "#22c55e"]
         ];
 
-        var state = {
+        const state = {
             levelCount: 10,
             goalCount: FIXED_GOAL_COUNT,
             rows: FIXED_ROWS,
             cols: FIXED_COLS,
             selectedLevel: null,
             deleteMode: false,
+            suppressBuildToast: false,
             items: [],
             board: []
         };
 
-        var toastTimer = null;
-        var lastTapIndex = null;
-        var lastTapAt = 0;
-        var suppressNextClick = false;
+        let toastTimer = null;
+        let lastTapIndex = null;
+        let lastTapAt = 0;
+        let suppressNextClick = false;
 
-        var pointerDrag = {
+        const pointerDrag = {
             active: false,
             started: false,
             pointerId: null,
@@ -1079,42 +1125,96 @@
             overCell: null
         };
 
-        function sanitizeInt(value, min, max, fallback) {
-            var n = Number(value);
+        const applyStaticI18n = () => {
+            document.documentElement.lang = currentLang;
+            document.title = t("pageTitle");
+
+            const nodes = document.querySelectorAll("[data-i18n]");
+
+            nodes.forEach((node) => {
+                const key = node.getAttribute("data-i18n");
+                node.textContent = t(key);
+            });
+
+            if (languageSelect) {
+                languageSelect.value = currentLang;
+            }
+        };
+
+        const setLanguage = (lang) => {
+            if (!i18n[lang]) return;
+
+            currentLang = lang;
+            localStorage.setItem("mergeIslandLang", currentLang);
+
+            applyStaticI18n();
+            renderPalette();
+            recalc();
+        };
+
+        const loadI18n = async () => {
+            try {
+                const response = await fetch("./i18n.json");
+
+                if (!response.ok) {
+                    throw new Error("Unable to load i18n.json");
+                }
+
+                i18n = await response.json();
+
+                if (!i18n[currentLang]) {
+                    currentLang = "zh-Hant";
+                }
+
+                applyStaticI18n();
+            } catch (err) {
+                i18n = {
+                    "zh-Hant": {}
+                };
+            }
+        };
+
+        const sanitizeInt = (value, min, max, fallback) => {
+            let n = Number(value);
+
             if (!Number.isFinite(n)) return fallback;
+
             n = Math.floor(n);
+
             if (n < min) return min;
             if (n > max) return max;
+
             return n;
-        }
+        };
 
-        function pow2(exp) {
-            return 1n << BigInt(exp);
-        }
+        const pow2 = (exp) => 1n << BigInt(exp);
 
-        function formatBigInt(value) {
-            var text = value.toString();
+        const formatBigInt = (value) => {
+            const text = value.toString();
             return text.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
+        };
 
-        function shuffleArray(arr) {
-            var copy = arr.slice();
-            for (var i = copy.length - 1; i > 0; i--) {
-                var j = Math.floor(Math.random() * (i + 1));
-                var temp = copy[i];
+        const shuffleArray = (arr) => {
+            const copy = arr.slice();
+
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = copy[i];
+
                 copy[i] = copy[j];
                 copy[j] = temp;
             }
+
             return copy;
-        }
+        };
 
-        function createItems(levelCount) {
-            var shuffledIcons = shuffleArray(icons);
-            var result = [];
+        const createItems = (levelCount) => {
+            const shuffledIcons = shuffleArray(icons);
+            const result = [];
 
-            for (var i = 0; i <= levelCount; i++) {
-                var index = i;
-                var gradient = gradients[index % gradients.length];
+            for (let i = 0; i <= levelCount; i++) {
+                const index = i;
+                const gradient = gradients[index % gradients.length];
 
                 result.push({
                     level: i,
@@ -1125,19 +1225,20 @@
             }
 
             return result;
-        }
+        };
 
-        function getItemByLevel(level) {
-            for (var i = 0; i < state.items.length; i++) {
-                if (state.items[i].level === level) {
-                    return state.items[i];
+        const getItemByLevel = (level) => {
+            for (const item of state.items) {
+                if (item.level === level) {
+                    return item;
                 }
             }
-            return null;
-        }
 
-        function createTokenElement(item, mode, cellIndex) {
-            var token = document.createElement("div");
+            return null;
+        };
+
+        const createTokenElement = (item, mode, cellIndex) => {
+            const token = document.createElement("div");
             token.className = "token";
             token.draggable = false;
             token.dataset.level = String(item.level);
@@ -1147,21 +1248,21 @@
                 token.dataset.cellIndex = String(cellIndex);
             }
 
-            token.style.background = "linear-gradient(135deg, " + item.from + ", " + item.to + ")";
+            token.style.background = `linear-gradient(135deg, ${item.from}, ${item.to})`;
 
             if (state.selectedLevel === item.level && mode === "palette") {
                 token.classList.add("selected");
             }
 
-            var power = document.createElement("div");
+            const power = document.createElement("div");
             power.className = "token-power";
-            power.textContent = "2^" + item.level;
+            power.textContent = `2^${item.level}`;
 
-            var icon = document.createElement("div");
+            const icon = document.createElement("div");
             icon.className = "token-icon";
             icon.textContent = item.icon;
 
-            var value = document.createElement("div");
+            const value = document.createElement("div");
             value.className = "token-value";
             value.textContent = formatBigInt(pow2(item.level));
 
@@ -1169,7 +1270,7 @@
             token.appendChild(icon);
             token.appendChild(value);
 
-            token.addEventListener("pointerdown", function (event) {
+            token.addEventListener("pointerdown", (event) => {
                 if (event.button !== undefined && event.button !== 0) return;
                 if (state.deleteMode) return;
 
@@ -1182,7 +1283,7 @@
             });
 
             if (mode === "palette") {
-                token.addEventListener("click", function () {
+                token.addEventListener("click", () => {
                     if (suppressNextClick) {
                         suppressNextClick = false;
                         return;
@@ -1190,12 +1291,12 @@
 
                     if (state.selectedLevel === item.level) {
                         state.selectedLevel = null;
-                        hintTextEl.textContent = "已取消選取。你可以拖拉物件到格子，或點選物件後點格子。";
+                        hintTextEl.textContent = t("hintCancelSelected");
                     } else {
                         state.selectedLevel = item.level;
                         state.deleteMode = false;
                         deleteModeBtn.classList.remove("active");
-                        hintTextEl.textContent = "已選取第 " + item.level + " 階，點擊矩陣格子即可放入。";
+                        hintTextEl.textContent = `${t("hintSelectedPrefix")}${item.level}${t("hintSelectedSuffix")}`;
                     }
 
                     renderPalette();
@@ -1203,59 +1304,60 @@
             }
 
             return token;
-        }
+        };
 
-        function renderPalette() {
+        const renderPalette = () => {
             paletteEl.innerHTML = "";
 
-            for (var i = 0; i < state.items.length; i++) {
-                paletteEl.appendChild(createTokenElement(state.items[i], "palette"));
+            for (const item of state.items) {
+                paletteEl.appendChild(createTokenElement(item, "palette"));
             }
-        }
+        };
 
-        function renderBoard() {
+        const renderBoard = () => {
             boardEl.innerHTML = "";
             boardEl.style.gridTemplateColumns = "repeat(7, minmax(0, 1fr))";
 
-            for (var i = 0; i < state.board.length; i++) {
-                var cell = document.createElement("div");
+            for (let i = 0; i < state.board.length; i++) {
+                const cell = document.createElement("div");
                 cell.className = "cell";
                 cell.dataset.index = String(i);
 
-                var level = state.board[i];
+                const level = state.board[i];
 
                 if (level !== null) {
                     cell.classList.add("filled");
 
-                    var item = getItemByLevel(level);
+                    const item = getItemByLevel(level);
+
                     if (item) {
                         cell.appendChild(createTokenElement(item, "cell", i));
                     }
 
-                    var remove = document.createElement("div");
+                    const remove = document.createElement("div");
                     remove.className = "cell-remove";
                     remove.textContent = "×";
                     cell.appendChild(remove);
                 }
 
-                cell.addEventListener("click", function () {
+                cell.addEventListener("click", () => {
                     if (suppressNextClick) {
                         suppressNextClick = false;
                         return;
                     }
 
-                    var index = Number(this.dataset.index);
-                    var now = Date.now();
+                    const index = Number(cell.dataset.index);
+                    const now = Date.now();
 
                     if (state.deleteMode) {
                         removeCell(index);
                         return;
                     }
 
-                    var isSameCell = lastTapIndex === index;
-                    var isFastEnough = now - lastTapAt <= DOUBLE_TAP_MS;
-                    var hasItem = state.board[index] !== null;
-                    var noSelectedItem = state.selectedLevel === null;
+                    const isSameCell = lastTapIndex === index;
+                    const isFastEnough = now - lastTapAt <= DOUBLE_TAP_MS;
+                    const hasItem = state.board[index] !== null;
+                    const noSelectedItem = state.selectedLevel === null;
 
                     if (isSameCell && isFastEnough && hasItem && noSelectedItem) {
                         lastTapIndex = null;
@@ -1274,16 +1376,16 @@
                     }
                 });
 
-                cell.addEventListener("dblclick", function () {
-                    var index = Number(this.dataset.index);
+                cell.addEventListener("dblclick", () => {
+                    const index = Number(cell.dataset.index);
                     removeCell(index);
                 });
 
                 boardEl.appendChild(cell);
             }
-        }
+        };
 
-        function startPointerDrag(event, payload) {
+        const startPointerDrag = (event, payload) => {
             pointerDrag.active = true;
             pointerDrag.started = false;
             pointerDrag.pointerId = event.pointerId;
@@ -1299,16 +1401,16 @@
             document.addEventListener("pointermove", onPointerMove, { passive: false });
             document.addEventListener("pointerup", onPointerUp, { passive: false });
             document.addEventListener("pointercancel", cancelPointerDrag, { passive: false });
-        }
+        };
 
-        function onPointerMove(event) {
+        const onPointerMove = (event) => {
             if (!pointerDrag.active || event.pointerId !== pointerDrag.pointerId) return;
 
-            var dx = event.clientX - pointerDrag.startX;
-            var dy = event.clientY - pointerDrag.startY;
-            var absX = Math.abs(dx);
-            var absY = Math.abs(dy);
-            var distance = Math.sqrt(dx * dx + dy * dy);
+            const dx = event.clientX - pointerDrag.startX;
+            const dy = event.clientY - pointerDrag.startY;
+            const absX = Math.abs(dx);
+            const absY = Math.abs(dy);
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
             if (!pointerDrag.started && distance < DRAG_THRESHOLD) return;
 
@@ -1331,18 +1433,18 @@
 
             moveGhost(event.clientX, event.clientY);
             updateOverCell(event.clientX, event.clientY);
-        }
+        };
 
-        function onPointerUp(event) {
+        const onPointerUp = (event) => {
             if (!pointerDrag.active || event.pointerId !== pointerDrag.pointerId) return;
 
             if (pointerDrag.started) {
                 event.preventDefault();
 
-                var cell = getCellFromPoint(event.clientX, event.clientY);
+                const cell = getCellFromPoint(event.clientX, event.clientY);
 
                 if (cell) {
-                    var targetIndex = Number(cell.dataset.index);
+                    const targetIndex = Number(cell.dataset.index);
                     placeDraggedItem(targetIndex);
                 }
 
@@ -1350,13 +1452,13 @@
             }
 
             cleanupPointerDrag();
-        }
+        };
 
-        function cancelPointerDrag() {
+        const cancelPointerDrag = () => {
             cleanupPointerDrag();
-        }
+        };
 
-        function beginVisualDrag(x, y) {
+        const beginVisualDrag = (x, y) => {
             pointerDrag.started = true;
             document.body.classList.add("is-dragging");
 
@@ -1368,34 +1470,37 @@
                 } catch (err) { }
             }
 
-            var item = getItemByLevel(pointerDrag.level);
+            const item = getItemByLevel(pointerDrag.level);
             if (!item) return;
 
-            var ghost = createTokenElement(item, "ghost");
+            const ghost = createTokenElement(item, "ghost");
             ghost.classList.add("drag-ghost");
-            ghost.style.width = pointerDrag.sourceEl ? pointerDrag.sourceEl.offsetWidth + "px" : "70px";
-            ghost.style.height = pointerDrag.sourceEl ? pointerDrag.sourceEl.offsetHeight + "px" : "70px";
+            ghost.style.width = pointerDrag.sourceEl ? `${pointerDrag.sourceEl.offsetWidth}px` : "70px";
+            ghost.style.height = pointerDrag.sourceEl ? `${pointerDrag.sourceEl.offsetHeight}px` : "70px";
             ghost.style.pointerEvents = "none";
 
             document.body.appendChild(ghost);
             pointerDrag.ghostEl = ghost;
             moveGhost(x, y);
-        }
+        };
 
-        function moveGhost(x, y) {
+        const moveGhost = (x, y) => {
             if (!pointerDrag.ghostEl) return;
-            pointerDrag.ghostEl.style.left = x + "px";
-            pointerDrag.ghostEl.style.top = y + "px";
-        }
 
-        function getCellFromPoint(x, y) {
-            var el = document.elementFromPoint(x, y);
+            pointerDrag.ghostEl.style.left = `${x}px`;
+            pointerDrag.ghostEl.style.top = `${y}px`;
+        };
+
+        const getCellFromPoint = (x, y) => {
+            const el = document.elementFromPoint(x, y);
+
             if (!el) return null;
-            return el.closest ? el.closest(".cell") : null;
-        }
 
-        function updateOverCell(x, y) {
-            var cell = getCellFromPoint(x, y);
+            return el.closest ? el.closest(".cell") : null;
+        };
+
+        const updateOverCell = (x, y) => {
+            const cell = getCellFromPoint(x, y);
 
             if (pointerDrag.overCell && pointerDrag.overCell !== cell) {
                 pointerDrag.overCell.classList.remove("drag-over");
@@ -1406,12 +1511,12 @@
             }
 
             pointerDrag.overCell = cell;
-        }
+        };
 
-        function placeDraggedItem(targetIndex) {
+        const placeDraggedItem = (targetIndex) => {
             if (pointerDrag.from === "cell" && typeof pointerDrag.cellIndex === "number") {
-                var oldIndex = pointerDrag.cellIndex;
-                var movingLevel = state.board[oldIndex];
+                const oldIndex = pointerDrag.cellIndex;
+                const movingLevel = state.board[oldIndex];
 
                 if (movingLevel === null) return;
 
@@ -1425,9 +1530,9 @@
             renderPalette();
             renderBoard();
             recalc();
-        }
+        };
 
-        function cleanupPointerDrag() {
+        const cleanupPointerDrag = () => {
             document.removeEventListener("pointermove", onPointerMove);
             document.removeEventListener("pointerup", onPointerUp);
             document.removeEventListener("pointercancel", cancelPointerDrag);
@@ -1440,7 +1545,10 @@
                 pointerDrag.sourceEl.classList.remove("dragging-source");
 
                 try {
-                    if (pointerDrag.pointerId !== null && pointerDrag.sourceEl.hasPointerCapture(pointerDrag.pointerId)) {
+                    if (
+                        pointerDrag.pointerId !== null &&
+                        pointerDrag.sourceEl.hasPointerCapture(pointerDrag.pointerId)
+                    ) {
                         pointerDrag.sourceEl.releasePointerCapture(pointerDrag.pointerId);
                     }
                 } catch (err) { }
@@ -1461,9 +1569,9 @@
             pointerDrag.sourceEl = null;
             pointerDrag.ghostEl = null;
             pointerDrag.overCell = null;
-        }
+        };
 
-        function buildGame() {
+        const buildGame = () => {
             state.levelCount = sanitizeInt(levelCountInput.value, 1, 30, 10);
             state.goalCount = FIXED_GOAL_COUNT;
             state.rows = FIXED_ROWS;
@@ -1476,7 +1584,7 @@
             state.items = createItems(state.levelCount);
             state.board = [];
 
-            for (var i = 0; i < state.rows * state.cols; i++) {
+            for (let i = 0; i < state.rows * state.cols; i++) {
                 state.board.push(null);
             }
 
@@ -1484,16 +1592,19 @@
             lastTapAt = 0;
 
             deleteModeBtn.classList.remove("active");
-            hintTextEl.textContent = "操作提示：固定 7 × 7 矩陣。手機可左右滑動圖案列；要拖曳時按住圖案往下拖。";
+            hintTextEl.textContent = t("hintBuilt");
 
             renderPalette();
             renderBoard();
             recalc();
-            showToast("已重新產生 7 × 7 矩陣");
-        }
 
-        function clearBoard() {
-            for (var i = 0; i < state.board.length; i++) {
+            if (!state.suppressBuildToast) {
+                showToast(t("toastBuilt"));
+            }
+        };
+
+        const clearBoard = () => {
+            for (let i = 0; i < state.board.length; i++) {
                 state.board[i] = null;
             }
 
@@ -1502,48 +1613,44 @@
 
             renderBoard();
             recalc();
-            showToast("矩陣已清空");
-        }
+            showToast(t("toastCleared"));
+        };
 
-        function removeCell(index) {
+        const removeCell = (index) => {
             if (state.board[index] === null) return;
 
             state.board[index] = null;
             renderBoard();
             recalc();
-            showToast("已移除物件");
-        }
+            showToast(t("toastRemoved"));
+        };
 
-        function getBoardTotal() {
-            var total = 0n;
+        const getBoardTotal = () => {
+            let total = 0n;
 
-            for (var i = 0; i < state.board.length; i++) {
-                var level = state.board[i];
-
+            for (const level of state.board) {
                 if (level !== null) {
                     total += pow2(level);
                 }
             }
 
             return total;
-        }
+        };
 
-        function getPlacedCount() {
-            var count = 0;
+        const getPlacedCount = () => {
+            let count = 0;
 
-            for (var i = 0; i < state.board.length; i++) {
-                if (state.board[i] !== null) count++;
+            for (const level of state.board) {
+                if (level !== null) count++;
             }
 
             return count;
-        }
+        };
 
-        function getLevelStats() {
-            var stats = {};
+        const getLevelStats = () => {
+            const stats = {};
 
-            for (var i = 0; i < state.board.length; i++) {
-                var level = state.board[i];
-
+            for (const level of state.board) {
                 if (level !== null) {
                     if (!stats[level]) stats[level] = 0;
                     stats[level]++;
@@ -1551,33 +1658,33 @@
             }
 
             return stats;
-        }
+        };
 
-        function getPercent(current, target) {
+        const getPercent = (current, target) => {
             if (target <= 0n) return 0;
 
-            var capped = current > target ? target : current;
-            var basisPoints = Number((capped * 10000n) / target);
+            const capped = current > target ? target : current;
+            const basisPoints = Number((capped * 10000n) / target);
 
             return basisPoints / 100;
-        }
+        };
 
-        function renderStats(stats) {
+        const renderStats = (stats) => {
             statsListEl.innerHTML = "";
 
-            var hasAny = false;
+            let hasAny = false;
 
-            for (var level = state.levelCount; level >= 0; level--) {
+            for (let level = state.levelCount; level >= 0; level--) {
                 if (stats[level]) {
                     hasAny = true;
 
-                    var line = document.createElement("div");
+                    const line = document.createElement("div");
                     line.className = "mini-line";
 
-                    var left = document.createElement("span");
-                    left.textContent = "第 " + level + " 階 × " + stats[level];
+                    const left = document.createElement("span");
+                    left.textContent = `${t("statsLinePrefix")}${level}${t("statsLineMiddle")}${stats[level]}`;
 
-                    var right = document.createElement("strong");
+                    const right = document.createElement("strong");
                     right.textContent = formatBigInt(pow2(level) * BigInt(stats[level]));
 
                     line.appendChild(left);
@@ -1587,30 +1694,30 @@
             }
 
             if (!hasAny) {
-                var empty = document.createElement("div");
+                const empty = document.createElement("div");
                 empty.className = "tip";
-                empty.textContent = "目前矩陣內還沒有放入任何物件。";
+                empty.textContent = t("statsEmpty");
                 statsListEl.appendChild(empty);
             }
-        }
+        };
 
-        function recalc() {
+        const recalc = () => {
             state.levelCount = sanitizeInt(levelCountInput.value, 1, 30, state.levelCount);
             state.goalCount = FIXED_GOAL_COUNT;
 
-            var target = pow2(state.levelCount) * BigInt(FIXED_GOAL_COUNT);
-            var current = getBoardTotal();
-            var missing = target > current ? target - current : 0n;
-            var over = current > target ? current - target : 0n;
-            var percent = getPercent(current, target);
-            var placedCount = getPlacedCount();
-            var stats = getLevelStats();
+            const target = pow2(state.levelCount) * BigInt(FIXED_GOAL_COUNT);
+            const current = getBoardTotal();
+            const missing = target > current ? target - current : 0n;
+            const over = current > target ? current - target : 0n;
+            const percent = getPercent(current, target);
+            const placedCount = getPlacedCount();
+            const stats = getLevelStats();
 
             targetValueEl.textContent = formatBigInt(target);
-            targetNoteEl.textContent = "第 " + state.levelCount + " 階 × 1 件";
+            targetNoteEl.textContent = `${t("targetNotePrefix")}${state.levelCount}${t("targetNoteSuffix")}`;
 
             currentValueEl.textContent = formatBigInt(current);
-            placedNoteEl.textContent = "目前放入 " + placedCount + " 個物件";
+            placedNoteEl.textContent = `${t("placedNotePrefix")}${placedCount}${t("placedNoteSuffix")}`;
 
             missingValueEl.textContent = formatBigInt(missing);
 
@@ -1619,98 +1726,101 @@
                 missingCardEl.classList.add("done");
 
                 if (over > 0n) {
-                    missingNoteEl.textContent = "已超過 " + formatBigInt(over) + " 閃電";
+                    missingNoteEl.textContent = `${t("overPrefix")}${formatBigInt(over)}${t("overSuffix")}`;
                 } else {
-                    missingNoteEl.textContent = "剛好完成";
+                    missingNoteEl.textContent = t("exactDone");
                 }
 
-                statusTextEl.textContent = "已完成";
+                statusTextEl.textContent = t("done");
             } else {
                 missingCardEl.classList.add("missing");
                 missingCardEl.classList.remove("done");
-                missingNoteEl.textContent = "還需要補 " + formatBigInt(missing) + " 閃電";
-                statusTextEl.textContent = "未完成";
+                missingNoteEl.textContent = `${t("missingNeedPrefix")}${formatBigInt(missing)}${t("missingNeedSuffix")}`;
+                statusTextEl.textContent = t("notDone");
             }
 
-            progressTextEl.textContent = "完成度 " + percent.toFixed(2).replace(".00", "") + "%";
-            progressBarEl.style.width = Math.min(percent, 100) + "%";
+            progressTextEl.textContent = `${t("progressPrefix")}${percent.toFixed(2).replace(".00", "")}%`;
+            progressBarEl.style.width = `${Math.min(percent, 100)}%`;
 
             renderStats(stats);
-        }
+        };
 
-        function toggleDeleteMode() {
+        const toggleDeleteMode = () => {
             state.deleteMode = !state.deleteMode;
 
             if (state.deleteMode) {
                 state.selectedLevel = null;
                 deleteModeBtn.classList.add("active");
-                hintTextEl.textContent = "刪除模式已開啟：點擊矩陣內任一格即可清除。";
+                hintTextEl.textContent = t("hintDeleteOn");
             } else {
                 deleteModeBtn.classList.remove("active");
-                hintTextEl.textContent = "刪除模式已關閉。你可以繼續拖拉或點選物件放入。";
+                hintTextEl.textContent = t("hintDeleteOff");
             }
 
             renderPalette();
-        }
+        };
 
-        function copyResult() {
-            var target = targetValueEl.textContent;
-            var current = currentValueEl.textContent;
-            var missing = missingValueEl.textContent;
-            var percent = progressTextEl.textContent.replace("完成度 ", "");
-            var status = statusTextEl.textContent;
+        const copyResult = () => {
+            const target = targetValueEl.textContent;
+            const current = currentValueEl.textContent;
+            const missing = missingValueEl.textContent;
+            const percent = progressTextEl.textContent.replace(t("progressPrefix"), "");
+            const status = statusTextEl.textContent;
 
-            var text =
-                "【合併島嶼矩陣計算】\n" +
-                "共有階數：" + state.levelCount + "\n" +
-                "矩陣大小：7 × 7\n" +
-                "最終目標件數：1\n" +
-                "目標需求：" + target + "\n" +
-                "目前折算：" + current + "\n" +
-                "還缺閃電：" + missing + "\n" +
-                "完成度：" + percent + "\n" +
-                "狀態：" + status;
+            const text =
+                `${t("copyTitle")}\n` +
+                `${t("copyLevelCount")}${state.levelCount}\n` +
+                `${t("copyBoardSize")}\n` +
+                `${t("copyFinalGoal")}\n` +
+                `${t("copyTarget")}${target}\n` +
+                `${t("copyCurrent")}${current}\n` +
+                `${t("copyMissing")}${missing}\n` +
+                `${t("copyProgress")}${percent}\n` +
+                `${t("copyStatus")}${status}`;
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(function () {
-                    showToast("結果已複製");
-                }).catch(function () {
-                    fallbackCopy(text);
-                });
+                navigator.clipboard.writeText(text)
+                    .then(() => {
+                        showToast(t("toastCopied"));
+                    })
+                    .catch(() => {
+                        fallbackCopy(text);
+                    });
             } else {
                 fallbackCopy(text);
             }
-        }
+        };
 
-        function fallbackCopy(text) {
-            var textarea = document.createElement("textarea");
+        const fallbackCopy = (text) => {
+            const textarea = document.createElement("textarea");
             textarea.value = text;
             textarea.style.position = "fixed";
             textarea.style.left = "-9999px";
+
             document.body.appendChild(textarea);
             textarea.focus();
             textarea.select();
 
             try {
                 document.execCommand("copy");
-                showToast("結果已複製");
+                showToast(t("toastCopied"));
             } catch (err) {
-                showToast("複製失敗，請手動截圖");
+                showToast(t("toastCopyFailed"));
             }
 
             document.body.removeChild(textarea);
-        }
+        };
 
-        function showToast(message) {
+        const showToast = (message) => {
             toastEl.textContent = message;
             toastEl.classList.add("show");
 
             clearTimeout(toastTimer);
 
-            toastTimer = setTimeout(function () {
+            toastTimer = setTimeout(() => {
                 toastEl.classList.remove("show");
             }, 1600);
-        }
+        };
 
         buildBtn.addEventListener("click", buildGame);
         clearBtn.addEventListener("click", clearBoard);
@@ -1718,8 +1828,17 @@
         deleteModeBtn.addEventListener("click", toggleDeleteMode);
         levelCountInput.addEventListener("change", buildGame);
 
-        buildGame();
+        languageSelect.addEventListener("change", () => {
+            setLanguage(languageSelect.value);
+        });
+
+        loadI18n().then(() => {
+            state.suppressBuildToast = true;
+            buildGame();
+            state.suppressBuildToast = false;
+        });
     </script>
+
 </body>
 
 </html>
