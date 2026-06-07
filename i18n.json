@@ -4,6 +4,7 @@
         "heroBadge": "⚡ 合併島嶼工具",
         "heroTitle": "矩陣式閃電計算器",
         "heroDesc": "下方固定為 7 × 7 共 49 格，最終目標件數固定為 1。輸入這次活動共有幾階後，上方會產生對應 2 的次方物件。把物件拖曳或點選放到矩陣中，就能即時計算目前折算值與還缺多少閃電。",
+        "languageLabel": "語言",
         "levelCountLabel": "共有幾階",
         "finalGoalLabel": "最終目標件數",
         "fixedText": "固定",
@@ -66,6 +67,7 @@
         "heroBadge": "⚡ Merge Islands Tool",
         "heroTitle": "Matrix Lightning Calculator",
         "heroDesc": "The board below is fixed at 7 × 7, totaling 49 cells, and the final target quantity is fixed at 1. Enter the number of levels for this event, and the corresponding power-of-2 items will be generated above. Drag or select items into the matrix to instantly calculate the current converted value and the remaining lightning needed.",
+        "languageLabel": "Language",
         "levelCountLabel": "Number of levels",
         "finalGoalLabel": "Final target quantity",
         "fixedText": "Fixed",
@@ -121,13 +123,14 @@
         "copyMissing": "Lightning missing: ",
         "copyProgress": "Progress: ",
         "copyStatus": "Status: ",
-        "footer": "© Coin999-長長久久 Team"
+        "footer": "© Coin999-Forever Team"
     },
     "vi": {
         "pageTitle": "Máy Tính Tia Sét Ma Trận Merge Islands",
         "heroBadge": "⚡ Công cụ Merge Islands",
         "heroTitle": "Máy Tính Tia Sét Dạng Ma Trận",
         "heroDesc": "Bảng bên dưới được cố định ở kích thước 7 × 7, tổng cộng 49 ô, và số lượng mục tiêu cuối cùng được cố định là 1. Nhập số cấp của sự kiện lần này, hệ thống sẽ tạo các vật phẩm tương ứng theo lũy thừa của 2 ở phía trên. Kéo hoặc chọn vật phẩm đặt vào ma trận để tính ngay giá trị quy đổi hiện tại và số tia sét còn thiếu.",
+        "languageLabel": "Ngôn ngữ",
         "levelCountLabel": "Tổng số cấp",
         "finalGoalLabel": "Số lượng mục tiêu cuối",
         "fixedText": "Cố định",
@@ -183,6 +186,6 @@
         "copyMissing": "Tia sét còn thiếu: ",
         "copyProgress": "Tiến độ: ",
         "copyStatus": "Trạng thái: ",
-        "footer": "© Coin999-長長久久 隊伍"
+        "footer": "© Coin999-Forever Team"
     }
 }
