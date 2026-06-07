@@ -1212,7 +1212,7 @@
             const shuffledIcons = shuffleArray(icons);
             const result = [];
 
-            for (let i = 0; i <= levelCount; i++) {
+            for (let i = 0; i < levelCount; i++) {
                 const index = i;
                 const gradient = gradients[index % gradients.length];
 
@@ -1226,6 +1226,7 @@
 
             return result;
         };
+
 
         const getItemByLevel = (level) => {
             for (const item of state.items) {
@@ -1674,7 +1675,7 @@
 
             let hasAny = false;
 
-            for (let level = state.levelCount; level >= 0; level--) {
+            for (let level = state.levelCount - 1; level >= 0; level--) {
                 if (stats[level]) {
                     hasAny = true;
 
@@ -1705,7 +1706,9 @@
             state.levelCount = sanitizeInt(levelCountInput.value, 1, 30, state.levelCount);
             state.goalCount = FIXED_GOAL_COUNT;
 
-            const target = pow2(state.levelCount) * BigInt(FIXED_GOAL_COUNT);
+            const targetLevel = state.levelCount - 1;
+            const target = pow2(targetLevel) * BigInt(FIXED_GOAL_COUNT);
+
             const current = getBoardTotal();
             const missing = target > current ? target - current : 0n;
             const over = current > target ? current - target : 0n;
@@ -1714,7 +1717,7 @@
             const stats = getLevelStats();
 
             targetValueEl.textContent = formatBigInt(target);
-            targetNoteEl.textContent = `${t("targetNotePrefix")}${state.levelCount}${t("targetNoteSuffix")}`;
+            targetNoteEl.textContent = `${t("targetNotePrefix")}${targetLevel}${t("targetNoteSuffix")}`;
 
             currentValueEl.textContent = formatBigInt(current);
             placedNoteEl.textContent = `${t("placedNotePrefix")}${placedCount}${t("placedNoteSuffix")}`;
