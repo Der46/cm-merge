@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="pageTitle">合併島嶼矩陣閃電計算器</title>
+    <title>合併島嶼矩陣閃電計算器</title>
 
     <style>
         :root {
             --bg-a: #fff6df;
             --bg-b: #dff6ff;
             --bg-c: #ffe4ef;
-            --card: rgba(255, 255, 255, 0.88);
+            --card: rgba(255, 255, 255, 0.9);
             --text: #263238;
             --muted: #6b7280;
             --primary: #ff8a00;
@@ -20,27 +20,29 @@
             --blue: #25a7ff;
             --green: #18a66a;
             --danger: #ef4444;
-            --shadow: 0 18px 48px rgba(30, 41, 59, 0.16);
-            --radius-xl: 30px;
-            --cell-size: 72px;
-            --board-gap: 8px;
-            --board-max-size: calc((var(--cell-size) * 7) + (var(--board-gap) * 6));
+            --shadow: 0 14px 34px rgba(30, 41, 59, 0.14);
+            --radius-xl: 24px;
+            --board-gap: 6px;
         }
 
         * {
             box-sizing: border-box;
         }
 
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Noto Sans JP", "Noto Sans KR", "Noto Sans Thai", sans-serif;
             color: var(--text);
             background:
-                radial-gradient(circle at 10% 10%, rgba(255, 194, 92, 0.7), transparent 26%),
-                radial-gradient(circle at 90% 8%, rgba(69, 193, 255, 0.55), transparent 28%),
-                radial-gradient(circle at 50% 100%, rgba(255, 89, 143, 0.28), transparent 34%),
-                linear-gradient(135deg, var(--bg-a), var(--bg-b) 56%, var(--bg-c));
+                radial-gradient(circle at 10% 10%, rgba(255, 194, 92, 0.72), transparent 28%),
+                radial-gradient(circle at 90% 8%, rgba(69, 193, 255, 0.58), transparent 30%),
+                radial-gradient(circle at 50% 100%, rgba(255, 89, 143, 0.28), transparent 35%),
+                linear-gradient(135deg, var(--bg-a), var(--bg-b) 58%, var(--bg-c));
             overflow-x: hidden;
         }
 
@@ -52,39 +54,39 @@
             background-image:
                 linear-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.28) 1px, transparent 1px);
-            background-size: 44px 44px;
-            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent);
             z-index: -1;
         }
 
         body.is-dragging {
             user-select: none;
             cursor: grabbing;
-            overscroll-behavior: none;
+            overscroll-behavior: contain;
         }
 
         .app {
-            width: min(1220px, calc(100% - 24px));
+            width: min(100% - 12px, 760px);
             margin: 0 auto;
-            padding: 24px 0 56px;
+            padding: 10px 0 36px;
         }
 
         .hero {
             position: relative;
             overflow: hidden;
-            padding: 28px;
+            padding: 18px;
             border-radius: var(--radius-xl);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 249, 235, 0.88));
-            border: 1px solid rgba(255, 255, 255, 0.75);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 249, 235, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.76);
             box-shadow: var(--shadow);
         }
 
         .hero::after {
             content: "⚡";
             position: absolute;
-            right: 28px;
-            top: 4px;
-            font-size: 112px;
+            right: 16px;
+            top: -8px;
+            font-size: 86px;
             opacity: 0.12;
             transform: rotate(12deg);
         }
@@ -93,36 +95,35 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 14px;
+            padding: 7px 12px;
             border-radius: 999px;
             background: rgba(255, 138, 0, 0.13);
             color: var(--primary-dark);
-            font-weight: 900;
-            font-size: 14px;
-            margin-bottom: 12px;
+            font-weight: 950;
+            font-size: 13px;
+            margin-bottom: 10px;
         }
 
         h1 {
             margin: 0;
-            font-size: clamp(32px, 5vw, 56px);
-            line-height: 1.05;
-            letter-spacing: -1.2px;
+            font-size: clamp(28px, 8vw, 42px);
+            line-height: 1.08;
+            letter-spacing: -1px;
         }
 
         .hero p {
-            margin: 14px 0 0;
-            max-width: 850px;
+            margin: 12px 0 0;
             color: #4b5563;
-            font-size: 16px;
-            line-height: 1.75;
+            font-size: 14px;
+            line-height: 1.7;
         }
 
         .toolbar {
             display: grid;
-            grid-template-columns: 0.8fr 1fr 1fr auto;
-            gap: 12px;
-            margin-top: 18px;
-            padding: 18px;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 12px;
             border-radius: var(--radius-xl);
             background: var(--card);
             border: 1px solid rgba(255, 255, 255, 0.75);
@@ -133,42 +134,23 @@
 
         .field label {
             display: block;
-            font-size: 13px;
-            font-weight: 900;
+            font-size: 12px;
+            font-weight: 950;
             color: #374151;
-            margin-bottom: 7px;
-        }
-
-        input {
-            width: 100%;
-            height: 46px;
-            padding: 10px 12px;
-            border-radius: 14px;
-            border: 1px solid rgba(107, 114, 128, 0.24);
-            background: rgba(255, 255, 255, 0.92);
-            color: var(--text);
-            font-size: 15px;
-            outline: none;
-            transition: 0.16s ease;
-        }
-
-        input:focus {
-            border-color: rgba(255, 138, 0, 0.88);
-            box-shadow: 0 0 0 4px rgba(255, 138, 0, 0.14);
+            margin-bottom: 6px;
         }
 
         select {
             width: 100%;
-            height: 46px;
-            padding: 10px 12px;
+            height: 44px;
+            padding: 9px 11px;
             border-radius: 14px;
             border: 1px solid rgba(107, 114, 128, 0.24);
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             color: var(--text);
             font-size: 15px;
-            font-weight: 850;
+            font-weight: 900;
             outline: none;
-            transition: 0.16s ease;
         }
 
         select:focus {
@@ -176,62 +158,39 @@
             box-shadow: 0 0 0 4px rgba(255, 138, 0, 0.14);
         }
 
-        .fixed-goal {
-            min-height: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 10px 14px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 138, 0, 0.2);
-            background: rgba(255, 255, 255, 0.72);
-            color: #374151;
-            font-size: 14px;
-            font-weight: 900;
-        }
-
-        .fixed-goal strong {
-            color: var(--primary-dark);
-            font-size: 16px;
-        }
-
         .button-row {
             display: flex;
-            gap: 10px;
-            align-items: end;
+            gap: 9px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         button {
-            min-height: 46px;
+            min-height: 44px;
             border: 0;
             border-radius: 14px;
-            padding: 10px 14px;
+            padding: 9px 13px;
             cursor: pointer;
             font-weight: 950;
             color: #fff;
             background: linear-gradient(135deg, var(--primary), var(--pink));
-            box-shadow: 0 12px 24px rgba(255, 79, 136, 0.22);
+            box-shadow: 0 10px 20px rgba(255, 79, 136, 0.2);
             transition: transform 0.14s ease, box-shadow 0.14s ease, opacity 0.14s ease;
             white-space: nowrap;
-        }
-
-        button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 16px 30px rgba(255, 79, 136, 0.28);
+            touch-action: manipulation;
         }
 
         button:active {
-            transform: translateY(0);
+            transform: scale(0.98);
         }
 
         .btn-blue {
             background: linear-gradient(135deg, #25a7ff, #5d6bff);
-            box-shadow: 0 12px 24px rgba(37, 167, 255, 0.18);
+            box-shadow: 0 10px 20px rgba(37, 167, 255, 0.18);
         }
 
         .btn-soft {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.86);
             color: #374151;
             border: 1px solid rgba(107, 114, 128, 0.18);
             box-shadow: none;
@@ -243,17 +202,10 @@
 
         .btn-danger.active {
             outline: 4px solid rgba(239, 68, 68, 0.22);
-            transform: translateY(-1px);
-        }
-
-        .main-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 330px;
-            gap: 18px;
-            margin-top: 18px;
         }
 
         .panel {
+            margin-top: 12px;
             border-radius: var(--radius-xl);
             background: var(--card);
             border: 1px solid rgba(255, 255, 255, 0.76);
@@ -264,7 +216,7 @@
         }
 
         .panel-head {
-            padding: 18px 20px 14px;
+            padding: 14px 14px 11px;
             border-bottom: 1px solid rgba(255, 138, 0, 0.16);
         }
 
@@ -272,24 +224,124 @@
             margin: 0;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 20px;
+            gap: 8px;
+            font-size: 18px;
             font-weight: 950;
         }
 
         .panel-desc {
-            margin: 7px 0 0;
+            margin: 6px 0 0;
             color: var(--muted);
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.55;
         }
 
         .panel-body {
-            padding: 18px 20px 20px;
+            padding: 12px 14px 14px;
+        }
+
+        .result-panel {
+            position: relative;
+            z-index: 1;
+            margin-top: 12px;
+        }
+
+        .result-list {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .result-card {
+            position: relative;
+            overflow: hidden;
+            padding: 10px 7px;
+            min-height: 76px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 20px rgba(30, 41, 59, 0.08);
+        }
+
+        .result-card::after {
+            content: "";
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255, 138, 0, 0.12);
+        }
+
+        .result-label {
+            position: relative;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 950;
+            margin-bottom: 4px;
+            line-height: 1.25;
+        }
+
+        .result-value {
+            position: relative;
+            font-size: clamp(18px, 5.2vw, 24px);
+            font-weight: 950;
+            letter-spacing: -0.4px;
+            line-height: 1.15;
+            font-variant-numeric: tabular-nums;
+            word-break: break-word;
+        }
+
+        .result-note {
+            position: relative;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 9px;
+            line-height: 1.25;
+        }
+
+        .result-card.missing .result-value {
+            color: var(--danger);
+        }
+
+        .result-card.done .result-value {
+            color: var(--green);
+        }
+
+        .progress-box {
+            margin-top: 8px;
+            padding: 10px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.76);
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 12px;
+            font-weight: 950;
+            margin-bottom: 8px;
+        }
+
+        .progress-track {
+            height: 13px;
+            border-radius: 999px;
+            background: rgba(107, 114, 128, 0.14);
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--primary), var(--pink), var(--blue));
+            transition: width 0.18s ease;
         }
 
         .palette-scroll-note {
-            display: none;
             margin-bottom: 8px;
             color: #6b7280;
             font-size: 12px;
@@ -300,52 +352,37 @@
         .palette-wrap {
             overflow-x: auto;
             overflow-y: hidden;
-            padding: 8px 8px 12px;
-            margin: -2px -8px 0;
-            border-radius: 24px;
+            padding: 10px 10px 14px;
+            margin: 0 -14px;
+            border-radius: 20px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgba(255, 246, 223, 0.38));
-            border: 1px solid rgba(255, 255, 255, 0.52);
+            border-top: 1px solid rgba(255, 255, 255, 0.52);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.52);
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 138, 0, 0.45) rgba(255, 255, 255, 0.45);
             touch-action: pan-x;
-        }
-
-        .palette-wrap::-webkit-scrollbar {
-            height: 9px;
-        }
-
-        .palette-wrap::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.45);
-            border-radius: 999px;
-        }
-
-        .palette-wrap::-webkit-scrollbar-thumb {
-            background: rgba(255, 138, 0, 0.45);
-            border-radius: 999px;
         }
 
         .palette {
             display: flex;
             gap: 12px;
-            min-height: 124px;
+            min-height: 118px;
             align-items: center;
             width: max-content;
             min-width: 100%;
-            padding: 4px 10px 8px;
+            padding: 4px 12px 8px;
         }
 
         .palette::after {
             content: "";
-            flex: 0 0 18px;
+            flex: 0 0 24px;
             height: 1px;
         }
 
         .token {
             position: relative;
             flex: 0 0 auto;
-            width: 76px;
-            height: 92px;
+            width: 78px;
+            height: 98px;
             border-radius: 22px;
             display: grid;
             place-items: center;
@@ -353,7 +390,7 @@
             user-select: none;
             color: #fff;
             border: 2px solid rgba(255, 255, 255, 0.78);
-            box-shadow: 0 12px 24px rgba(30, 41, 59, 0.16);
+            box-shadow: 0 10px 22px rgba(30, 41, 59, 0.16);
             transition: transform 0.16s ease, box-shadow 0.16s ease, outline 0.16s ease, opacity 0.16s ease;
             isolation: isolate;
             touch-action: none;
@@ -376,11 +413,6 @@
             z-index: -1;
         }
 
-        .token:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 18px 30px rgba(30, 41, 59, 0.2);
-        }
-
         .token:active {
             cursor: grabbing;
             transform: scale(0.98);
@@ -388,7 +420,7 @@
 
         .token.selected {
             outline: 5px solid rgba(255, 138, 0, 0.32);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
         .token.dragging-source {
@@ -396,7 +428,7 @@
         }
 
         .token-icon {
-            font-size: 32px;
+            font-size: 34px;
             line-height: 1;
             filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.18));
         }
@@ -441,24 +473,26 @@
 
         .board-tools {
             display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column;
             gap: 10px;
-            margin: 14px 0;
+            margin: 12px 0;
         }
 
         .tip {
             color: var(--muted);
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.55;
+        }
+
+        .board-tools .button-row button {
+            flex: 1;
         }
 
         .board-wrap {
             width: 100%;
             overflow: visible;
-            padding: 12px;
-            border-radius: var(--radius-xl);
+            padding: 8px;
+            border-radius: 20px;
             background:
                 linear-gradient(135deg, rgba(116, 216, 255, 0.3), rgba(255, 197, 100, 0.22));
             border: 1px solid rgba(255, 255, 255, 0.74);
@@ -468,7 +502,7 @@
             display: grid;
             grid-template-columns: repeat(7, minmax(0, 1fr));
             gap: var(--board-gap);
-            width: min(100%, var(--board-max-size));
+            width: 100%;
             margin: 0 auto;
             justify-content: center;
         }
@@ -477,18 +511,17 @@
             width: 100%;
             aspect-ratio: 1 / 1;
             min-width: 0;
-            border-radius: 18px;
+            border-radius: 12px;
             display: grid;
             place-items: center;
-            background: rgba(255, 255, 255, 0.55);
-            border: 2px dashed rgba(255, 138, 0, 0.26);
+            background: rgba(255, 255, 255, 0.56);
+            border: 1.5px dashed rgba(255, 138, 0, 0.28);
             transition: 0.14s ease;
             position: relative;
         }
 
-        .cell:hover,
         .cell.drag-over {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.94);
             border-color: rgba(255, 138, 0, 0.85);
             transform: translateY(-1px);
         }
@@ -500,10 +533,11 @@
         }
 
         .cell .token {
-            width: 82%;
-            height: 82%;
+            width: 84%;
+            height: 84%;
             border-radius: 24%;
-            box-shadow: 0 8px 18px rgba(30, 41, 59, 0.14);
+            box-shadow: 0 7px 15px rgba(30, 41, 59, 0.14);
+            border-width: 1.5px;
         }
 
         .cell .token::before {
@@ -512,11 +546,11 @@
         }
 
         .cell .token-icon {
-            font-size: clamp(16px, 4.8vw, 27px);
+            font-size: clamp(15px, 5vw, 27px);
         }
 
         .cell .token-power {
-            font-size: clamp(6px, 1.8vw, 9px);
+            font-size: clamp(6px, 1.9vw, 9px);
             left: 8%;
             top: 8%;
             padding: 1px 5px;
@@ -527,132 +561,40 @@
             left: 8%;
             right: 8%;
             bottom: 8%;
-            font-size: clamp(6px, 1.7vw, 10px);
+            font-size: clamp(6px, 1.9vw, 10px);
         }
 
         .cell-remove {
             position: absolute;
-            right: -6px;
-            top: -6px;
-            width: 20px;
-            height: 20px;
+            right: -4px;
+            top: -4px;
+            width: 16px;
+            height: 16px;
             border-radius: 999px;
             display: none;
             place-items: center;
             color: #fff;
             background: var(--danger);
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 950;
             box-shadow: 0 6px 12px rgba(239, 68, 68, 0.28);
             pointer-events: none;
         }
 
-        .cell.filled:hover .cell-remove {
+        .cell.filled .cell-remove {
             display: grid;
-        }
-
-        .result-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .result-card {
-            position: relative;
-            overflow: hidden;
-            padding: 16px;
-            min-height: 94px;
-            border-radius: 22px;
-            background: rgba(255, 255, 255, 0.82);
-            border: 1px solid rgba(255, 255, 255, 0.78);
-            box-shadow: 0 10px 26px rgba(30, 41, 59, 0.08);
-        }
-
-        .result-card::after {
-            content: "";
-            position: absolute;
-            right: -28px;
-            top: -28px;
-            width: 92px;
-            height: 92px;
-            border-radius: 50%;
-            background: rgba(255, 138, 0, 0.12);
-        }
-
-        .result-label {
-            position: relative;
-            color: var(--muted);
-            font-size: 13px;
-            font-weight: 950;
-            margin-bottom: 8px;
-        }
-
-        .result-value {
-            position: relative;
-            font-size: 30px;
-            font-weight: 950;
-            letter-spacing: -0.8px;
-            font-variant-numeric: tabular-nums;
-            word-break: break-word;
-        }
-
-        .result-note {
-            position: relative;
-            margin-top: 6px;
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.45;
-        }
-
-        .result-card.missing .result-value {
-            color: var(--danger);
-        }
-
-        .result-card.done .result-value {
-            color: var(--green);
-        }
-
-        .progress-box {
-            margin-top: 12px;
-            padding: 14px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.76);
-        }
-
-        .progress-top {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            font-size: 13px;
-            font-weight: 950;
-            margin-bottom: 10px;
-        }
-
-        .progress-track {
-            height: 14px;
-            border-radius: 999px;
-            background: rgba(107, 114, 128, 0.14);
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            border-radius: inherit;
-            background: linear-gradient(90deg, var(--primary), var(--pink), var(--blue));
-            transition: width 0.18s ease;
         }
 
         .placed-list {
-            margin-top: 14px;
-            padding: 14px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.72);
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.74);
             border: 1px solid rgba(255, 255, 255, 0.76);
         }
 
         .placed-list h3 {
-            margin: 0 0 10px;
+            margin: 0 0 9px;
             font-size: 15px;
         }
 
@@ -672,18 +614,20 @@
         .toast {
             position: fixed;
             left: 50%;
-            bottom: 22px;
+            bottom: 18px;
             transform: translateX(-50%) translateY(30px);
             opacity: 0;
             pointer-events: none;
-            z-index: 30;
-            padding: 12px 16px;
+            z-index: 50;
+            padding: 11px 15px;
             border-radius: 999px;
             color: #fff;
             background: rgba(31, 41, 55, 0.94);
             box-shadow: 0 12px 28px rgba(31, 41, 55, 0.22);
             font-weight: 900;
+            font-size: 13px;
             transition: 0.2s ease;
+            white-space: nowrap;
         }
 
         .toast.show {
@@ -692,157 +636,88 @@
         }
 
         .footer {
-            margin-top: 22px;
+            margin-top: 18px;
             text-align: center;
             color: rgba(36, 66, 92, 0.72);
             font-weight: 850;
-            font-size: 13px;
+            font-size: 12px;
         }
 
-        @media (max-width: 1050px) {
-            .toolbar {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .toolbar>.button-row {
-                grid-column: span 2;
-            }
-        }
-
-        @media (max-width: 640px) {
-            :root {
-                --board-gap: 5px;
-            }
-
+        @media (min-width: 640px) {
             .app {
-                width: min(100% - 12px, 1220px);
-                padding-top: 12px;
-                padding-bottom: 32px;
+                padding-top: 18px;
             }
 
-            .hero,
-            .toolbar,
-            .panel {
-                border-radius: 22px;
+            .result-list {
+                gap: 10px;
             }
 
-            .hero {
-                padding: 20px;
-            }
-
-            .hero h1 {
-                font-size: 33px;
-            }
-
-            .hero p {
-                font-size: 14px;
-                line-height: 1.65;
-            }
-
-            .toolbar {
-                grid-template-columns: 1fr;
-                padding: 14px;
-            }
-
-            .toolbar>.button-row {
-                grid-column: auto;
-            }
-
-            .button-row {
-                flex-wrap: wrap;
-            }
-
-            button {
-                flex: 1;
-            }
-
-            .panel-head,
-            .panel-body {
-                padding-left: 12px;
-                padding-right: 12px;
-            }
-
-            .palette-scroll-note {
-                display: block;
-            }
-
-            .palette-wrap {
-                margin-left: -12px;
-                margin-right: -12px;
-                padding: 12px 12px 18px;
+            .result-card {
+                min-height: 88px;
+                padding: 14px 13px;
                 border-radius: 20px;
             }
 
-            .palette {
-                gap: 14px;
-                min-height: 136px;
-                padding: 8px 14px 12px;
-            }
-
-            .palette::after {
-                flex-basis: 36px;
-            }
-
-            .palette>.token {
+            .result-card::after {
                 width: 82px;
-                height: 104px;
-                border-radius: 24px;
+                height: 82px;
+                right: -26px;
+                top: -26px;
             }
 
-            .palette>.token .token-icon {
-                font-size: 36px;
-            }
-
-            .palette>.token .token-power {
+            .result-label {
                 font-size: 12px;
-                left: 9px;
-                top: 8px;
-            }
-
-            .palette>.token .token-value {
-                height: 25px;
-                font-size: 12px;
-            }
-
-            .board-tools {
-                align-items: stretch;
-            }
-
-            .board-tools .button-row {
-                width: 100%;
-            }
-
-            .board-wrap {
-                padding: 8px;
-                border-radius: 18px;
-                overflow: visible;
-            }
-
-            .cell {
-                border-radius: 12px;
-                border-width: 1.5px;
-            }
-
-            .cell .token {
-                width: 84%;
-                height: 84%;
-                border-width: 1.5px;
-            }
-
-            .cell-remove {
-                width: 16px;
-                height: 16px;
-                right: -4px;
-                top: -4px;
-                font-size: 10px;
+                margin-bottom: 6px;
             }
 
             .result-value {
                 font-size: 28px;
+            }
+
+            .result-note {
+                font-size: 12px;
+                margin-top: 5px;
+            }
+
+            .progress-box {
+                margin-top: 10px;
+                padding: 12px;
+                border-radius: 18px;
+            }
+
+            .progress-top {
+                font-size: 13px;
+                margin-bottom: 9px;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr 1fr auto;
+            }
+
+            .hero {
+                padding: 24px;
+            }
+
+            .panel-head {
+                padding: 16px 18px 12px;
+            }
+
+            .panel-body {
+                padding: 16px 18px 18px;
+            }
+
+            .palette-wrap {
+                margin: 0 -18px;
+            }
+
+            .board-tools {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .board-tools .button-row button {
+                flex: none;
             }
         }
 
@@ -852,30 +727,42 @@
             }
 
             .app {
-                width: min(100% - 8px, 1220px);
+                width: min(100% - 8px, 760px);
             }
 
-            .panel-head,
-            .panel-body {
-                padding-left: 10px;
-                padding-right: 10px;
+            .hero {
+                padding: 16px;
             }
 
-            .palette-wrap {
-                margin-left: -10px;
-                margin-right: -10px;
-                padding: 12px 10px 18px;
+            .toolbar {
+                grid-template-columns: 1fr;
             }
 
-            .palette {
-                gap: 12px;
-                min-height: 130px;
-                padding-left: 12px;
+            .result-list {
+                gap: 4px;
             }
 
-            .palette>.token {
-                width: 78px;
-                height: 100px;
+            .result-card {
+                min-height: 72px;
+                padding: 9px 5px;
+                border-radius: 14px;
+            }
+
+            .result-label {
+                font-size: 9px;
+            }
+
+            .result-value {
+                font-size: clamp(16px, 5vw, 22px);
+            }
+
+            .result-note {
+                font-size: 8px;
+            }
+
+            .token {
+                width: 76px;
+                height: 96px;
             }
 
             .board-wrap {
@@ -884,15 +771,6 @@
 
             .cell {
                 border-radius: 10px;
-            }
-
-            .cell .token-power {
-                padding: 0 4px;
-            }
-
-            .footer {
-                margin-top: 16px;
-                font-size: 12px;
             }
         }
     </style>
@@ -904,9 +782,7 @@
             <div class="hero-badge" data-i18n="heroBadge">⚡ 合併島嶼工具</div>
             <h1 data-i18n="heroTitle">矩陣式閃電計算器</h1>
             <p data-i18n="heroDesc">
-                下方固定為 7 × 7 共 49 格，最終目標件數固定為 1。
-                輸入這次活動共有幾階後，上方會產生對應 2 的次方物件。
-                把物件拖曳或點選放到矩陣中，就能即時計算目前折算值與還缺多少閃電。
+                選擇本次目標階數 10 個、11 個或 12 個，將目前棋盤上的物件拖曳到下方 7 × 7 矩陣中，上方會即時計算目前折算值、還缺多少閃電與完成度。
             </p>
         </section>
 
@@ -914,23 +790,25 @@
             <div class="field">
                 <label for="languageSelect" data-i18n="languageLabel">語言</label>
                 <select id="languageSelect">
-                    <option value="zh-Hant">繁體中文</option>
+                    <option value="zh-Hant">中文</option>
                     <option value="en">English</option>
                     <option value="vi">Tiếng Việt</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                    <option value="th">ไทย</option>
+                    <option value="id">Bahasa Indonesia</option>
+                    <option value="es">Español</option>
+                    <option value="pt">Português</option>
                 </select>
             </div>
 
             <div class="field">
-                <label for="levelCount" data-i18n="levelCountLabel">共有幾階</label>
-                <input id="levelCount" type="number" min="1" max="30" step="1" value="10">
-            </div>
-
-            <div class="field">
-                <label data-i18n="finalGoalLabel">最終目標件數</label>
-                <div class="fixed-goal">
-                    <span data-i18n="fixedText">固定</span>
-                    <strong data-i18n="oneItem">1 件</strong>
-                </div>
+                <label for="targetSelect" data-i18n="targetSelectLabel">目標階數</label>
+                <select id="targetSelect">
+                    <option value="10">10 個</option>
+                    <option value="11">11 個</option>
+                    <option value="12" selected>12 個</option>
+                </select>
             </div>
 
             <div class="button-row">
@@ -938,123 +816,172 @@
             </div>
         </section>
 
-        <section class="main-layout">
-            <section class="panel">
-                <div class="panel-head">
-                    <h2 class="panel-title" data-i18n="paletteTitle">🧩 可拖拉物件</h2>
-                    <p class="panel-desc" data-i18n="paletteDesc">
-                        上方物件是模板，不會被消耗。手機與桌機都可以拖曳；也可以先點選物件，再點矩陣格子放入。
-                    </p>
-                </div>
+        <section class="panel result-panel">
+            <div class="panel-head">
+                <h2 class="panel-title" data-i18n="resultTitle">📊 即時計算</h2>
+                <p class="panel-desc" data-i18n="resultDesc">拖拉或點選物件放入矩陣後，結果會立刻更新。</p>
+            </div>
 
-                <div class="panel-body">
-                    <div class="palette-scroll-note" data-i18n="mobileScrollNote">
-                        手機操作：左右滑動可瀏覽圖案；要拖到矩陣時，請按住圖案後往下拖。
+            <div class="panel-body">
+                <div class="result-list">
+                    <div class="result-card">
+                        <div class="result-label" data-i18n="targetDemand">目標需求</div>
+                        <div id="targetValue" class="result-value">4,096</div>
+                        <div id="targetNote" class="result-note">第 12 階 × 1 件</div>
                     </div>
 
-                    <div class="palette-wrap">
-                        <div id="palette" class="palette"></div>
+                    <div class="result-card">
+                        <div class="result-label" data-i18n="currentTotal">目前矩陣折算</div>
+                        <div id="currentValue" class="result-value">0</div>
+                        <div id="placedNote" class="result-note">目前放入 0 個物件</div>
                     </div>
 
-                    <div class="board-tools">
-                        <div class="tip" id="hintText" data-i18n="hintDefault">
-                            操作提示：拖拉物件到格子，或點選物件後點格子。連點同一格兩下可刪除。
-                        </div>
-
-                        <div class="button-row">
-                            <button id="deleteModeBtn" class="btn-danger" data-i18n="deleteModeBtn">刪除模式</button>
-                            <button id="clearBtn" class="btn-soft" data-i18n="clearBtn">清空矩陣</button>
-                            <button id="copyBtn" class="btn-blue" data-i18n="copyBtn">複製結果</button>
-                        </div>
-                    </div>
-
-                    <div class="board-wrap">
-                        <div id="board" class="board"></div>
+                    <div id="missingCard" class="result-card missing">
+                        <div class="result-label" data-i18n="missingLightning">還缺閃電</div>
+                        <div id="missingValue" class="result-value">4,096</div>
+                        <div id="missingNote" class="result-note">尚未完成</div>
                     </div>
                 </div>
-            </section>
 
-            <aside class="panel">
-                <div class="panel-head">
-                    <h2 class="panel-title" data-i18n="resultTitle">📊 即時計算</h2>
-                    <p class="panel-desc" data-i18n="resultDesc">
-                        矩陣內每個物件都會依照它的階級折算成閃電。
-                    </p>
-                </div>
-
-                <div class="panel-body">
-                    <div class="result-list">
-                        <div class="result-card">
-                            <div class="result-label" data-i18n="targetDemand">目標需求</div>
-                            <div id="targetValue" class="result-value">1,024</div>
-                            <div id="targetNote" class="result-note">第 10 階 × 1 件</div>
-                        </div>
-
-                        <div class="result-card">
-                            <div class="result-label" data-i18n="currentTotal">目前矩陣折算</div>
-                            <div id="currentValue" class="result-value">0</div>
-                            <div id="placedNote" class="result-note">目前放入 0 個物件</div>
-                        </div>
-
-                        <div id="missingCard" class="result-card missing">
-                            <div class="result-label" data-i18n="missingLightning">還缺閃電</div>
-                            <div id="missingValue" class="result-value">1,024</div>
-                            <div id="missingNote" class="result-note" data-i18n="missingNotDone">尚未完成</div>
-                        </div>
+                <div class="progress-box">
+                    <div class="progress-top">
+                        <span id="progressText">完成度 0%</span>
+                        <span id="statusText">未完成</span>
                     </div>
-
-                    <div class="progress-box">
-                        <div class="progress-top">
-                            <span id="progressText">完成度 0%</span>
-                            <span id="statusText" data-i18n="notDone">未完成</span>
-                        </div>
-                        <div class="progress-track">
-                            <div id="progressBar" class="progress-bar"></div>
-                        </div>
-                    </div>
-
-                    <div class="placed-list">
-                        <h3 data-i18n="statsTitle">矩陣統計</h3>
-                        <div id="statsList"></div>
+                    <div class="progress-track">
+                        <div id="progressBar" class="progress-bar"></div>
                     </div>
                 </div>
-            </aside>
+            </div>
+        </section>
 
+        <section class="panel">
+            <div class="panel-head">
+                <h2 class="panel-title" data-i18n="paletteTitle">🧩 可拖拉物件</h2>
+                <p class="panel-desc" data-i18n="paletteDesc">
+                    物件是模板，不會被消耗。手機可以左右滑動瀏覽，也可以點選物件後再點矩陣格子放入。
+                </p>
+            </div>
+
+            <div class="panel-body">
+                <div class="palette-scroll-note" data-i18n="mobileScrollNote">
+                    手機操作：左右滑動可瀏覽圖案；要拖到矩陣時，請按住圖案後往下拖。
+                </div>
+
+                <div class="palette-wrap">
+                    <div id="palette" class="palette"></div>
+                </div>
+
+                <div class="board-tools">
+                    <div class="tip" id="hintText">
+                        操作提示：拖拉物件到格子，或點選物件後點格子。連點同一格兩下可刪除。
+                    </div>
+
+                    <div class="button-row">
+                        <button id="deleteModeBtn" class="btn-danger" data-i18n="deleteModeBtn">刪除模式</button>
+                        <button id="clearBtn" class="btn-soft" data-i18n="clearBtn">清空矩陣</button>
+                        <button id="copyBtn" class="btn-blue" data-i18n="copyBtn">複製結果</button>
+                    </div>
+                </div>
+
+                <div class="board-wrap">
+                    <div id="board" class="board"></div>
+                </div>
+
+                <div class="placed-list">
+                    <h3 data-i18n="statsTitle">矩陣統計</h3>
+                    <div id="statsList"></div>
+                </div>
+            </div>
         </section>
 
         <div class="footer" data-i18n="footer">
-            &copy; Coin999 - 長長久久 隊伍
+            © Coin999 - 長長久久 隊伍
         </div>
     </main>
 
-    <div id="toast" class="toast" data-i18n="toastDone">已完成</div>
+    <div id="toast" class="toast">已完成</div>
 
     <script>
         let i18n = {};
         let currentLang = localStorage.getItem("mergeIslandLang") || "zh-Hant";
 
+        const fallbackI18n = {
+            "zh-Hant": {
+                pageTitle: "合併島嶼矩陣閃電計算器",
+                heroBadge: "⚡ 合併島嶼工具",
+                heroTitle: "矩陣式閃電計算器",
+                heroDesc: "選擇本次目標階數 10 個、11 個或 12 個，將目前棋盤上的物件拖曳到下方 7 × 7 矩陣中，上方會即時計算目前折算值、還缺多少閃電與完成度。",
+                languageLabel: "語言",
+                targetSelectLabel: "目標階數",
+                buildBtn: "重新產生",
+                resultTitle: "📊 即時計算",
+                resultDesc: "拖拉或點選物件放入矩陣後，結果會立刻更新。",
+                targetDemand: "目標需求",
+                currentTotal: "目前矩陣折算",
+                missingLightning: "還缺閃電",
+                targetLevelPrefix: "第 ",
+                targetLevelSuffix: " 階 × 1 件",
+                placedNotePrefix: "目前放入 ",
+                placedNoteSuffix: " 個物件",
+                missingNeedPrefix: "還需要補 ",
+                missingNeedSuffix: " 閃電",
+                overPrefix: "已超過 ",
+                overSuffix: " 閃電",
+                exactDone: "剛好完成",
+                done: "已完成",
+                notDone: "未完成",
+                progressPrefix: "完成度 ",
+                paletteTitle: "🧩 可拖拉物件",
+                paletteDesc: "物件是模板，不會被消耗。手機可以左右滑動瀏覽，也可以點選物件後再點矩陣格子放入。",
+                mobileScrollNote: "手機操作：左右滑動可瀏覽圖案；要拖到矩陣時，請按住圖案後往下拖。",
+                hintBuilt: "已重新產生物件。手機可左右滑動圖案列；要拖曳時按住圖案往下拖。",
+                hintCancelSelected: "已取消選取。你可以拖拉物件到格子，或點選物件後點格子。",
+                hintSelectedPrefix: "已選取 ",
+                hintSelectedSuffix: "，點擊矩陣格子即可放入。",
+                hintDeleteOn: "刪除模式已開啟：點擊矩陣內任一格即可清除。",
+                hintDeleteOff: "刪除模式已關閉。你可以繼續拖拉或點選物件放入。",
+                deleteModeBtn: "刪除模式",
+                clearBtn: "清空矩陣",
+                copyBtn: "複製結果",
+                statsTitle: "矩陣統計",
+                statsLinePrefix: "數值 ",
+                statsLineMiddle: " × ",
+                statsEmpty: "目前矩陣內還沒有放入任何物件。",
+                toastBuilt: "已重新產生矩陣",
+                toastCleared: "矩陣已清空",
+                toastRemoved: "已移除物件",
+                toastCopied: "結果已複製",
+                toastCopyFailed: "複製失敗，請手動截圖",
+                copyTitle: "【合併島嶼矩陣計算】",
+                copyTargetLevel: "目標階數：",
+                copyTarget: "目標需求：",
+                copyCurrent: "目前折算：",
+                copyMissing: "還缺閃電：",
+                copyProgress: "完成度：",
+                copyStatus: "狀態：",
+                footer: "© Coin999 - 長長久久 隊伍"
+            }
+        };
+
         const t = (key) => {
-            if (i18n[currentLang] && i18n[currentLang][key]) {
-                return i18n[currentLang][key];
-            }
-
-            if (i18n["zh-Hant"] && i18n["zh-Hant"][key]) {
-                return i18n["zh-Hant"][key];
-            }
-
+            if (i18n[currentLang] && i18n[currentLang][key]) return i18n[currentLang][key];
+            if (i18n["zh-Hant"] && i18n["zh-Hant"][key]) return i18n["zh-Hant"][key];
             return key;
         };
 
         const FIXED_ROWS = 7;
         const FIXED_COLS = 7;
-        const FIXED_GOAL_COUNT = 1;
         const DOUBLE_TAP_MS = 360;
         const DRAG_THRESHOLD = 8;
 
+        const AUTO_SCROLL_EDGE = 90;
+        const AUTO_SCROLL_MAX_SPEED = 18;
+
         const paletteEl = document.getElementById("palette");
         const boardEl = document.getElementById("board");
-        const levelCountInput = document.getElementById("levelCount");
         const languageSelect = document.getElementById("languageSelect");
+        const targetSelect = document.getElementById("targetSelect");
 
         const buildBtn = document.getElementById("buildBtn");
         const clearBtn = document.getElementById("clearBtn");
@@ -1076,9 +1003,9 @@
         const toastEl = document.getElementById("toast");
 
         const icons = [
-            "🐚", "🪸", "🌺", "🦪", "💎", "🔮", "🪙", "💍", "🪞", "👑",
-            "🧿", "⭐", "🌙", "☀️", "🍀", "🍄", "🥥", "🏝️", "🧜", "🦀",
-            "🐠", "🐙", "🦜", "🎁", "🏺", "🪄", "🧭", "🛡️", "💫", "⚜️"
+            "🍴", "🍽️", "🥄", "🔪", "🧂", "🍳", "🥘", "🍲", "🧃", "🥣",
+            "🍞", "🧈", "🥫", "🥤", "🍵", "☕", "🧁", "🍰", "🎂", "🍯",
+            "🧊", "🥗", "🍱", "🍜", "🍝", "🍕", "🍔", "🌮", "🥪", "🥐"
         ];
 
         const gradients = [
@@ -1091,15 +1018,18 @@
             ["#fb7185", "#f43f5e"],
             ["#8b5cf6", "#6366f1"],
             ["#06b6d4", "#2563eb"],
-            ["#84cc16", "#22c55e"]
+            ["#84cc16", "#22c55e"],
+            ["#f59e0b", "#ef4444"],
+            ["#0ea5e9", "#7c3aed"],
+            ["#22c55e", "#0f766e"]
         ];
 
         const state = {
-            levelCount: 10,
-            goalCount: FIXED_GOAL_COUNT,
+            targetLevel: 12,
+            target: 4096,
             rows: FIXED_ROWS,
             cols: FIXED_COLS,
-            selectedLevel: null,
+            selectedValue: null,
             deleteMode: false,
             suppressBuildToast: false,
             items: [],
@@ -1117,39 +1047,15 @@
             pointerId: null,
             startX: 0,
             startY: 0,
-            level: null,
+            currentX: 0,
+            currentY: 0,
+            value: null,
             from: null,
             cellIndex: null,
             sourceEl: null,
             ghostEl: null,
-            overCell: null
-        };
-
-        const applyStaticI18n = () => {
-            document.documentElement.lang = currentLang;
-            document.title = t("pageTitle");
-
-            const nodes = document.querySelectorAll("[data-i18n]");
-
-            nodes.forEach((node) => {
-                const key = node.getAttribute("data-i18n");
-                node.textContent = t(key);
-            });
-
-            if (languageSelect) {
-                languageSelect.value = currentLang;
-            }
-        };
-
-        const setLanguage = (lang) => {
-            if (!i18n[lang]) return;
-
-            currentLang = lang;
-            localStorage.setItem("mergeIslandLang", currentLang);
-
-            applyStaticI18n();
-            renderPalette();
-            recalc();
+            overCell: null,
+            autoScrollFrame: null
         };
 
         const loadI18n = async () => {
@@ -1165,33 +1071,39 @@
                 if (!i18n[currentLang]) {
                     currentLang = "zh-Hant";
                 }
-
-                applyStaticI18n();
             } catch (err) {
-                i18n = {
-                    "zh-Hant": {}
-                };
+                i18n = fallbackI18n;
+                currentLang = "zh-Hant";
             }
         };
 
-        const sanitizeInt = (value, min, max, fallback) => {
-            let n = Number(value);
+        const applyStaticI18n = () => {
+            document.documentElement.lang = currentLang;
+            document.title = t("pageTitle");
 
-            if (!Number.isFinite(n)) return fallback;
+            const nodes = document.querySelectorAll("[data-i18n]");
 
-            n = Math.floor(n);
+            nodes.forEach((node) => {
+                const key = node.getAttribute("data-i18n");
+                node.textContent = t(key);
+            });
 
-            if (n < min) return min;
-            if (n > max) return max;
-
-            return n;
+            languageSelect.value = currentLang;
         };
 
-        const pow2 = (exp) => 1n << BigInt(exp);
+        const setLanguage = (lang) => {
+            if (!i18n[lang]) return;
 
-        const formatBigInt = (value) => {
-            const text = value.toString();
-            return text.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            currentLang = lang;
+            localStorage.setItem("mergeIslandLang", currentLang);
+
+            applyStaticI18n();
+            renderPalette();
+            recalc();
+        };
+
+        const formatNumber = (value) => {
+            return Number(value).toLocaleString("en-US");
         };
 
         const shuffleArray = (arr) => {
@@ -1200,7 +1112,6 @@
             for (let i = copy.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 const temp = copy[i];
-
                 copy[i] = copy[j];
                 copy[j] = temp;
             }
@@ -1208,41 +1119,42 @@
             return copy;
         };
 
-        const createItems = (levelCount) => {
-            const shuffledIcons = shuffleArray(icons);
-            const result = [];
+        const getTargetValues = (targetLevel) => {
+            const values = [];
 
-            for (let i = 0; i < levelCount; i++) {
-                const index = i;
+            for (let level = 0; level <= targetLevel; level++) {
+                values.push(2 ** level);
+            }
+
+            return values;
+        };
+
+        const createItems = (targetLevel) => {
+            const values = getTargetValues(targetLevel);
+            const shuffledIcons = shuffleArray(icons);
+
+            return values.map((value, index) => {
                 const gradient = gradients[index % gradients.length];
 
-                result.push({
-                    level: i,
+                return {
+                    level: index,
+                    value,
                     icon: shuffledIcons[index % shuffledIcons.length],
                     from: gradient[0],
                     to: gradient[1]
-                });
-            }
-
-            return result;
+                };
+            });
         };
 
-
-        const getItemByLevel = (level) => {
-            for (const item of state.items) {
-                if (item.level === level) {
-                    return item;
-                }
-            }
-
-            return null;
+        const getItemByValue = (value) => {
+            return state.items.find(item => item.value === value) || null;
         };
 
         const createTokenElement = (item, mode, cellIndex) => {
             const token = document.createElement("div");
             token.className = "token";
             token.draggable = false;
-            token.dataset.level = String(item.level);
+            token.dataset.value = String(item.value);
             token.dataset.mode = mode;
 
             if (typeof cellIndex === "number") {
@@ -1251,13 +1163,13 @@
 
             token.style.background = `linear-gradient(135deg, ${item.from}, ${item.to})`;
 
-            if (state.selectedLevel === item.level && mode === "palette") {
+            if (state.selectedValue === item.value && mode === "palette") {
                 token.classList.add("selected");
             }
 
             const power = document.createElement("div");
             power.className = "token-power";
-            power.textContent = `2^${item.level}`;
+            power.textContent = `Lv.${item.level}`;
 
             const icon = document.createElement("div");
             icon.className = "token-icon";
@@ -1265,7 +1177,7 @@
 
             const value = document.createElement("div");
             value.className = "token-value";
-            value.textContent = formatBigInt(pow2(item.level));
+            value.textContent = formatNumber(item.value);
 
             token.appendChild(power);
             token.appendChild(icon);
@@ -1277,7 +1189,7 @@
 
                 startPointerDrag(event, {
                     from: mode,
-                    level: item.level,
+                    value: item.value,
                     cellIndex: typeof cellIndex === "number" ? cellIndex : null,
                     sourceEl: token
                 });
@@ -1290,14 +1202,14 @@
                         return;
                     }
 
-                    if (state.selectedLevel === item.level) {
-                        state.selectedLevel = null;
+                    if (state.selectedValue === item.value) {
+                        state.selectedValue = null;
                         hintTextEl.textContent = t("hintCancelSelected");
                     } else {
-                        state.selectedLevel = item.level;
+                        state.selectedValue = item.value;
                         state.deleteMode = false;
                         deleteModeBtn.classList.remove("active");
-                        hintTextEl.textContent = `${t("hintSelectedPrefix")}${item.level}${t("hintSelectedSuffix")}`;
+                        hintTextEl.textContent = `${t("hintSelectedPrefix")}${formatNumber(item.value)}${t("hintSelectedSuffix")}`;
                     }
 
                     renderPalette();
@@ -1317,19 +1229,18 @@
 
         const renderBoard = () => {
             boardEl.innerHTML = "";
-            boardEl.style.gridTemplateColumns = "repeat(7, minmax(0, 1fr))";
 
             for (let i = 0; i < state.board.length; i++) {
                 const cell = document.createElement("div");
                 cell.className = "cell";
                 cell.dataset.index = String(i);
 
-                const level = state.board[i];
+                const value = state.board[i];
 
-                if (level !== null) {
+                if (value !== null) {
                     cell.classList.add("filled");
 
-                    const item = getItemByLevel(level);
+                    const item = getItemByValue(value);
 
                     if (item) {
                         cell.appendChild(createTokenElement(item, "cell", i));
@@ -1358,7 +1269,7 @@
                     const isSameCell = lastTapIndex === index;
                     const isFastEnough = now - lastTapAt <= DOUBLE_TAP_MS;
                     const hasItem = state.board[index] !== null;
-                    const noSelectedItem = state.selectedLevel === null;
+                    const noSelectedItem = state.selectedValue === null;
 
                     if (isSameCell && isFastEnough && hasItem && noSelectedItem) {
                         lastTapIndex = null;
@@ -1370,8 +1281,8 @@
                     lastTapIndex = index;
                     lastTapAt = now;
 
-                    if (state.selectedLevel !== null) {
-                        state.board[index] = state.selectedLevel;
+                    if (state.selectedValue !== null) {
+                        state.board[index] = state.selectedValue;
                         renderBoard();
                         recalc();
                     }
@@ -1392,12 +1303,15 @@
             pointerDrag.pointerId = event.pointerId;
             pointerDrag.startX = event.clientX;
             pointerDrag.startY = event.clientY;
-            pointerDrag.level = payload.level;
+            pointerDrag.currentX = event.clientX;
+            pointerDrag.currentY = event.clientY;
+            pointerDrag.value = payload.value;
             pointerDrag.from = payload.from;
             pointerDrag.cellIndex = payload.cellIndex;
             pointerDrag.sourceEl = payload.sourceEl;
             pointerDrag.ghostEl = null;
             pointerDrag.overCell = null;
+            pointerDrag.autoScrollFrame = null;
 
             document.addEventListener("pointermove", onPointerMove, { passive: false });
             document.addEventListener("pointerup", onPointerUp, { passive: false });
@@ -1413,14 +1327,11 @@
             const absY = Math.abs(dy);
             const distance = Math.sqrt(dx * dx + dy * dy);
 
+            pointerDrag.currentX = event.clientX;
+            pointerDrag.currentY = event.clientY;
+
             if (!pointerDrag.started && distance < DRAG_THRESHOLD) return;
 
-            /*
-                手機圖案列優化：
-                如果使用者在 palette 圖案列中明顯是「左右滑」，
-                就不要啟動拖曳，讓瀏覽器正常橫向捲動。
-                如果是往下或往上拖，才進入拖曳放置模式。
-            */
             if (!pointerDrag.started && pointerDrag.from === "palette" && absX > absY * 1.15) {
                 cleanupPointerDrag();
                 return;
@@ -1432,12 +1343,19 @@
                 beginVisualDrag(event.clientX, event.clientY);
             }
 
+            pointerDrag.currentX = event.clientX;
+            pointerDrag.currentY = event.clientY;
+
             moveGhost(event.clientX, event.clientY);
             updateOverCell(event.clientX, event.clientY);
+            startAutoScroll();
         };
 
         const onPointerUp = (event) => {
             if (!pointerDrag.active || event.pointerId !== pointerDrag.pointerId) return;
+
+            pointerDrag.currentX = event.clientX;
+            pointerDrag.currentY = event.clientY;
 
             if (pointerDrag.started) {
                 event.preventDefault();
@@ -1471,7 +1389,7 @@
                 } catch (err) { }
             }
 
-            const item = getItemByLevel(pointerDrag.level);
+            const item = getItemByValue(pointerDrag.value);
             if (!item) return;
 
             const ghost = createTokenElement(item, "ghost");
@@ -1492,11 +1410,55 @@
             pointerDrag.ghostEl.style.top = `${y}px`;
         };
 
+        const startAutoScroll = () => {
+            if (pointerDrag.autoScrollFrame !== null) return;
+
+            const step = () => {
+                if (!pointerDrag.active || !pointerDrag.started) {
+                    stopAutoScroll();
+                    return;
+                }
+
+                const y = pointerDrag.currentY;
+                const viewportHeight = window.innerHeight;
+
+                let scrollSpeed = 0;
+
+                if (y < AUTO_SCROLL_EDGE) {
+                    const intensity = (AUTO_SCROLL_EDGE - y) / AUTO_SCROLL_EDGE;
+                    scrollSpeed = -AUTO_SCROLL_MAX_SPEED * intensity;
+                } else if (y > viewportHeight - AUTO_SCROLL_EDGE) {
+                    const intensity = (y - (viewportHeight - AUTO_SCROLL_EDGE)) / AUTO_SCROLL_EDGE;
+                    scrollSpeed = AUTO_SCROLL_MAX_SPEED * intensity;
+                }
+
+                if (scrollSpeed !== 0) {
+                    window.scrollBy({
+                        top: scrollSpeed,
+                        left: 0,
+                        behavior: "auto"
+                    });
+
+                    moveGhost(pointerDrag.currentX, pointerDrag.currentY);
+                    updateOverCell(pointerDrag.currentX, pointerDrag.currentY);
+                }
+
+                pointerDrag.autoScrollFrame = requestAnimationFrame(step);
+            };
+
+            pointerDrag.autoScrollFrame = requestAnimationFrame(step);
+        };
+
+        const stopAutoScroll = () => {
+            if (pointerDrag.autoScrollFrame !== null) {
+                cancelAnimationFrame(pointerDrag.autoScrollFrame);
+                pointerDrag.autoScrollFrame = null;
+            }
+        };
+
         const getCellFromPoint = (x, y) => {
             const el = document.elementFromPoint(x, y);
-
             if (!el) return null;
-
             return el.closest ? el.closest(".cell") : null;
         };
 
@@ -1517,23 +1479,25 @@
         const placeDraggedItem = (targetIndex) => {
             if (pointerDrag.from === "cell" && typeof pointerDrag.cellIndex === "number") {
                 const oldIndex = pointerDrag.cellIndex;
-                const movingLevel = state.board[oldIndex];
+                const movingValue = state.board[oldIndex];
 
-                if (movingLevel === null) return;
+                if (movingValue === null) return;
 
                 state.board[oldIndex] = null;
-                state.board[targetIndex] = movingLevel;
+                state.board[targetIndex] = movingValue;
             } else {
-                state.board[targetIndex] = pointerDrag.level;
+                state.board[targetIndex] = pointerDrag.value;
             }
 
-            state.selectedLevel = null;
+            state.selectedValue = null;
             renderPalette();
             renderBoard();
             recalc();
         };
 
         const cleanupPointerDrag = () => {
+            stopAutoScroll();
+
             document.removeEventListener("pointermove", onPointerMove);
             document.removeEventListener("pointerup", onPointerUp);
             document.removeEventListener("pointercancel", cancelPointerDrag);
@@ -1564,25 +1528,25 @@
             pointerDrag.active = false;
             pointerDrag.started = false;
             pointerDrag.pointerId = null;
-            pointerDrag.level = null;
+            pointerDrag.startX = 0;
+            pointerDrag.startY = 0;
+            pointerDrag.currentX = 0;
+            pointerDrag.currentY = 0;
+            pointerDrag.value = null;
             pointerDrag.from = null;
             pointerDrag.cellIndex = null;
             pointerDrag.sourceEl = null;
             pointerDrag.ghostEl = null;
             pointerDrag.overCell = null;
+            pointerDrag.autoScrollFrame = null;
         };
 
         const buildGame = () => {
-            state.levelCount = sanitizeInt(levelCountInput.value, 1, 30, 10);
-            state.goalCount = FIXED_GOAL_COUNT;
-            state.rows = FIXED_ROWS;
-            state.cols = FIXED_COLS;
-            state.selectedLevel = null;
+            state.targetLevel = Number(targetSelect.value);
+            state.target = 2 ** state.targetLevel;
+            state.selectedValue = null;
             state.deleteMode = false;
-
-            levelCountInput.value = String(state.levelCount);
-
-            state.items = createItems(state.levelCount);
+            state.items = createItems(state.targetLevel);
             state.board = [];
 
             for (let i = 0; i < state.rows * state.cols; i++) {
@@ -1627,11 +1591,11 @@
         };
 
         const getBoardTotal = () => {
-            let total = 0n;
+            let total = 0;
 
-            for (const level of state.board) {
-                if (level !== null) {
-                    total += pow2(level);
+            for (const value of state.board) {
+                if (value !== null) {
+                    total += value;
                 }
             }
 
@@ -1641,20 +1605,20 @@
         const getPlacedCount = () => {
             let count = 0;
 
-            for (const level of state.board) {
-                if (level !== null) count++;
+            for (const value of state.board) {
+                if (value !== null) count++;
             }
 
             return count;
         };
 
-        const getLevelStats = () => {
+        const getValueStats = () => {
             const stats = {};
 
-            for (const level of state.board) {
-                if (level !== null) {
-                    if (!stats[level]) stats[level] = 0;
-                    stats[level]++;
+            for (const value of state.board) {
+                if (value !== null) {
+                    if (!stats[value]) stats[value] = 0;
+                    stats[value]++;
                 }
             }
 
@@ -1662,31 +1626,30 @@
         };
 
         const getPercent = (current, target) => {
-            if (target <= 0n) return 0;
+            if (target <= 0) return 0;
 
             const capped = current > target ? target : current;
-            const basisPoints = Number((capped * 10000n) / target);
-
-            return basisPoints / 100;
+            return (capped / target) * 100;
         };
 
         const renderStats = (stats) => {
             statsListEl.innerHTML = "";
 
             let hasAny = false;
+            const values = getTargetValues(state.targetLevel).reverse();
 
-            for (let level = state.levelCount - 1; level >= 0; level--) {
-                if (stats[level]) {
+            for (const value of values) {
+                if (stats[value]) {
                     hasAny = true;
 
                     const line = document.createElement("div");
                     line.className = "mini-line";
 
                     const left = document.createElement("span");
-                    left.textContent = `${t("statsLinePrefix")}${level}${t("statsLineMiddle")}${stats[level]}`;
+                    left.textContent = `${t("statsLinePrefix")}${formatNumber(value)}${t("statsLineMiddle")}${stats[value]}`;
 
                     const right = document.createElement("strong");
-                    right.textContent = formatBigInt(pow2(level) * BigInt(stats[level]));
+                    right.textContent = formatNumber(value * stats[value]);
 
                     line.appendChild(left);
                     line.appendChild(right);
@@ -1703,33 +1666,31 @@
         };
 
         const recalc = () => {
-            state.levelCount = sanitizeInt(levelCountInput.value, 1, 30, state.levelCount);
-            state.goalCount = FIXED_GOAL_COUNT;
+            state.targetLevel = Number(targetSelect.value);
+            state.target = 2 ** state.targetLevel;
 
-            const targetLevel = state.levelCount - 1;
-            const target = pow2(targetLevel) * BigInt(FIXED_GOAL_COUNT);
-
+            const target = state.target;
             const current = getBoardTotal();
-            const missing = target > current ? target - current : 0n;
-            const over = current > target ? current - target : 0n;
+            const missing = target > current ? target - current : 0;
+            const over = current > target ? current - target : 0;
             const percent = getPercent(current, target);
             const placedCount = getPlacedCount();
-            const stats = getLevelStats();
+            const stats = getValueStats();
 
-            targetValueEl.textContent = formatBigInt(target);
-            targetNoteEl.textContent = `${t("targetNotePrefix")}${targetLevel}${t("targetNoteSuffix")}`;
+            targetValueEl.textContent = formatNumber(target);
+            targetNoteEl.textContent = `${t("targetLevelPrefix")}${state.targetLevel}${t("targetLevelSuffix")}`;
 
-            currentValueEl.textContent = formatBigInt(current);
+            currentValueEl.textContent = formatNumber(current);
             placedNoteEl.textContent = `${t("placedNotePrefix")}${placedCount}${t("placedNoteSuffix")}`;
 
-            missingValueEl.textContent = formatBigInt(missing);
+            missingValueEl.textContent = formatNumber(missing);
 
-            if (missing === 0n) {
+            if (missing === 0) {
                 missingCardEl.classList.remove("missing");
                 missingCardEl.classList.add("done");
 
-                if (over > 0n) {
-                    missingNoteEl.textContent = `${t("overPrefix")}${formatBigInt(over)}${t("overSuffix")}`;
+                if (over > 0) {
+                    missingNoteEl.textContent = `${t("overPrefix")}${formatNumber(over)}${t("overSuffix")}`;
                 } else {
                     missingNoteEl.textContent = t("exactDone");
                 }
@@ -1738,11 +1699,12 @@
             } else {
                 missingCardEl.classList.add("missing");
                 missingCardEl.classList.remove("done");
-                missingNoteEl.textContent = `${t("missingNeedPrefix")}${formatBigInt(missing)}${t("missingNeedSuffix")}`;
+                missingNoteEl.textContent = `${t("missingNeedPrefix")}${formatNumber(missing)}${t("missingNeedSuffix")}`;
                 statusTextEl.textContent = t("notDone");
             }
 
-            progressTextEl.textContent = `${t("progressPrefix")}${percent.toFixed(2).replace(".00", "")}%`;
+            const percentText = Number.isInteger(percent) ? String(percent) : percent.toFixed(2).replace(".00", "");
+            progressTextEl.textContent = `${t("progressPrefix")}${percentText}%`;
             progressBarEl.style.width = `${Math.min(percent, 100)}%`;
 
             renderStats(stats);
@@ -1752,7 +1714,7 @@
             state.deleteMode = !state.deleteMode;
 
             if (state.deleteMode) {
-                state.selectedLevel = null;
+                state.selectedValue = null;
                 deleteModeBtn.classList.add("active");
                 hintTextEl.textContent = t("hintDeleteOn");
             } else {
@@ -1764,6 +1726,7 @@
         };
 
         const copyResult = () => {
+            const targetLevel = state.targetLevel;
             const target = targetValueEl.textContent;
             const current = currentValueEl.textContent;
             const missing = missingValueEl.textContent;
@@ -1772,9 +1735,7 @@
 
             const text =
                 `${t("copyTitle")}\n` +
-                `${t("copyLevelCount")}${state.levelCount}\n` +
-                `${t("copyBoardSize")}\n` +
-                `${t("copyFinalGoal")}\n` +
+                `${t("copyTargetLevel") || "目標階數："}${targetLevel}\n` +
                 `${t("copyTarget")}${target}\n` +
                 `${t("copyCurrent")}${current}\n` +
                 `${t("copyMissing")}${missing}\n` +
@@ -1822,26 +1783,28 @@
 
             toastTimer = setTimeout(() => {
                 toastEl.classList.remove("show");
-            }, 1600);
+            }, 1500);
         };
 
         buildBtn.addEventListener("click", buildGame);
         clearBtn.addEventListener("click", clearBoard);
         copyBtn.addEventListener("click", copyResult);
         deleteModeBtn.addEventListener("click", toggleDeleteMode);
-        levelCountInput.addEventListener("change", buildGame);
+
+        targetSelect.addEventListener("change", buildGame);
 
         languageSelect.addEventListener("change", () => {
             setLanguage(languageSelect.value);
         });
 
         loadI18n().then(() => {
+            applyStaticI18n();
+
             state.suppressBuildToast = true;
             buildGame();
             state.suppressBuildToast = false;
         });
     </script>
-
 </body>
 
 </html>
