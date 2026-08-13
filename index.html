@@ -29,12 +29,21 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            min-height: 100%;
+            height: auto;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
         html {
             -webkit-text-size-adjust: 100%;
         }
 
         body {
             margin: 0;
+            padding-bottom: env(safe-area-inset-bottom);
             min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Noto Sans JP", "Noto Sans KR", "Noto Sans Thai", sans-serif;
             color: var(--text);
@@ -43,7 +52,6 @@
                 radial-gradient(circle at 90% 8%, rgba(69, 193, 255, 0.58), transparent 30%),
                 radial-gradient(circle at 50% 100%, rgba(255, 89, 143, 0.28), transparent 35%),
                 linear-gradient(135deg, var(--bg-a), var(--bg-b) 58%, var(--bg-c));
-            overflow-x: hidden;
         }
 
         body::before {
@@ -68,7 +76,7 @@
         .app {
             width: min(100% - 12px, 760px);
             margin: 0 auto;
-            padding: 10px 0 36px;
+            padding: 10px 0 calc(28px + env(safe-area-inset-bottom));
         }
 
         .hero {
@@ -120,7 +128,7 @@
 
         .toolbar {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr auto;
             gap: 10px;
             margin-top: 12px;
             padding: 12px;
@@ -342,17 +350,17 @@
         }
 
         .palette-scroll-note {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #6b7280;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
-            line-height: 1.5;
+            line-height: 1.35;
         }
 
         .palette-wrap {
             overflow-x: auto;
             overflow-y: hidden;
-            padding: 10px 10px 14px;
+            padding: 6px 8px 8px;
             margin: 0 -14px;
             border-radius: 20px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgba(255, 246, 223, 0.38));
@@ -364,12 +372,12 @@
 
         .palette {
             display: flex;
-            gap: 12px;
-            min-height: 118px;
+            gap: 8px;
+            min-height: 88px;
             align-items: center;
             width: max-content;
             min-width: 100%;
-            padding: 4px 12px 8px;
+            padding: 2px 10px 4px;
         }
 
         .palette::after {
@@ -397,11 +405,10 @@
         }
 
         .palette .token {
+            width: 60px;
+            height: 74px;
+            border-radius: 16px;
             touch-action: pan-x;
-        }
-
-        .cell .token {
-            touch-action: none;
         }
 
         .token::before {
@@ -411,6 +418,11 @@
             border-radius: 17px;
             background: rgba(255, 255, 255, 0.15);
             z-index: -1;
+        }
+
+        .palette .token::before {
+            inset: 6px;
+            border-radius: 12px;
         }
 
         .token:active {
@@ -433,6 +445,10 @@
             filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.18));
         }
 
+        .palette .token-icon {
+            font-size: 25px;
+        }
+
         .token-power {
             position: absolute;
             left: 8px;
@@ -443,6 +459,13 @@
             font-weight: 950;
             color: rgba(255, 255, 255, 0.96);
             background: rgba(0, 0, 0, 0.18);
+        }
+
+        .palette .token-power {
+            left: 6px;
+            top: 5px;
+            padding: 1px 5px;
+            font-size: 9px;
         }
 
         .token-value {
@@ -461,6 +484,14 @@
             font-variant-numeric: tabular-nums;
         }
 
+        .palette .token-value {
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            height: 18px;
+            font-size: 9px;
+        }
+
         .drag-ghost {
             position: fixed;
             z-index: 9999;
@@ -475,48 +506,36 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin: 12px 0;
-            width: 100%;
+            justify-content: flex-end;
+            gap: 8px;
+            margin: 8px 0;
             min-width: 0;
-        }
-
-        .tip {
-            flex: 1 1 auto;
-            min-width: 0;
-            max-width: 100%;
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.55;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .board-tools .button-row {
             flex: 0 0 auto;
             display: flex;
             flex-wrap: nowrap;
-            align-items: center;
-            gap: 8px;
+            gap: 6px;
             min-width: max-content;
         }
 
         .board-tools .button-row button {
             flex: 0 0 auto;
-            min-height: 44px;
-            padding-left: 13px;
-            padding-right: 13px;
-            font-size: 14px;
+            min-height: 38px;
+            padding: 7px 11px;
+            font-size: 12px;
+            border-radius: 12px;
             white-space: nowrap;
         }
 
         .board-wrap {
             width: 100%;
+            max-width: min(100%, 640px);
+            margin: 0 auto 16px;
+            padding: clamp(4px, 1.4vw, 8px);
             overflow: visible;
-            padding: 8px;
-            border-radius: 20px;
+            border-radius: 18px;
             background:
                 linear-gradient(135deg, rgba(116, 216, 255, 0.3), rgba(255, 197, 100, 0.22));
             border: 1px solid rgba(255, 255, 255, 0.74);
@@ -525,17 +544,25 @@
         .board {
             display: grid;
             grid-template-columns: repeat(7, minmax(0, 1fr));
-            gap: var(--board-gap);
+            gap: clamp(3px, 1vw, 6px);
             width: 100%;
+            max-width: min(100%, calc(100svh - 330px), 640px);
             margin: 0 auto;
-            justify-content: center;
+            aspect-ratio: 1 / 1;
+        }
+
+        @supports not (height: 100svh) {
+            .board {
+                max-width: min(100%, calc(100vh - 330px), 640px);
+            }
         }
 
         .cell {
             width: 100%;
             aspect-ratio: 1 / 1;
             min-width: 0;
-            border-radius: 12px;
+            min-height: 0;
+            border-radius: clamp(7px, 1.8vw, 12px);
             display: grid;
             place-items: center;
             background: rgba(255, 255, 255, 0.56);
@@ -557,49 +584,50 @@
         }
 
         .cell .token {
-            width: 84%;
-            height: 84%;
-            border-radius: 24%;
-            box-shadow: 0 7px 15px rgba(30, 41, 59, 0.14);
-            border-width: 1.5px;
+            width: 76%;
+            height: 76%;
+            border-radius: 22%;
+            border-width: 1px;
+            box-shadow: 0 4px 9px rgba(30, 41, 59, 0.13);
+            touch-action: none;
         }
 
         .cell .token::before {
             inset: 10%;
-            border-radius: 22%;
+            border-radius: 20%;
         }
 
         .cell .token-icon {
-            font-size: clamp(15px, 5vw, 27px);
+            font-size: clamp(12px, 4.2vw, 23px);
         }
 
         .cell .token-power {
-            font-size: clamp(6px, 1.9vw, 9px);
-            left: 8%;
-            top: 8%;
-            padding: 1px 5px;
+            left: 7%;
+            top: 7%;
+            padding: 1px 4px;
+            font-size: clamp(5px, 1.5vw, 8px);
         }
 
         .cell .token-value {
-            height: 24%;
-            left: 8%;
-            right: 8%;
-            bottom: 8%;
-            font-size: clamp(6px, 1.9vw, 10px);
+            left: 7%;
+            right: 7%;
+            bottom: 7%;
+            height: 22%;
+            font-size: clamp(5px, 1.5vw, 8px);
         }
 
         .cell-remove {
             position: absolute;
-            right: -4px;
-            top: -4px;
-            width: 16px;
-            height: 16px;
+            right: -3px;
+            top: -3px;
+            width: 14px;
+            height: 14px;
             border-radius: 999px;
             display: none;
             place-items: center;
             color: #fff;
             background: var(--danger);
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 950;
             box-shadow: 0 6px 12px rgba(239, 68, 68, 0.28);
             pointer-events: none;
@@ -610,8 +638,9 @@
         }
 
         .placed-list {
-            margin-top: 12px;
-            padding: 12px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
             border-radius: 18px;
             background: rgba(255, 255, 255, 0.74);
             border: 1px solid rgba(255, 255, 255, 0.76);
@@ -633,6 +662,12 @@
 
         .mini-line:last-child {
             border-bottom: 0;
+        }
+
+        .tip {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.55;
         }
 
         .toast {
@@ -667,103 +702,149 @@
             font-size: 12px;
         }
 
-        @media (min-width: 640px) {
+        @media (max-width: 520px) {
             .app {
-                padding-top: 18px;
+                width: min(100% - 8px, 760px);
+                padding-top: 6px;
+                padding-bottom: calc(18px + env(safe-area-inset-bottom));
             }
 
-            .result-list {
-                gap: 10px;
-            }
-
-            .result-card {
-                min-height: 88px;
-                padding: 14px 13px;
-                border-radius: 20px;
-            }
-
-            .result-card::after {
-                width: 82px;
-                height: 82px;
-                right: -26px;
-                top: -26px;
-            }
-
-            .result-label {
-                font-size: 12px;
-                margin-bottom: 6px;
-            }
-
-            .result-value {
-                font-size: 28px;
-            }
-
-            .result-note {
-                font-size: 12px;
-                margin-top: 5px;
-            }
-
-            .progress-box {
-                margin-top: 10px;
+            .hero {
                 padding: 12px;
                 border-radius: 18px;
             }
 
-            .progress-top {
-                font-size: 13px;
-                margin-bottom: 9px;
+            .hero-badge {
+                padding: 5px 9px;
+                font-size: 11px;
+                margin-bottom: 6px;
+            }
+
+            h1 {
+                font-size: clamp(23px, 7vw, 32px);
+            }
+
+            .hero p {
+                margin-top: 7px;
+                font-size: 12px;
+                line-height: 1.45;
             }
 
             .toolbar {
-                grid-template-columns: 1fr 1fr auto;
+                grid-template-columns: 1fr;
+                margin-top: 8px;
+                padding: 9px;
+                gap: 8px;
             }
 
-            .hero {
-                padding: 24px;
+            select {
+                height: 38px;
+                font-size: 13px;
+                border-radius: 12px;
+            }
+
+            button {
+                min-height: 38px;
+                padding: 7px 10px;
+                font-size: 12px;
+                border-radius: 12px;
+            }
+
+            .panel {
+                margin-top: 8px;
+                border-radius: 18px;
             }
 
             .panel-head {
-                padding: 16px 18px 12px;
+                padding: 10px 11px 8px;
+            }
+
+            .panel-title {
+                font-size: 15px;
+            }
+
+            .panel-desc {
+                margin-top: 4px;
+                font-size: 11px;
+                line-height: 1.35;
             }
 
             .panel-body {
-                padding: 16px 18px 18px;
+                padding: 9px 11px 11px;
+            }
+
+            .result-list {
+                gap: 4px;
+            }
+
+            .result-card {
+                min-height: 62px;
+                padding: 7px 5px;
+                border-radius: 12px;
+            }
+
+            .result-label {
+                font-size: 8px;
+                margin-bottom: 3px;
+            }
+
+            .result-value {
+                font-size: clamp(15px, 4.8vw, 20px);
+            }
+
+            .result-note {
+                font-size: 7px;
+                margin-top: 3px;
+            }
+
+            .progress-box {
+                margin-top: 6px;
+                padding: 7px;
+                border-radius: 12px;
+            }
+
+            .progress-top {
+                font-size: 10px;
+                margin-bottom: 5px;
+            }
+
+            .progress-track {
+                height: 9px;
             }
 
             .palette-wrap {
-                margin: 0 -18px;
+                padding: 5px 6px 6px;
+                margin-left: -11px;
+                margin-right: -11px;
             }
-        }
 
-        @media (max-width: 520px) {
+            .palette {
+                min-height: 74px;
+                gap: 7px;
+            }
+
+            .palette .token {
+                width: 50px;
+                height: 62px;
+                border-radius: 14px;
+            }
+
+            .palette .token-icon {
+                font-size: 21px;
+            }
+
+            .palette .token-power {
+                font-size: 8px;
+            }
+
+            .palette .token-value {
+                height: 16px;
+                font-size: 8px;
+            }
+
             .board-tools {
-                gap: 6px;
-            }
-
-            .tip {
-                font-size: 11px;
-            }
-
-            .board-tools .button-row {
+                margin: 7px 0;
                 gap: 5px;
-            }
-
-            .board-tools .button-row button {
-                min-height: 42px;
-                padding-left: 10px;
-                padding-right: 10px;
-                font-size: 13px;
-                border-radius: 13px;
-            }
-        }
-
-        @media (max-width: 430px) {
-            .board-tools {
-                gap: 5px;
-            }
-
-            .tip {
-                font-size: 10px;
             }
 
             .board-tools .button-row {
@@ -771,118 +852,135 @@
             }
 
             .board-tools .button-row button {
-                min-height: 40px;
-                padding-left: 8px;
-                padding-right: 8px;
-                font-size: 12px;
-                border-radius: 12px;
+                min-height: 34px;
+                padding: 6px 8px;
+                font-size: 11px;
+                border-radius: 10px;
+            }
+
+            .board {
+                max-width: min(100%, calc(100svh - 300px));
+                gap: 3px;
+            }
+
+            @supports not (height: 100svh) {
+                .board {
+                    max-width: min(100%, calc(100vh - 300px));
+                }
+            }
+
+            .board-wrap {
+                padding: 5px;
+                margin-bottom: 12px;
+                border-radius: 15px;
+            }
+
+            .cell {
+                border-radius: 8px;
+            }
+
+            .cell .token {
+                width: 72%;
+                height: 72%;
+            }
+
+            .cell .token-icon {
+                font-size: clamp(10px, 4vw, 18px);
+            }
+
+            .cell .token-power {
+                font-size: clamp(4px, 1.4vw, 7px);
+                padding: 0 3px;
+            }
+
+            .cell .token-value {
+                font-size: clamp(4px, 1.4vw, 7px);
             }
         }
 
         @media (max-width: 390px) {
             :root {
-                --board-gap: 4px;
+                --board-gap: 3px;
             }
 
             .app {
-                width: min(100% - 8px, 760px);
+                width: min(100% - 6px, 760px);
             }
 
             .hero {
-                padding: 16px;
+                padding: 10px;
+            }
+
+            .hero p {
+                font-size: 11px;
+                line-height: 1.35;
             }
 
             .toolbar {
                 grid-template-columns: 1fr;
-            }
-
-            .result-list {
-                gap: 4px;
+                padding: 8px;
             }
 
             .result-card {
-                min-height: 72px;
-                padding: 9px 5px;
-                border-radius: 14px;
+                min-height: 58px;
+                padding: 6px 4px;
             }
 
-            .result-label {
-                font-size: 9px;
-            }
-
-            .result-value {
-                font-size: clamp(16px, 5vw, 22px);
-            }
-
-            .result-note {
-                font-size: 8px;
-            }
-
-            .token {
-                width: 76px;
-                height: 96px;
-            }
-
-            .board-wrap {
-                padding: 6px;
-            }
-
-            .cell {
-                border-radius: 10px;
-            }
-
-            .board-tools {
-                gap: 4px;
-            }
-
-            .tip {
+            .palette-scroll-note {
                 font-size: 10px;
-                max-width: calc(100% - 238px);
+                line-height: 1.25;
             }
 
-            .board-tools .button-row {
-                gap: 4px;
+            .palette {
+                min-height: 66px;
+            }
+
+            .palette .token {
+                width: 46px;
+                height: 56px;
+            }
+
+            .palette .token-icon {
+                font-size: 19px;
             }
 
             .board-tools .button-row button {
-                min-height: 38px;
-                padding-left: 7px;
-                padding-right: 7px;
-                font-size: 11px;
-                border-radius: 11px;
+                min-height: 32px;
+                padding: 5px 6px;
+                font-size: 10px;
+                border-radius: 9px;
             }
-        }
 
-        html,
-        body {
-            min-height: 100%;
-            height: auto;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
+            .board {
+                max-width: min(100%, calc(100svh - 285px));
+                gap: 3px;
+            }
 
-        body {
-            padding-bottom: env(safe-area-inset-bottom);
-        }
+            @supports not (height: 100svh) {
+                .board {
+                    max-width: min(100%, calc(100vh - 285px));
+                }
+            }
 
-        .app {
-            padding-bottom: calc(120px + env(safe-area-inset-bottom));
-        }
+            .board-wrap {
+                padding: 4px;
+                margin-bottom: 10px;
+            }
 
-        .board-wrap {
-            margin-bottom: 96px;
-        }
+            .cell .token {
+                width: 70%;
+                height: 70%;
+            }
 
-        .placed-list {
-            margin-bottom: 80px;
-        }
+            .cell .token-icon {
+                font-size: clamp(9px, 3.8vw, 16px);
+            }
 
-        body.is-dragging .app {
-            padding-bottom: calc(220px + env(safe-area-inset-bottom));
-        }
-
-        body.is-dragging .board-wrap {
-            margin-bottom: 180px;
+            .placed-list {
+                padding: 8px;
+                margin-top: 8px;
+                margin-bottom: 14px;
+            }
         }
     </style>
 </head>
@@ -893,7 +991,7 @@
             <div class="hero-badge" data-i18n="heroBadge">⚡ 合併島嶼工具</div>
             <h1 data-i18n="heroTitle">矩陣式閃電計算器</h1>
             <p data-i18n="heroDesc">
-                選擇本次目標階數 10 個、11 個或 12 個，將目前棋盤上的物件拖曳到下方 7 × 7 矩陣中，上方會即時計算目前折算值、還缺多少閃電與完成度。
+                選擇本次目標值 1024、2048 或 4096，將目前棋盤上的物件拖曳到下方 7 × 7 矩陣中，上方會即時計算目前折算值、還缺多少閃電與完成度。
             </p>
         </section>
 
@@ -914,7 +1012,7 @@
             </div>
 
             <div class="field">
-                <label for="targetSelect" data-i18n="targetSelectLabel">目標階數</label>
+                <label for="targetSelect" data-i18n="targetSelectLabel">目標合併值</label>
                 <select id="targetSelect">
                     <option value="10">10 個</option>
                     <option value="11">11 個</option>
@@ -984,7 +1082,6 @@
                 </div>
 
                 <div class="board-tools">
-
                     <div class="button-row">
                         <button id="deleteModeBtn" class="btn-danger" data-i18n="deleteModeBtn">刪除模式</button>
                         <button id="clearBtn" class="btn-soft" data-i18n="clearBtn">清空矩陣</button>
@@ -1015,14 +1112,8 @@
         let currentLang = localStorage.getItem("mergeIslandLang") || "zh-Hant";
 
         const t = (key) => {
-            if (i18n[currentLang] && i18n[currentLang][key]) {
-                return i18n[currentLang][key];
-            }
-
-            if (i18n["zh-Hant"] && i18n["zh-Hant"][key]) {
-                return i18n["zh-Hant"][key];
-            }
-
+            if (i18n[currentLang] && i18n[currentLang][key]) return i18n[currentLang][key];
+            if (i18n["zh-Hant"] && i18n["zh-Hant"][key]) return i18n["zh-Hant"][key];
             return key;
         };
 
@@ -1030,7 +1121,6 @@
         const FIXED_COLS = 7;
         const DOUBLE_TAP_MS = 360;
         const DRAG_THRESHOLD = 8;
-
         const AUTO_SCROLL_EDGE = 120;
         const AUTO_SCROLL_MAX_SPEED = 26;
 
@@ -1038,7 +1128,6 @@
         const boardEl = document.getElementById("board");
         const languageSelect = document.getElementById("languageSelect");
         const targetSelect = document.getElementById("targetSelect");
-
         const buildBtn = document.getElementById("buildBtn");
         const clearBtn = document.getElementById("clearBtn");
         const copyBtn = document.getElementById("copyBtn");
@@ -1055,7 +1144,6 @@
         const statusTextEl = document.getElementById("statusText");
         const progressBarEl = document.getElementById("progressBar");
         const statsListEl = document.getElementById("statsList");
-        const hintTextEl = document.getElementById("hintText");
         const toastEl = document.getElementById("toast");
 
         const icons = [
@@ -1115,13 +1203,9 @@
         };
 
         const loadI18n = async () => {
-            const response = await fetch("./i18n.json", {
-                cache: "no-store"
-            });
+            const response = await fetch("./i18n.json", { cache: "no-store" });
 
-            if (!response.ok) {
-                throw new Error("Unable to load i18n.json");
-            }
+            if (!response.ok) throw new Error("Unable to load i18n.json");
 
             i18n = await response.json();
 
@@ -1160,19 +1244,6 @@
             });
         };
 
-        const updateHintText = () => {
-            if (state.deleteMode) {
-                hintTextEl.textContent = t("hintDeleteOn");
-                return;
-            }
-
-            if (state.selectedValue !== null) {
-                hintTextEl.textContent = `${t("hintSelectedPrefix")}${formatNumber(state.selectedValue)}${t("hintSelectedSuffix")}`;
-                return;
-            }
-
-        };
-
         const applyStaticI18n = () => {
             document.documentElement.lang = currentLang;
             document.title = t("pageTitle");
@@ -1186,7 +1257,6 @@
 
             languageSelect.value = currentLang;
             renderTargetOptions();
-            updateHintText();
         };
 
         const setLanguage = (lang) => {
@@ -1302,12 +1372,10 @@
 
                     if (state.selectedValue === item.value) {
                         state.selectedValue = null;
-                        hintTextEl.textContent = t("hintCancelSelected");
                     } else {
                         state.selectedValue = item.value;
                         state.deleteMode = false;
                         deleteModeBtn.classList.remove("active");
-                        hintTextEl.textContent = `${t("hintSelectedPrefix")}${formatNumber(item.value)}${t("hintSelectedSuffix")}`;
                     }
 
                     renderPalette();
@@ -1441,9 +1509,6 @@
                 beginVisualDrag(event.clientX, event.clientY);
             }
 
-            pointerDrag.currentX = event.clientX;
-            pointerDrag.currentY = event.clientY;
-
             moveGhost(event.clientX, event.clientY);
             updateOverCell(event.clientX, event.clientY);
             startAutoScroll();
@@ -1532,7 +1597,6 @@
 
                 if (scrollSpeed !== 0) {
                     const scroller = document.scrollingElement || document.documentElement || document.body;
-
                     scroller.scrollTop += scrollSpeed;
 
                     moveGhost(pointerDrag.currentX, pointerDrag.currentY);
@@ -1811,10 +1875,8 @@
             if (state.deleteMode) {
                 state.selectedValue = null;
                 deleteModeBtn.classList.add("active");
-                hintTextEl.textContent = t("hintDeleteOn");
             } else {
                 deleteModeBtn.classList.remove("active");
-                hintTextEl.textContent = t("hintDeleteOff");
             }
 
             renderPalette();
