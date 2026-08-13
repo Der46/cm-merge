@@ -473,19 +473,43 @@
 
         .board-tools {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
             gap: 10px;
             margin: 12px 0;
+            width: 100%;
+            min-width: 0;
         }
 
         .tip {
+            flex: 1 1 auto;
+            min-width: 0;
+            max-width: 100%;
             color: var(--muted);
             font-size: 12px;
             line-height: 1.55;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .board-tools .button-row {
+            flex: 0 0 auto;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 8px;
+            min-width: max-content;
         }
 
         .board-tools .button-row button {
-            flex: 1;
+            flex: 0 0 auto;
+            min-height: 44px;
+            padding-left: 13px;
+            padding-right: 13px;
+            font-size: 14px;
+            white-space: nowrap;
         }
 
         .board-wrap {
@@ -709,15 +733,49 @@
             .palette-wrap {
                 margin: 0 -18px;
             }
+        }
 
+        @media (max-width: 520px) {
             .board-tools {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
+                gap: 6px;
+            }
+
+            .tip {
+                font-size: 11px;
+            }
+
+            .board-tools .button-row {
+                gap: 5px;
             }
 
             .board-tools .button-row button {
-                flex: none;
+                min-height: 42px;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 13px;
+                border-radius: 13px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .board-tools {
+                gap: 5px;
+            }
+
+            .tip {
+                font-size: 10px;
+            }
+
+            .board-tools .button-row {
+                gap: 4px;
+            }
+
+            .board-tools .button-row button {
+                min-height: 40px;
+                padding-left: 8px;
+                padding-right: 8px;
+                font-size: 12px;
+                border-radius: 12px;
             }
         }
 
@@ -772,6 +830,59 @@
             .cell {
                 border-radius: 10px;
             }
+
+            .board-tools {
+                gap: 4px;
+            }
+
+            .tip {
+                font-size: 10px;
+                max-width: calc(100% - 238px);
+            }
+
+            .board-tools .button-row {
+                gap: 4px;
+            }
+
+            .board-tools .button-row button {
+                min-height: 38px;
+                padding-left: 7px;
+                padding-right: 7px;
+                font-size: 11px;
+                border-radius: 11px;
+            }
+        }
+
+        html,
+        body {
+            min-height: 100%;
+            height: auto;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        body {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .app {
+            padding-bottom: calc(120px + env(safe-area-inset-bottom));
+        }
+
+        .board-wrap {
+            margin-bottom: 96px;
+        }
+
+        .placed-list {
+            margin-bottom: 80px;
+        }
+
+        body.is-dragging .app {
+            padding-bottom: calc(220px + env(safe-area-inset-bottom));
+        }
+
+        body.is-dragging .board-wrap {
+            margin-bottom: 180px;
         }
     </style>
 </head>
@@ -827,7 +938,7 @@
                     <div class="result-card">
                         <div class="result-label" data-i18n="targetDemand">目標需求</div>
                         <div id="targetValue" class="result-value">4,096</div>
-                        <div id="targetNote" class="result-note">第 12 階 × 1 件</div>
+                        <div id="targetNote" class="result-note">目標合併值 × 1 件</div>
                     </div>
 
                     <div class="result-card">
@@ -873,9 +984,6 @@
                 </div>
 
                 <div class="board-tools">
-                    <div class="tip" id="hintText">
-                        操作提示：拖拉物件到格子，或點選物件後點格子。連點同一格兩下可刪除。
-                    </div>
 
                     <div class="button-row">
                         <button id="deleteModeBtn" class="btn-danger" data-i18n="deleteModeBtn">刪除模式</button>
@@ -906,67 +1014,15 @@
         let i18n = {};
         let currentLang = localStorage.getItem("mergeIslandLang") || "zh-Hant";
 
-        const fallbackI18n = {
-            "zh-Hant": {
-                pageTitle: "合併島嶼矩陣閃電計算器",
-                heroBadge: "⚡ 合併島嶼工具",
-                heroTitle: "矩陣式閃電計算器",
-                heroDesc: "選擇本次目標階數 10 個、11 個或 12 個，將目前棋盤上的物件拖曳到下方 7 × 7 矩陣中，上方會即時計算目前折算值、還缺多少閃電與完成度。",
-                languageLabel: "語言",
-                targetSelectLabel: "目標階數",
-                buildBtn: "重新產生",
-                resultTitle: "📊 即時計算",
-                resultDesc: "拖拉或點選物件放入矩陣後，結果會立刻更新。",
-                targetDemand: "目標需求",
-                currentTotal: "目前矩陣折算",
-                missingLightning: "還缺閃電",
-                targetLevelPrefix: "第 ",
-                targetLevelSuffix: " 階 × 1 件",
-                placedNotePrefix: "目前放入 ",
-                placedNoteSuffix: " 個物件",
-                missingNeedPrefix: "還需要補 ",
-                missingNeedSuffix: " 閃電",
-                overPrefix: "已超過 ",
-                overSuffix: " 閃電",
-                exactDone: "剛好完成",
-                done: "已完成",
-                notDone: "未完成",
-                progressPrefix: "完成度 ",
-                paletteTitle: "🧩 可拖拉物件",
-                paletteDesc: "物件是模板，不會被消耗。手機可以左右滑動瀏覽，也可以點選物件後再點矩陣格子放入。",
-                mobileScrollNote: "手機操作：左右滑動可瀏覽圖案；要拖到矩陣時，請按住圖案後往下拖。",
-                hintBuilt: "已重新產生物件。手機可左右滑動圖案列；要拖曳時按住圖案往下拖。",
-                hintCancelSelected: "已取消選取。你可以拖拉物件到格子，或點選物件後點格子。",
-                hintSelectedPrefix: "已選取 ",
-                hintSelectedSuffix: "，點擊矩陣格子即可放入。",
-                hintDeleteOn: "刪除模式已開啟：點擊矩陣內任一格即可清除。",
-                hintDeleteOff: "刪除模式已關閉。你可以繼續拖拉或點選物件放入。",
-                deleteModeBtn: "刪除模式",
-                clearBtn: "清空矩陣",
-                copyBtn: "複製結果",
-                statsTitle: "矩陣統計",
-                statsLinePrefix: "數值 ",
-                statsLineMiddle: " × ",
-                statsEmpty: "目前矩陣內還沒有放入任何物件。",
-                toastBuilt: "已重新產生矩陣",
-                toastCleared: "矩陣已清空",
-                toastRemoved: "已移除物件",
-                toastCopied: "結果已複製",
-                toastCopyFailed: "複製失敗，請手動截圖",
-                copyTitle: "【合併島嶼矩陣計算】",
-                copyTargetLevel: "目標階數：",
-                copyTarget: "目標需求：",
-                copyCurrent: "目前折算：",
-                copyMissing: "還缺閃電：",
-                copyProgress: "完成度：",
-                copyStatus: "狀態：",
-                footer: "© Coin999 - 長長久久 隊伍"
-            }
-        };
-
         const t = (key) => {
-            if (i18n[currentLang] && i18n[currentLang][key]) return i18n[currentLang][key];
-            if (i18n["zh-Hant"] && i18n["zh-Hant"][key]) return i18n["zh-Hant"][key];
+            if (i18n[currentLang] && i18n[currentLang][key]) {
+                return i18n[currentLang][key];
+            }
+
+            if (i18n["zh-Hant"] && i18n["zh-Hant"][key]) {
+                return i18n["zh-Hant"][key];
+            }
+
             return key;
         };
 
@@ -975,8 +1031,8 @@
         const DOUBLE_TAP_MS = 360;
         const DRAG_THRESHOLD = 8;
 
-        const AUTO_SCROLL_EDGE = 90;
-        const AUTO_SCROLL_MAX_SPEED = 18;
+        const AUTO_SCROLL_EDGE = 120;
+        const AUTO_SCROLL_MAX_SPEED = 26;
 
         const paletteEl = document.getElementById("palette");
         const boardEl = document.getElementById("board");
@@ -1059,22 +1115,62 @@
         };
 
         const loadI18n = async () => {
-            try {
-                const response = await fetch("./i18n.json");
+            const response = await fetch("./i18n.json", {
+                cache: "no-store"
+            });
 
-                if (!response.ok) {
-                    throw new Error("Unable to load i18n.json");
-                }
-
-                i18n = await response.json();
-
-                if (!i18n[currentLang]) {
-                    currentLang = "zh-Hant";
-                }
-            } catch (err) {
-                i18n = fallbackI18n;
-                currentLang = "zh-Hant";
+            if (!response.ok) {
+                throw new Error("Unable to load i18n.json");
             }
+
+            i18n = await response.json();
+
+            if (!i18n[currentLang]) {
+                currentLang = "zh-Hant";
+                localStorage.setItem("mergeIslandLang", currentLang);
+            }
+        };
+
+        const formatTargetOptionLabel = (level) => {
+            const unit = t("targetUnit");
+
+            if (currentLang === "ko") {
+                return `${level}${unit}`;
+            }
+
+            return `${level} ${unit}`;
+        };
+
+        const renderTargetOptions = () => {
+            const selectedValue = targetSelect.value || String(state.targetLevel || 12);
+            const levels = [10, 11, 12];
+
+            targetSelect.innerHTML = "";
+
+            levels.forEach((level) => {
+                const option = document.createElement("option");
+                option.value = String(level);
+                option.textContent = formatTargetOptionLabel(level);
+
+                if (option.value === selectedValue) {
+                    option.selected = true;
+                }
+
+                targetSelect.appendChild(option);
+            });
+        };
+
+        const updateHintText = () => {
+            if (state.deleteMode) {
+                hintTextEl.textContent = t("hintDeleteOn");
+                return;
+            }
+
+            if (state.selectedValue !== null) {
+                hintTextEl.textContent = `${t("hintSelectedPrefix")}${formatNumber(state.selectedValue)}${t("hintSelectedSuffix")}`;
+                return;
+            }
+
         };
 
         const applyStaticI18n = () => {
@@ -1089,6 +1185,8 @@
             });
 
             languageSelect.value = currentLang;
+            renderTargetOptions();
+            updateHintText();
         };
 
         const setLanguage = (lang) => {
@@ -1433,11 +1531,9 @@
                 }
 
                 if (scrollSpeed !== 0) {
-                    window.scrollBy({
-                        top: scrollSpeed,
-                        left: 0,
-                        behavior: "auto"
-                    });
+                    const scroller = document.scrollingElement || document.documentElement || document.body;
+
+                    scroller.scrollTop += scrollSpeed;
 
                     moveGhost(pointerDrag.currentX, pointerDrag.currentY);
                     updateOverCell(pointerDrag.currentX, pointerDrag.currentY);
@@ -1557,7 +1653,6 @@
             lastTapAt = 0;
 
             deleteModeBtn.classList.remove("active");
-            hintTextEl.textContent = t("hintBuilt");
 
             renderPalette();
             renderBoard();
@@ -1678,7 +1773,7 @@
             const stats = getValueStats();
 
             targetValueEl.textContent = formatNumber(target);
-            targetNoteEl.textContent = `${t("targetLevelPrefix")}${state.targetLevel}${t("targetLevelSuffix")}`;
+            targetNoteEl.textContent = t("targetNote");
 
             currentValueEl.textContent = formatNumber(current);
             placedNoteEl.textContent = `${t("placedNotePrefix")}${placedCount}${t("placedNoteSuffix")}`;
@@ -1726,7 +1821,6 @@
         };
 
         const copyResult = () => {
-            const targetLevel = state.targetLevel;
             const target = targetValueEl.textContent;
             const current = currentValueEl.textContent;
             const missing = missingValueEl.textContent;
@@ -1735,7 +1829,6 @@
 
             const text =
                 `${t("copyTitle")}\n` +
-                `${t("copyTargetLevel") || "目標階數："}${targetLevel}\n` +
                 `${t("copyTarget")}${target}\n` +
                 `${t("copyCurrent")}${current}\n` +
                 `${t("copyMissing")}${missing}\n` +
@@ -1797,13 +1890,20 @@
             setLanguage(languageSelect.value);
         });
 
-        loadI18n().then(() => {
-            applyStaticI18n();
+        loadI18n()
+            .then(() => {
+                applyStaticI18n();
 
-            state.suppressBuildToast = true;
-            buildGame();
-            state.suppressBuildToast = false;
-        });
+                state.suppressBuildToast = true;
+                buildGame();
+                state.suppressBuildToast = false;
+            })
+            .catch((error) => {
+                console.error("i18n.json 載入失敗，請確認檔案路徑與 JSON 格式。", error);
+
+                toastEl.textContent = "i18n.json 載入失敗";
+                toastEl.classList.add("show");
+            });
     </script>
 </body>
 
