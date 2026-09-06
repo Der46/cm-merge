@@ -1013,11 +1013,16 @@
 
             <div class="field">
                 <label for="targetSelect" data-i18n="targetSelectLabel">目標合併值</label>
-                <select id="targetSelect">
-                    <option value="10">10 個</option>
-                    <option value="11">11 個</option>
-                    <option value="12" selected>12 個</option>
-                </select>
+                <div style="display: flex; gap: 6px;">
+                    <select id="targetSelect">
+                        <option value="11">11 個</option>
+                        <option value="12" selected>12 個</option>
+                        <option value="13">13 個</option>
+                        <option value="custom">自行輸入</option>
+                    </select>
+                    <input type="number" id="customTargetInput" min="1" max="25" placeholder="個數"
+                        style="display: none; width: 80px; height: 44px; padding: 9px; border-radius: 14px; border: 1px solid rgba(107, 114, 128, 0.24); font-size: 15px; font-weight: 900; outline: none; background: rgba(255, 255, 255, 0.95);" />
+                </div>
             </div>
 
             <div class="button-row">
@@ -1128,6 +1133,7 @@
         const boardEl = document.getElementById("board");
         const languageSelect = document.getElementById("languageSelect");
         const targetSelect = document.getElementById("targetSelect");
+        const customTargetInput = document.getElementById("customTargetInput");
         const buildBtn = document.getElementById("buildBtn");
         const clearBtn = document.getElementById("clearBtn");
         const copyBtn = document.getElementById("copyBtn");
@@ -1169,7 +1175,8 @@
         ];
 
         const state = {
-            targetLevel: 12,
+            targetCount: 13,
+            targetLevel: 12, // 2^(13-1) = 2^12
             target: 4096,
             rows: FIXED_ROWS,
             cols: FIXED_COLS,
@@ -1215,26 +1222,34 @@
             }
         };
 
-        const formatTargetOptionLabel = (level) => {
+        const formatTargetOptionLabel = (count) => {
             const unit = t("targetUnit");
 
             if (currentLang === "ko") {
-                return `${level}${unit}`;
+                return `${count}${unit}`;
             }
 
-            return `${level} ${unit}`;
+            return `${count} ${unit}`;
+        };
+
+        const getSelectedTargetCount = () => {
+            if (targetSelect.value === "custom") {
+                const customVal = parseInt(customTargetInput.value, 10);
+                return (!isNaN(customVal) && customVal >= 2) ? customVal : 13;
+            }
+            return Number(targetSelect.value) || 13;
         };
 
         const renderTargetOptions = () => {
-            const selectedValue = targetSelect.value || String(state.targetLevel || 12);
-            const levels = [10, 11, 12];
+            const selectedValue = targetSelect.value || String(state.targetCount || 13);
+            const counts = [11, 12, 13];
 
             targetSelect.innerHTML = "";
 
-            levels.forEach((level) => {
+            counts.forEach((count) => {
                 const option = document.createElement("option");
-                option.value = String(level);
-                option.textContent = formatTargetOptionLabel(level);
+                option.value = String(count);
+                option.textContent = formatTargetOptionLabel(count);
 
                 if (option.value === selectedValue) {
                     option.selected = true;
@@ -1242,6 +1257,14 @@
 
                 targetSelect.appendChild(option);
             });
+
+            const customOption = document.createElement("option");
+            customOption.value = "custom";
+            customOption.textContent = t("targetCustom") || (currentLang === "zh-Hant" ? "自行輸入" : "Custom");
+            if (selectedValue === "custom") {
+                customOption.selected = true;
+            }
+            targetSelect.appendChild(customOption);
         };
 
         const applyStaticI18n = () => {
@@ -1287,25 +1310,27 @@
             return copy;
         };
 
-        const getTargetValues = (targetLevel) => {
+        // 從 2^0 開始算，產生到 2^(targetCount - 2)，共 (targetCount - 1) 個物件
+        const getPaletteValues = (targetCount) => {
             const values = [];
+            const paletteCount = Math.max(1, targetCount - 1);
 
-            for (let level = 0; level <= targetLevel; level++) {
+            for (let level = 0; level < paletteCount; level++) {
                 values.push(2 ** level);
             }
 
             return values;
         };
 
-        const createItems = (targetLevel) => {
-            const values = getTargetValues(targetLevel);
+        const createItems = (targetCount) => {
+            const values = getPaletteValues(targetCount);
             const shuffledIcons = shuffleArray(icons);
 
             return values.map((value, index) => {
                 const gradient = gradients[index % gradients.length];
 
                 return {
-                    level: index,
+                    level: index + 1,
                     value,
                     icon: shuffledIcons[index % shuffledIcons.length],
                     from: gradient[0],
@@ -1702,11 +1727,12 @@
         };
 
         const buildGame = () => {
-            state.targetLevel = Number(targetSelect.value);
+            state.targetCount = getSelectedTargetCount();
+            state.targetLevel = state.targetCount - 1; // 2^(targetCount - 1)
             state.target = 2 ** state.targetLevel;
             state.selectedValue = null;
             state.deleteMode = false;
-            state.items = createItems(state.targetLevel);
+            state.items = createItems(state.targetCount);
             state.board = [];
 
             for (let i = 0; i < state.rows * state.cols; i++) {
@@ -1795,7 +1821,7 @@
             statsListEl.innerHTML = "";
 
             let hasAny = false;
-            const values = getTargetValues(state.targetLevel).reverse();
+            const values = getPaletteValues(state.targetCount).reverse();
 
             for (const value of values) {
                 if (stats[value]) {
@@ -1825,7 +1851,8 @@
         };
 
         const recalc = () => {
-            state.targetLevel = Number(targetSelect.value);
+            state.targetCount = getSelectedTargetCount();
+            state.targetLevel = state.targetCount - 1;
             state.target = 2 ** state.targetLevel;
 
             const target = state.target;
@@ -1946,7 +1973,19 @@
         copyBtn.addEventListener("click", copyResult);
         deleteModeBtn.addEventListener("click", toggleDeleteMode);
 
-        targetSelect.addEventListener("change", buildGame);
+        targetSelect.addEventListener("change", () => {
+            if (targetSelect.value === "custom") {
+                customTargetInput.style.display = "block";
+                if (!customTargetInput.value) {
+                    customTargetInput.value = "14";
+                }
+            } else {
+                customTargetInput.style.display = "none";
+            }
+            buildGame();
+        });
+
+        customTargetInput.addEventListener("input", buildGame);
 
         languageSelect.addEventListener("change", () => {
             setLanguage(languageSelect.value);
