@@ -119,6 +119,19 @@
             letter-spacing: -1px;
         }
 
+        .hero-title-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 4px 10px;
+        }
+
+        .hero-credit {
+            color: #6b7280;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
         .hero p {
             margin: 12px 0 0;
             color: #4b5563;
@@ -989,9 +1002,12 @@
     <main class="app">
         <section class="hero">
             <div class="hero-badge" data-i18n="heroBadge">⚡ 合併島嶼工具</div>
-            <h1 data-i18n="heroTitle">矩陣式閃電計算器</h1>
+            <div class="hero-title-row">
+                <h1 data-i18n="heroTitle">矩陣式閃電計算器</h1>
+                <span class="hero-credit" data-i18n="heroCredit">由 Coin999 - 長長久久 隊伍製作</span>
+            </div>
             <p data-i18n="heroDesc">
-                選擇本次目標值 1024、2048 或 4096，將目前棋盤上的物件拖曳到下方 7 × 7 矩陣中，上方會即時計算目前折算值、還缺多少閃電與完成度。
+                選擇本次目標物件 11、12、13 個或自行輸入，將目前棋盤上的物件拖曳到下方 7 × 7 矩陣中，會即時計算目前折算值、還缺多少閃電與完成度。
             </p>
         </section>
 
