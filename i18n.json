@@ -52,7 +52,91 @@
         "copyMissing": "還缺閃電：",
         "copyProgress": "完成度：",
         "copyStatus": "狀態：",
-        "footer": "© {year} 大佬群CSL製作"
+        "footer": "© {year} 大佬群CSL製作",
+        "guide": {
+            "fab": "攻略",
+            "fabAria": "開啟合併遊戲攻略",
+            "title": "合併遊戲攻略",
+            "subtitle": "掌握技巧，輕鬆拿大獎",
+            "updated": "更新：2026.07.11",
+            "close": "關閉",
+            "sections": [
+                {
+                    "title": "賭注建議",
+                    "points": [
+                        {
+                            "t": "全程使用 **4 倍**即可",
+                            "tone": "good"
+                        },
+                        {
+                            "t": "不建議使用 **8 倍**",
+                            "tone": "bad"
+                        }
+                    ],
+                    "boxes": [
+                        {
+                            "title": "原因",
+                            "points": [
+                                "4 倍更容易蹦出 **4 倍以上**的高倍組合",
+                                "第 12 輪（2048）最高 4 倍",
+                                "第 13 輪（4096）最高 8 倍"
+                            ]
+                        },
+                        {
+                            "title": "倍率說明",
+                            "points": [
+                                "第 8 輪可用 2 倍",
+                                "第 10 輪可用 4 倍",
+                                "第 12 輪可用 8 倍"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "閃電洗法",
+                    "points": [
+                        "如果本輪閃電可以洗，建議洗到拿到一次 **100 閃電的閃電獎勵**",
+                        "拿到這個獎勵後，再立即往**第二輪**前進"
+                    ],
+                    "boxes": [
+                        {
+                            "title": "原因",
+                            "points": [
+                                "之後再洗的閃電雖然還會累積，但無法再拿到第二次 100 閃電獎勵（只會注入進度條）"
+                            ]
+                        }
+                    ],
+                    "note": "因此建議：第一輪拿到 100 閃電獎勵後，就趕快合成大獎進入第二輪。"
+                },
+                {
+                    "title": "第二輪技巧",
+                    "points": [
+                        "閃電可以帶到第二輪",
+                        "第一輪先**存好閃電**",
+                        "第二輪一開始就有較多閃電可用，打起來輕鬆許多，也**更容易完成**"
+                    ]
+                },
+                {
+                    "title": "完成前要注意",
+                    "points": [
+                        "快完成活動時，閃電只拿到**剛好足夠完成**即可",
+                        "完成後**不要立刻退出**！請先把畫面上還能合成的物品**全部合成**"
+                    ],
+                    "note": "這樣才能避免合成獎勵（大獎）沒有成功領到。"
+                }
+            ],
+            "summary": {
+                "title": "重點整理",
+                "points": [
+                    "全程用 4 倍，不要用 8 倍",
+                    "第一輪先洗到拿到一次 100 閃電獎勵",
+                    "拿到後盡快進入第二輪",
+                    "閃電可帶到第二輪，先存再用更輕鬆",
+                    "完成前控制閃電剛好就好",
+                    "完成後先把所有可合成物品合完再退出，避免漏領獎勵"
+                ]
+            }
+        }
     },
     "en": {
         "pageTitle": "Merge Islands Matrix Lightning Calculator",
@@ -107,7 +191,91 @@
         "copyMissing": "Lightning missing: ",
         "copyProgress": "Progress: ",
         "copyStatus": "Status: ",
-        "footer": "© {year} 大佬群CSL製作"
+        "footer": "© {year} 大佬群CSL製作",
+        "guide": {
+            "fab": "Tips",
+            "fabAria": "Open the merge event guide",
+            "title": "Merge Event Guide",
+            "subtitle": "Learn the tricks, win the grand prize",
+            "updated": "Updated 2026.07.11",
+            "close": "Close",
+            "sections": [
+                {
+                    "title": "Bet advice",
+                    "points": [
+                        {
+                            "t": "Use **x4** the whole way",
+                            "tone": "good"
+                        },
+                        {
+                            "t": "**x8** is not recommended",
+                            "tone": "bad"
+                        }
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Why",
+                            "points": [
+                                "x4 more easily triggers combos **higher than x4**",
+                                "Round 12 (2048): up to x4",
+                                "Round 13 (4096): up to x8"
+                            ]
+                        },
+                        {
+                            "title": "Multiplier guide",
+                            "points": [
+                                "Round 8: x2 available",
+                                "Round 10: x4 available",
+                                "Round 12: x8 available"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Farming lightning",
+                    "points": [
+                        "If lightning can be farmed this round, keep farming until you get the **100-lightning reward** once",
+                        "After getting that reward, move on to **round 2** right away"
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Why",
+                            "points": [
+                                "Lightning collected after that still counts, but you can't get the 100-lightning reward a second time (it only fills the progress bar)"
+                            ]
+                        }
+                    ],
+                    "note": "So: once you've received the 100-lightning reward, merge the grand prize quickly and move to round 2."
+                },
+                {
+                    "title": "Round 2 tips",
+                    "points": [
+                        "Lightning carries over to round 2",
+                        "**Save up lightning** in round 1",
+                        "You start round 2 with more lightning, so it's much easier and **more likely to finish**"
+                    ]
+                },
+                {
+                    "title": "Before you finish",
+                    "points": [
+                        "Near the end of the event, get **just enough lightning** to finish",
+                        "After finishing, **don't exit right away**! First **merge everything** still mergeable on screen"
+                    ],
+                    "note": "This makes sure the merge reward (grand prize) is actually claimed."
+                }
+            ],
+            "summary": {
+                "title": "Key points",
+                "points": [
+                    "Use x4 throughout, not x8",
+                    "In round 1, farm until you get the 100-lightning reward once",
+                    "Then move to round 2 quickly",
+                    "Lightning carries over, so save it for round 2",
+                    "Before finishing, get just enough lightning",
+                    "After finishing, merge everything before exiting so no reward is missed"
+                ]
+            }
+        }
     },
     "vi": {
         "pageTitle": "Máy Tính Tia Sét Ma Trận Merge Islands",
@@ -162,7 +330,91 @@
         "copyMissing": "Tia sét còn thiếu: ",
         "copyProgress": "Tiến độ: ",
         "copyStatus": "Trạng thái: ",
-        "footer": "© {year} 大佬群CSL製作"
+        "footer": "© {year} 大佬群CSL製作",
+        "guide": {
+            "fab": "Mẹo",
+            "fabAria": "Mở hướng dẫn sự kiện hợp nhất",
+            "title": "Hướng dẫn sự kiện hợp nhất",
+            "subtitle": "Nắm mẹo, dễ dàng nhận giải lớn",
+            "updated": "Cập nhật 2026.07.11",
+            "close": "Đóng",
+            "sections": [
+                {
+                    "title": "Gợi ý mức cược",
+                    "points": [
+                        {
+                            "t": "Dùng **x4** suốt cả quá trình",
+                            "tone": "good"
+                        },
+                        {
+                            "t": "Không nên dùng **x8**",
+                            "tone": "bad"
+                        }
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Lý do",
+                            "points": [
+                                "x4 dễ ra tổ hợp **cao hơn x4**",
+                                "Vòng 12 (2048): tối đa x4",
+                                "Vòng 13 (4096): tối đa x8"
+                            ]
+                        },
+                        {
+                            "title": "Hệ số nhân",
+                            "points": [
+                                "Vòng 8 dùng được x2",
+                                "Vòng 10 dùng được x4",
+                                "Vòng 12 dùng được x8"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Cách cày tia sét",
+                    "points": [
+                        "Nếu vòng này có thể cày tia sét, hãy cày cho tới khi nhận được **phần thưởng 100 tia sét** một lần",
+                        "Nhận phần thưởng đó xong, lập tức tiến sang **vòng 2**"
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Lý do",
+                            "points": [
+                                "Tia sét cày thêm sau đó vẫn được tính, nhưng không nhận được phần thưởng 100 tia sét lần thứ hai (chỉ nạp vào thanh tiến độ)"
+                            ]
+                        }
+                    ],
+                    "note": "Vì vậy: nhận được phần thưởng 100 tia sét rồi thì hãy nhanh chóng hợp nhất giải lớn để sang vòng 2."
+                },
+                {
+                    "title": "Mẹo vòng 2",
+                    "points": [
+                        "Tia sét được mang sang vòng 2",
+                        "Ở vòng 1 hãy **tích trữ tia sét**",
+                        "Vòng 2 bắt đầu với nhiều tia sét hơn, chơi nhẹ nhàng hơn và **dễ hoàn thành hơn**"
+                    ]
+                },
+                {
+                    "title": "Lưu ý trước khi hoàn thành",
+                    "points": [
+                        "Khi sắp hoàn thành sự kiện, chỉ lấy **vừa đủ tia sét** để hoàn thành",
+                        "Hoàn thành xong **đừng thoát ngay**! Hãy **hợp nhất hết** các vật phẩm còn hợp nhất được trên màn hình"
+                    ],
+                    "note": "Như vậy mới tránh bị lỡ phần thưởng hợp nhất (giải lớn)."
+                }
+            ],
+            "summary": {
+                "title": "Tóm tắt",
+                "points": [
+                    "Dùng x4 suốt, không dùng x8",
+                    "Vòng 1 cày tới khi nhận phần thưởng 100 tia sét một lần",
+                    "Sau đó nhanh chóng sang vòng 2",
+                    "Tia sét mang sang vòng 2 được: tích trước, dùng sau",
+                    "Trước khi hoàn thành, chỉ lấy vừa đủ tia sét",
+                    "Hoàn thành xong hợp nhất hết rồi mới thoát để không lỡ phần thưởng"
+                ]
+            }
+        }
     },
     "ja": {
         "pageTitle": "マージアイランド・マトリックス雷計算機",
@@ -217,7 +469,91 @@
         "copyMissing": "不足している雷：",
         "copyProgress": "進行度：",
         "copyStatus": "状態：",
-        "footer": "© {year} 大佬群CSL製作"
+        "footer": "© {year} 大佬群CSL製作",
+        "guide": {
+            "fab": "攻略",
+            "fabAria": "合成イベント攻略を開く",
+            "title": "合成イベント攻略",
+            "subtitle": "コツをつかんで大賞をゲット",
+            "updated": "更新：2026.07.11",
+            "close": "閉じる",
+            "sections": [
+                {
+                    "title": "ベット倍率のおすすめ",
+                    "points": [
+                        {
+                            "t": "最初から最後まで **4倍** でOK",
+                            "tone": "good"
+                        },
+                        {
+                            "t": "**8倍** はおすすめしません",
+                            "tone": "bad"
+                        }
+                    ],
+                    "boxes": [
+                        {
+                            "title": "理由",
+                            "points": [
+                                "4倍のほうが **4倍以上** の高倍率コンボが出やすい",
+                                "第12ラウンド（2048）は最大4倍",
+                                "第13ラウンド（4096）は最大8倍"
+                            ]
+                        },
+                        {
+                            "title": "倍率の目安",
+                            "points": [
+                                "第8ラウンドで2倍が使用可",
+                                "第10ラウンドで4倍が使用可",
+                                "第12ラウンドで8倍が使用可"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "稲妻の集め方",
+                    "points": [
+                        "このラウンドで稲妻を集められるなら、**稲妻100個の報酬** を1回もらえるまで集める",
+                        "その報酬をもらったら、すぐ **第2ラウンド** へ進む"
+                    ],
+                    "boxes": [
+                        {
+                            "title": "理由",
+                            "points": [
+                                "その後に集めた稲妻もカウントはされますが、稲妻100個の報酬は2回目はもらえません（進行バーに入るだけ）"
+                            ]
+                        }
+                    ],
+                    "note": "そのため：稲妻100個の報酬をもらったら、急いで大賞を合成して第2ラウンドへ。"
+                },
+                {
+                    "title": "第2ラウンドのコツ",
+                    "points": [
+                        "稲妻は第2ラウンドに持ち越せる",
+                        "第1ラウンドで **稲妻を貯めておく**",
+                        "第2ラウンドを多めの稲妻で始められるので、ずっと楽で **完成しやすい**"
+                    ]
+                },
+                {
+                    "title": "完成前の注意",
+                    "points": [
+                        "イベント完成間近は、稲妻を **完成にちょうど足りる分** だけ取る",
+                        "完成後 **すぐに退出しない**！画面上でまだ合成できるアイテムを **すべて合成** してから"
+                    ],
+                    "note": "こうすることで合成報酬（大賞）の受け取り漏れを防げます。"
+                }
+            ],
+            "summary": {
+                "title": "まとめ",
+                "points": [
+                    "ずっと4倍、8倍は使わない",
+                    "第1ラウンドは稲妻100個の報酬を1回もらうまで集める",
+                    "その後すぐ第2ラウンドへ",
+                    "稲妻は持ち越せるので、貯めてから使うと楽",
+                    "完成前は稲妻をちょうど足りる分に",
+                    "完成後は全部合成してから退出し、報酬の取り漏れを防ぐ"
+                ]
+            }
+        }
     },
     "ko": {
         "pageTitle": "머지 아일랜드 매트릭스 번개 계산기",
@@ -272,7 +608,91 @@
         "copyMissing": "부족한 번개: ",
         "copyProgress": "진행률: ",
         "copyStatus": "상태: ",
-        "footer": "© {year} 大佬群CSL製作"
+        "footer": "© {year} 大佬群CSL製作",
+        "guide": {
+            "fab": "공략",
+            "fabAria": "합성 이벤트 공략 열기",
+            "title": "합성 이벤트 공략",
+            "subtitle": "요령을 익혀 대상을 손쉽게",
+            "updated": "업데이트: 2026.07.11",
+            "close": "닫기",
+            "sections": [
+                {
+                    "title": "베팅 추천",
+                    "points": [
+                        {
+                            "t": "처음부터 끝까지 **4배**면 충분",
+                            "tone": "good"
+                        },
+                        {
+                            "t": "**8배**는 추천하지 않음",
+                            "tone": "bad"
+                        }
+                    ],
+                    "boxes": [
+                        {
+                            "title": "이유",
+                            "points": [
+                                "4배가 **4배 이상** 고배율 조합이 더 잘 나옴",
+                                "12라운드(2048)는 최대 4배",
+                                "13라운드(4096)는 최대 8배"
+                            ]
+                        },
+                        {
+                            "title": "배율 안내",
+                            "points": [
+                                "8라운드부터 2배 사용 가능",
+                                "10라운드부터 4배 사용 가능",
+                                "12라운드부터 8배 사용 가능"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "번개 모으기",
+                    "points": [
+                        "이번 라운드에 번개를 모을 수 있다면 **번개 100개 보상**을 한 번 받을 때까지 모으기",
+                        "그 보상을 받으면 바로 **2라운드**로 진행"
+                    ],
+                    "boxes": [
+                        {
+                            "title": "이유",
+                            "points": [
+                                "그 이후 모은 번개도 계산은 되지만 번개 100개 보상은 두 번 받을 수 없음(진행 바에만 채워짐)"
+                            ]
+                        }
+                    ],
+                    "note": "따라서 번개 100개 보상을 받으면 서둘러 대상을 합성하고 2라운드로 넘어가세요."
+                },
+                {
+                    "title": "2라운드 요령",
+                    "points": [
+                        "번개는 2라운드로 이월됨",
+                        "1라운드에서 **번개를 모아 두기**",
+                        "2라운드를 더 많은 번개로 시작해 훨씬 수월하고 **완료하기 쉬움**"
+                    ]
+                },
+                {
+                    "title": "완료 전 주의",
+                    "points": [
+                        "이벤트 완료가 가까우면 번개는 **딱 완료할 만큼만** 받기",
+                        "완료 후 **바로 나가지 말 것**! 화면에서 아직 합성 가능한 아이템을 **모두 합성**하기"
+                    ],
+                    "note": "그래야 합성 보상(대상)을 놓치지 않습니다."
+                }
+            ],
+            "summary": {
+                "title": "핵심 정리",
+                "points": [
+                    "계속 4배, 8배는 쓰지 않기",
+                    "1라운드에서 번개 100개 보상을 한 번 받을 때까지 모으기",
+                    "그다음 빠르게 2라운드로",
+                    "번개는 이월되니 모아 두었다 쓰기",
+                    "완료 전엔 번개를 딱 맞게",
+                    "완료 후 모두 합성하고 나가서 보상 누락 방지"
+                ]
+            }
+        }
     },
     "th": {
         "pageTitle": "เครื่องคำนวณสายฟ้าแบบตาราง Merge Islands",
@@ -327,7 +747,91 @@
         "copyMissing": "สายฟ้าที่ยังขาด: ",
         "copyProgress": "ความคืบหน้า: ",
         "copyStatus": "สถานะ: ",
-        "footer": "© {year} 大佬群CSL製作"
+        "footer": "© {year} 大佬群CSL製作",
+        "guide": {
+            "fab": "เคล็ดลับ",
+            "fabAria": "เปิดคู่มือกิจกรรมรวมไอเทม",
+            "title": "คู่มือกิจกรรมรวมไอเทม",
+            "subtitle": "รู้เคล็ดลับ รับรางวัลใหญ่ได้ง่าย",
+            "updated": "อัปเดต 2026.07.11",
+            "close": "ปิด",
+            "sections": [
+                {
+                    "title": "คำแนะนำการเดิมพัน",
+                    "points": [
+                        {
+                            "t": "ใช้ **x4** ตลอดทั้งกิจกรรม",
+                            "tone": "good"
+                        },
+                        {
+                            "t": "ไม่แนะนำให้ใช้ **x8**",
+                            "tone": "bad"
+                        }
+                    ],
+                    "boxes": [
+                        {
+                            "title": "เหตุผล",
+                            "points": [
+                                "x4 มีโอกาสออกคอมโบ **มากกว่า x4** ได้ง่ายกว่า",
+                                "รอบที่ 12 (2048) สูงสุด x4",
+                                "รอบที่ 13 (4096) สูงสุด x8"
+                            ]
+                        },
+                        {
+                            "title": "ตัวคูณที่ใช้ได้",
+                            "points": [
+                                "รอบที่ 8 ใช้ x2 ได้",
+                                "รอบที่ 10 ใช้ x4 ได้",
+                                "รอบที่ 12 ใช้ x8 ได้"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "วิธีฟาร์มสายฟ้า",
+                    "points": [
+                        "ถ้ารอบนี้ฟาร์มสายฟ้าได้ ให้ฟาร์มจนได้ **รางวัลสายฟ้า 100** หนึ่งครั้ง",
+                        "ได้รางวัลนั้นแล้ว ให้รีบไป **รอบที่ 2** ทันที"
+                    ],
+                    "boxes": [
+                        {
+                            "title": "เหตุผล",
+                            "points": [
+                                "สายฟ้าที่ฟาร์มหลังจากนั้นยังนับอยู่ แต่จะไม่ได้รางวัลสายฟ้า 100 ครั้งที่สอง (แค่เติมแถบความคืบหน้า)"
+                            ]
+                        }
+                    ],
+                    "note": "ดังนั้น เมื่อได้รางวัลสายฟ้า 100 แล้ว ให้รีบรวมรางวัลใหญ่และเข้าสู่รอบที่ 2"
+                },
+                {
+                    "title": "เคล็ดลับรอบที่ 2",
+                    "points": [
+                        "สายฟ้ายกไปใช้ในรอบที่ 2 ได้",
+                        "รอบแรกให้ **เก็บสายฟ้าไว้**",
+                        "รอบที่ 2 เริ่มด้วยสายฟ้าที่มากขึ้น เล่นง่ายขึ้นมากและ **จบได้ง่ายกว่า**"
+                    ]
+                },
+                {
+                    "title": "ข้อควรระวังก่อนจบ",
+                    "points": [
+                        "ใกล้จบกิจกรรม ให้เก็บสายฟ้า **แค่พอให้จบ**",
+                        "จบแล้ว **อย่าเพิ่งออก**! ให้ **รวมไอเทมทั้งหมด** ที่ยังรวมได้บนหน้าจอก่อน"
+                    ],
+                    "note": "แบบนี้จะไม่พลาดรางวัลการรวม (รางวัลใหญ่)"
+                }
+            ],
+            "summary": {
+                "title": "สรุปประเด็นสำคัญ",
+                "points": [
+                    "ใช้ x4 ตลอด ไม่ใช้ x8",
+                    "รอบแรกฟาร์มจนได้รางวัลสายฟ้า 100 หนึ่งครั้ง",
+                    "จากนั้นรีบเข้ารอบที่ 2",
+                    "สายฟ้ายกไปได้ เก็บไว้ก่อนแล้วค่อยใช้",
+                    "ก่อนจบ เก็บสายฟ้าแค่พอดี",
+                    "จบแล้วรวมทุกอย่างก่อนออก เพื่อไม่พลาดรางวัล"
+                ]
+            }
+        }
     },
     "id": {
         "pageTitle": "Kalkulator Petir Matriks Merge Islands",
@@ -382,7 +886,91 @@
         "copyMissing": "Petir yang kurang: ",
         "copyProgress": "Progres: ",
         "copyStatus": "Status: ",
-        "footer": "© {year} 大佬群CSL製作"
+        "footer": "© {year} 大佬群CSL製作",
+        "guide": {
+            "fab": "Tips",
+            "fabAria": "Buka panduan event gabung",
+            "title": "Panduan Event Gabung",
+            "subtitle": "Kuasai triknya, raih hadiah utama",
+            "updated": "Diperbarui 2026.07.11",
+            "close": "Tutup",
+            "sections": [
+                {
+                    "title": "Saran taruhan",
+                    "points": [
+                        {
+                            "t": "Gunakan **x4** sepanjang event",
+                            "tone": "good"
+                        },
+                        {
+                            "t": "**x8** tidak disarankan",
+                            "tone": "bad"
+                        }
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Alasan",
+                            "points": [
+                                "x4 lebih mudah memunculkan kombo **di atas x4**",
+                                "Ronde 12 (2048): maksimal x4",
+                                "Ronde 13 (4096): maksimal x8"
+                            ]
+                        },
+                        {
+                            "title": "Panduan pengali",
+                            "points": [
+                                "Ronde 8 bisa pakai x2",
+                                "Ronde 10 bisa pakai x4",
+                                "Ronde 12 bisa pakai x8"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Cara farming petir",
+                    "points": [
+                        "Jika di ronde ini petir bisa di-farming, kumpulkan sampai mendapat **hadiah 100 petir** satu kali",
+                        "Setelah mendapat hadiah itu, segera lanjut ke **ronde 2**"
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Alasan",
+                            "points": [
+                                "Petir yang dikumpulkan setelahnya tetap terhitung, tetapi hadiah 100 petir tidak bisa didapat untuk kedua kalinya (hanya mengisi bilah progres)"
+                            ]
+                        }
+                    ],
+                    "note": "Jadi, setelah mendapat hadiah 100 petir, segera gabungkan hadiah utama dan masuk ronde 2."
+                },
+                {
+                    "title": "Tips ronde 2",
+                    "points": [
+                        "Petir terbawa ke ronde 2",
+                        "Di ronde 1, **simpan petir** dulu",
+                        "Ronde 2 dimulai dengan lebih banyak petir, jadi jauh lebih mudah dan **lebih cepat selesai**"
+                    ]
+                },
+                {
+                    "title": "Perhatikan sebelum selesai",
+                    "points": [
+                        "Menjelang event selesai, ambil petir **secukupnya untuk selesai**",
+                        "Setelah selesai, **jangan langsung keluar**! **Gabungkan semua** item yang masih bisa digabung di layar dulu"
+                    ],
+                    "note": "Dengan begitu hadiah gabung (hadiah utama) tidak terlewat."
+                }
+            ],
+            "summary": {
+                "title": "Ringkasan",
+                "points": [
+                    "Pakai x4 terus, jangan x8",
+                    "Ronde 1 farming sampai dapat hadiah 100 petir satu kali",
+                    "Lalu cepat masuk ronde 2",
+                    "Petir terbawa, jadi simpan dulu dan pakai nanti",
+                    "Sebelum selesai, ambil petir secukupnya",
+                    "Setelah selesai, gabungkan semua dulu baru keluar agar hadiah tidak terlewat"
+                ]
+            }
+        }
     },
     "es": {
         "pageTitle": "Calculadora de Rayos en Matriz de Merge Islands",
@@ -437,7 +1025,91 @@
         "copyMissing": "Rayos faltantes: ",
         "copyProgress": "Progreso: ",
         "copyStatus": "Estado: ",
-        "footer": "© {year} 大佬群CSL製作"
+        "footer": "© {year} 大佬群CSL製作",
+        "guide": {
+            "fab": "Guía",
+            "fabAria": "Abrir la guía del evento de fusión",
+            "title": "Guía del evento de fusión",
+            "subtitle": "Domina los trucos y gana el gran premio",
+            "updated": "Actualizado 2026.07.11",
+            "close": "Cerrar",
+            "sections": [
+                {
+                    "title": "Apuesta recomendada",
+                    "points": [
+                        {
+                            "t": "Usa **x4** todo el tiempo",
+                            "tone": "good"
+                        },
+                        {
+                            "t": "No se recomienda **x8**",
+                            "tone": "bad"
+                        }
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Por qué",
+                            "points": [
+                                "Con x4 salen más fácilmente combos **superiores a x4**",
+                                "Ronda 12 (2048): hasta x4",
+                                "Ronda 13 (4096): hasta x8"
+                            ]
+                        },
+                        {
+                            "title": "Multiplicadores",
+                            "points": [
+                                "Ronda 8: x2 disponible",
+                                "Ronda 10: x4 disponible",
+                                "Ronda 12: x8 disponible"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Cómo farmear rayos",
+                    "points": [
+                        "Si en esta ronda se pueden farmear rayos, sigue hasta obtener una vez la **recompensa de 100 rayos**",
+                        "Tras obtener esa recompensa, avanza de inmediato a la **ronda 2**"
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Por qué",
+                            "points": [
+                                "Los rayos que juntes después siguen contando, pero la recompensa de 100 rayos no se obtiene una segunda vez (solo llenan la barra de progreso)"
+                            ]
+                        }
+                    ],
+                    "note": "Por eso, al recibir la recompensa de 100 rayos, fusiona rápido el gran premio y pasa a la ronda 2."
+                },
+                {
+                    "title": "Trucos de la ronda 2",
+                    "points": [
+                        "Los rayos pasan a la ronda 2",
+                        "En la ronda 1, **guarda rayos**",
+                        "Empiezas la ronda 2 con más rayos: es mucho más fácil y **más probable terminarla**"
+                    ]
+                },
+                {
+                    "title": "Antes de terminar",
+                    "points": [
+                        "Cerca del final del evento, consigue **solo los rayos justos** para completarlo",
+                        "Al terminar, **¡no salgas enseguida!** Primero **fusiona todo** lo que aún se pueda fusionar en pantalla"
+                    ],
+                    "note": "Así evitas quedarte sin la recompensa de fusión (gran premio)."
+                }
+            ],
+            "summary": {
+                "title": "Resumen",
+                "points": [
+                    "Usa x4 siempre, no x8",
+                    "En la ronda 1, farmea hasta obtener una vez la recompensa de 100 rayos",
+                    "Luego pasa rápido a la ronda 2",
+                    "Los rayos se conservan: guárdalos y úsalos después",
+                    "Antes de terminar, consigue los rayos justos",
+                    "Al terminar, fusiona todo antes de salir para no perder recompensas"
+                ]
+            }
+        }
     },
     "pt": {
         "pageTitle": "Calculadora de Raios em Matriz do Merge Islands",
@@ -492,6 +1164,90 @@
         "copyMissing": "Raios faltantes: ",
         "copyProgress": "Progresso: ",
         "copyStatus": "Status: ",
-        "footer": "© {year} 大佬群CSL製作"
+        "footer": "© {year} 大佬群CSL製作",
+        "guide": {
+            "fab": "Guia",
+            "fabAria": "Abrir o guia do evento de fusão",
+            "title": "Guia do evento de fusão",
+            "subtitle": "Domine os truques e ganhe o grande prêmio",
+            "updated": "Atualizado 2026.07.11",
+            "close": "Fechar",
+            "sections": [
+                {
+                    "title": "Aposta recomendada",
+                    "points": [
+                        {
+                            "t": "Use **x4** o tempo todo",
+                            "tone": "good"
+                        },
+                        {
+                            "t": "**x8** não é recomendado",
+                            "tone": "bad"
+                        }
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Por quê",
+                            "points": [
+                                "Com x4 saem mais facilmente combos **acima de x4**",
+                                "Rodada 12 (2048): até x4",
+                                "Rodada 13 (4096): até x8"
+                            ]
+                        },
+                        {
+                            "title": "Multiplicadores",
+                            "points": [
+                                "Rodada 8: x2 disponível",
+                                "Rodada 10: x4 disponível",
+                                "Rodada 12: x8 disponível"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Como farmar raios",
+                    "points": [
+                        "Se nesta rodada der para farmar raios, continue até receber uma vez a **recompensa de 100 raios**",
+                        "Depois de receber essa recompensa, avance imediatamente para a **rodada 2**"
+                    ],
+                    "boxes": [
+                        {
+                            "title": "Por quê",
+                            "points": [
+                                "Os raios juntados depois continuam contando, mas a recompensa de 100 raios não vem uma segunda vez (só enchem a barra de progresso)"
+                            ]
+                        }
+                    ],
+                    "note": "Por isso, ao receber a recompensa de 100 raios, funda logo o grande prêmio e vá para a rodada 2."
+                },
+                {
+                    "title": "Dicas da rodada 2",
+                    "points": [
+                        "Os raios passam para a rodada 2",
+                        "Na rodada 1, **guarde raios**",
+                        "A rodada 2 começa com mais raios, fica bem mais fácil e **mais provável de concluir**"
+                    ]
+                },
+                {
+                    "title": "Antes de concluir",
+                    "points": [
+                        "Perto do fim do evento, pegue **só os raios suficientes** para concluir",
+                        "Ao concluir, **não saia logo!** Primeiro **funda tudo** o que ainda dá para fundir na tela"
+                    ],
+                    "note": "Assim você não perde a recompensa de fusão (grande prêmio)."
+                }
+            ],
+            "summary": {
+                "title": "Resumo",
+                "points": [
+                    "Use x4 sempre, não x8",
+                    "Na rodada 1, farme até receber uma vez a recompensa de 100 raios",
+                    "Depois vá rápido para a rodada 2",
+                    "Os raios passam adiante: guarde e use depois",
+                    "Antes de concluir, raios na medida certa",
+                    "Ao concluir, funda tudo antes de sair para não perder recompensas"
+                ]
+            }
+        }
     }
 }

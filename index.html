@@ -822,6 +822,329 @@
             font-size: 12px;
         }
 
+        /* ---------- Strategy guide: floating helper + sheet ---------- */
+        .footer {
+            padding-bottom: 72px;
+        }
+
+        html:has(dialog[open]) {
+            overflow: hidden;
+        }
+
+        .guide-fab {
+            position: fixed;
+            right: max(16px, env(safe-area-inset-right));
+            bottom: calc(16px + env(safe-area-inset-bottom));
+            z-index: 40;
+            width: 62px;
+            height: 62px;
+            min-height: 0;
+            padding: 0;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            align-content: center;
+            gap: 2px;
+            color: #fff;
+            background: var(--sea-night);
+            border: 3px solid var(--bolt);
+            box-shadow: 0 4px 0 #04262e, 0 14px 26px -10px rgba(8, 63, 74, 0.6);
+        }
+
+        .guide-fab:hover {
+            background: #0c4f5c;
+        }
+
+        .guide-fab:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #04262e;
+        }
+
+        .guide-fab svg {
+            width: 24px;
+            height: 24px;
+            color: var(--bolt);
+        }
+
+        .guide-fab-label {
+            max-width: 52px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 11px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        body.is-dragging .guide-fab {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .guide {
+            padding: 0;
+            border: 0;
+            margin: auto auto 0;
+            width: 100%;
+            max-width: 640px;
+            max-height: 88svh;
+            border-radius: 24px 24px 0 0;
+            color: var(--ink);
+            background: var(--sand);
+            box-shadow: 0 -12px 40px rgba(8, 63, 74, 0.35);
+            overflow: hidden;
+        }
+
+        .guide[open] {
+            display: flex;
+            flex-direction: column;
+            animation: guide-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .guide::backdrop {
+            background: rgba(8, 40, 48, 0.55);
+        }
+
+        @keyframes guide-in {
+            from {
+                transform: translateY(48px);
+                opacity: 0;
+            }
+        }
+
+        .guide-head {
+            position: relative;
+            flex: 0 0 auto;
+            padding: 22px 18px 18px;
+            color: #fff;
+            background:
+                radial-gradient(120% 90% at 100% 0%, rgba(255, 200, 61, 0.2), transparent 55%),
+                linear-gradient(160deg, var(--sea) 0%, var(--sea-deep) 60%, var(--sea-night) 100%);
+        }
+
+        .guide-head::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 40px;
+            height: 4px;
+            margin-left: -20px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .guide-head h2 {
+            margin: 0;
+            padding-right: 52px;
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 26px;
+            line-height: 1.2;
+        }
+
+        .guide-sub {
+            margin: 4px 0 0;
+            color: #d5efea;
+            font-size: 13px;
+        }
+
+        .guide-updated {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 2px 9px;
+            border-radius: 999px;
+            color: var(--ink);
+            background: var(--bolt);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .guide-close {
+            position: absolute;
+            right: 12px;
+            top: 14px;
+            width: 44px;
+            height: 44px;
+            min-height: 44px;
+            padding: 0;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, 0.14);
+            box-shadow: none;
+        }
+
+        .guide-close:hover {
+            background: rgba(255, 255, 255, 0.26);
+        }
+
+        .guide-close:active {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .guide-close svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .guide-body {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            display: grid;
+            gap: 10px;
+            align-content: start;
+            padding: 12px 12px calc(18px + env(safe-area-inset-bottom));
+        }
+
+        .guide-section {
+            padding: 14px;
+            border-radius: 18px;
+            background: #fff;
+            border: 1px solid var(--line);
+        }
+
+        .guide-section h3 {
+            margin: 0 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.25;
+        }
+
+        .guide-num {
+            flex: 0 0 auto;
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
+            display: grid;
+            place-items: center;
+            color: var(--ink);
+            background: var(--bolt);
+            box-shadow: 0 2px 0 var(--bolt-deep);
+            font-family: var(--font-num);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .guide-points {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 6px;
+        }
+
+        .guide-points li {
+            position: relative;
+            padding-left: 22px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .guide-points li::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 0.6em;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--sea);
+        }
+
+        .guide-points li.good::before,
+        .guide-points li.bad::before,
+        .guide-summary li::before {
+            top: 0;
+            left: 1px;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            background: none;
+            font-weight: 800;
+        }
+
+        .guide-points li.good::before,
+        .guide-summary li::before {
+            content: "\2713";
+            color: var(--leaf);
+        }
+
+        .guide-points li.bad::before {
+            content: "\2715";
+            color: var(--coral);
+        }
+
+        .guide-points strong {
+            color: var(--sea-deep);
+            font-weight: 800;
+        }
+
+        .guide-points li.bad strong {
+            color: var(--coral-deep);
+        }
+
+        .guide-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .guide-box {
+            padding: 10px 12px;
+            border-radius: 14px;
+            background: var(--foam);
+        }
+
+        .guide-box h4 {
+            margin: 0 0 6px;
+            color: var(--sea-deep);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .guide-box .guide-points li {
+            font-size: 13px;
+        }
+
+        .guide-note {
+            margin: 12px 0 0;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: #fff6d6;
+            border-left: 4px solid var(--bolt);
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.55;
+        }
+
+        @media (min-width: 760px) {
+            .guide {
+                margin: auto;
+                max-height: min(86vh, 820px);
+                border-radius: 24px;
+                box-shadow: 0 24px 60px rgba(8, 63, 74, 0.4);
+            }
+
+            .guide-head::before {
+                display: none;
+            }
+
+            .guide-head {
+                padding: 20px 22px;
+            }
+
+            .guide-body {
+                padding: 14px 16px 18px;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -1180,8 +1503,8 @@
                 <div class="target-inputs">
                     <select id="targetSelect">
                         <option value="11">11 個</option>
-                        <option value="12" selected>12 個</option>
-                        <option value="13">13 個</option>
+                        <option value="12">12 個</option>
+                        <option value="13" selected>13 個</option>
                         <option value="custom">自行輸入</option>
                     </select>
                     <input type="number" id="customTargetInput" class="custom-input" min="1" max="25" placeholder="個數" />
@@ -1270,6 +1593,29 @@
 
         <footer class="footer" data-i18n="footer">© 2026 大佬群CSL製作</footer>
     </main>
+
+    <button type="button" id="guideFab" class="guide-fab" aria-haspopup="dialog" aria-controls="guideDialog" aria-label="開啟合併遊戲攻略">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"
+                d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v15H5.5A1.5 1.5 0 0 0 4 19.5zM4 19.5A1.5 1.5 0 0 0 5.5 21H19v-3" />
+            <path fill="currentColor" d="M12.6 5.5 9 11h2.4l-.8 4.5L14.4 10H12z" />
+        </svg>
+        <span id="guideFabLabel" class="guide-fab-label">攻略</span>
+    </button>
+
+    <dialog id="guideDialog" class="guide" aria-labelledby="guideTitle">
+        <div class="guide-head">
+            <h2 id="guideTitle">合併遊戲攻略</h2>
+            <p id="guideSub" class="guide-sub"></p>
+            <span id="guideUpdated" class="guide-updated"></span>
+            <button type="button" id="guideClose" class="guide-close" aria-label="關閉">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />
+                </svg>
+            </button>
+        </div>
+        <div id="guideBody" class="guide-body"></div>
+    </dialog>
 
     <div id="toast" class="toast">已完成</div>
 
@@ -1442,6 +1788,7 @@
 
             languageSelect.value = currentLang;
             renderTargetOptions();
+            renderGuide();
         };
 
         const setLanguage = (lang) => {
@@ -2151,6 +2498,152 @@
 
         languageSelect.addEventListener("change", () => {
             setLanguage(languageSelect.value);
+        });
+
+        // ---------- Strategy guide ----------
+        const guideFab = document.getElementById("guideFab");
+        const guideFabLabel = document.getElementById("guideFabLabel");
+        const guideDialog = document.getElementById("guideDialog");
+        const guideTitleEl = document.getElementById("guideTitle");
+        const guideSubEl = document.getElementById("guideSub");
+        const guideUpdatedEl = document.getElementById("guideUpdated");
+        const guideCloseBtn = document.getElementById("guideClose");
+        const guideBodyEl = document.getElementById("guideBody");
+
+        const getGuide = () => {
+            if (i18n[currentLang] && i18n[currentLang].guide) return i18n[currentLang].guide;
+            if (i18n["zh-Hant"] && i18n["zh-Hant"].guide) return i18n["zh-Hant"].guide;
+            return null;
+        };
+
+        const makeEl = (tag, className, text) => {
+            const node = document.createElement(tag);
+            if (className) node.className = className;
+            if (text !== undefined) node.textContent = text;
+            return node;
+        };
+
+        // "**bold**" segments become <strong>; everything stays as text nodes
+        const appendRich = (parent, text) => {
+            String(text).split("**").forEach((part, index) => {
+                if (!part) return;
+                if (index % 2 === 1) {
+                    parent.appendChild(makeEl("strong", "", part));
+                } else {
+                    parent.appendChild(document.createTextNode(part));
+                }
+            });
+        };
+
+        const makePointList = (points, extraClass) => {
+            const list = makeEl("ul", extraClass ? `guide-points ${extraClass}` : "guide-points");
+
+            points.forEach((point) => {
+                const item = makeEl("li");
+                const text = typeof point === "string" ? point : point.t;
+                if (point && point.tone) item.className = point.tone;
+                appendRich(item, text);
+                list.appendChild(item);
+            });
+
+            return list;
+        };
+
+        const makeSection = (title, number) => {
+            const section = makeEl("section", "guide-section");
+            const heading = makeEl("h3");
+
+            if (number) heading.appendChild(makeEl("span", "guide-num", String(number)));
+            heading.appendChild(document.createTextNode(title));
+            section.appendChild(heading);
+
+            return section;
+        };
+
+        const renderGuide = () => {
+            const guide = getGuide();
+
+            if (!guide) {
+                guideFab.hidden = true;
+                return;
+            }
+
+            guideFab.hidden = false;
+            guideFabLabel.textContent = guide.fab;
+            guideFab.setAttribute("aria-label", guide.fabAria);
+            guideTitleEl.textContent = guide.title;
+            guideSubEl.textContent = guide.subtitle;
+            guideUpdatedEl.textContent = guide.updated;
+            guideCloseBtn.setAttribute("aria-label", guide.close);
+            guideBodyEl.innerHTML = "";
+
+            guide.sections.forEach((data, index) => {
+                const section = makeSection(data.title, index + 1);
+                section.appendChild(makePointList(data.points));
+
+                if (data.boxes && data.boxes.length) {
+                    const boxes = makeEl("div", "guide-boxes");
+
+                    data.boxes.forEach((box) => {
+                        const boxEl = makeEl("div", "guide-box");
+                        boxEl.appendChild(makeEl("h4", "", box.title));
+                        boxEl.appendChild(makePointList(box.points));
+                        boxes.appendChild(boxEl);
+                    });
+
+                    section.appendChild(boxes);
+                }
+
+                if (data.note) {
+                    const note = makeEl("p", "guide-note");
+                    appendRich(note, data.note);
+                    section.appendChild(note);
+                }
+
+                guideBodyEl.appendChild(section);
+            });
+
+            const summarySection = makeSection(guide.summary.title);
+            summarySection.appendChild(makePointList(guide.summary.points, "guide-summary"));
+            guideBodyEl.appendChild(summarySection);
+        };
+
+        const openGuide = () => {
+            if (guideDialog.open) return;
+
+            renderGuide();
+            guideDialog.showModal();
+            guideBodyEl.scrollTop = 0;
+
+            // Let the phone's back button close the guide instead of leaving the page
+            try {
+                history.pushState({ guide: true }, "");
+            } catch (error) {
+                // history unavailable (e.g. sandboxed frame): the close button and Esc still work
+            }
+        };
+
+        const closeGuide = () => {
+            if (history.state && history.state.guide) {
+                history.back();
+            } else if (guideDialog.open) {
+                guideDialog.close();
+            }
+        };
+
+        guideFab.addEventListener("click", openGuide);
+        guideCloseBtn.addEventListener("click", closeGuide);
+
+        guideDialog.addEventListener("click", (event) => {
+            if (event.target === guideDialog) closeGuide();
+        });
+
+        guideDialog.addEventListener("close", () => {
+            if (history.state && history.state.guide) history.back();
+        });
+
+        window.addEventListener("popstate", () => {
+            if (guideDialog.open) guideDialog.close();
         });
 
         loadI18n()
