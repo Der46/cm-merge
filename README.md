@@ -5,7 +5,7 @@
 <h1 align="center">合併島嶼矩陣閃電計算器</h1>
 
 <p align="center">
-  合併島嶼（Merge Island）的閃電需求計算工具 · 由 Coin999 - 長長久久 隊伍製作
+  合併島嶼（Merge Island）的閃電需求計算工具 · 大佬群CSL製作
 </p>
 
 ---
