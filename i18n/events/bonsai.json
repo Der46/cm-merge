@@ -9,11 +9,11 @@
         "prizes": {
             "spins": "{n} 次旋轉",
             "bamboo": "{n} 竹子代幣",
-            "thor": "索爾代幣 ×{n}",
+            "thor": "雷神代幣 ×{n}",
             "flowerBox": "花盒 ×{n}",
             "monsterChest": "怪獸寶箱",
             "halloweenChest": "萬聖節寶箱",
-            "smallThorBox": "小型索爾代幣箱"
+            "smallThorBox": "小型雷神代幣箱"
         },
         "guide": [
             {

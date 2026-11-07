@@ -26,12 +26,10 @@ const ICONS = {
         <path d="M31 21a8 8 0 1 0 1 6" fill="none" stroke="#a5660a" stroke-width="3.5" stroke-linecap="round"/>
         <path d="M33 14v8h-8z" fill="#a5660a"/>`,
     thor: `
-        <circle cx="24" cy="24" r="20" fill="#4d8ee0" stroke="#24589e" stroke-width="3"/>
-        <circle cx="24" cy="27" r="9" fill="#f4c99c"/>
-        <path d="M15 28c0 9 4 12 9 12s9-3 9-12c-3 3-6 3-9 3s-6 0-9-3z" fill="#e8812f"/>
-        <path d="M14 23c0-7 4-11 10-11s10 4 10 11z" fill="#cfd9e6" stroke="#7d8da3" stroke-width="1.5"/>
-        <path d="M14 21c-5-2-7-6-6-10 3 1 6 4 7 8zM34 21c5-2 7-6 6-10-3 1-6 4-7 8z" fill="#fff" stroke="#9aa9bd" stroke-width="1.2"/>
-        <circle cx="20.5" cy="26" r="1.4" fill="#3b2a1d"/><circle cx="27.5" cy="26" r="1.4" fill="#3b2a1d"/>`,
+        <circle cx="24" cy="24" r="20" fill="#c45fd8" stroke="#7d2a99" stroke-width="3"/>
+        <circle cx="24" cy="24" r="14.5" fill="#e08ef0"/>
+        <path d="M12 17a14 14 0 0 1 9-7" fill="none" stroke="#f6d4ff" stroke-width="3" stroke-linecap="round"/>
+        <path d="M26.5 10 16 26h7l-2.5 12L32 21h-7.2z" fill="#ffd23f" stroke="#c98a00" stroke-width="1.6" stroke-linejoin="round"/>`,
     monsterChest: `
         <path d="M7 22c0-8 7-12 17-12s17 4 17 12z" fill="#8d4fd0" stroke="#4e2380" stroke-width="2"/>
         <rect x="7" y="22" width="34" height="18" rx="3" fill="#7a3cc0" stroke="#4e2380" stroke-width="2"/>
@@ -53,7 +51,8 @@ const ICONS = {
         <path d="M40 18v16l-16 8V25z" fill="#4a6d93" stroke="#3d5f86" stroke-width="2" stroke-linejoin="round"/>
         <path d="M8 18l16 7 16-7" fill="none" stroke="#f2b53a" stroke-width="2.5"/>
         <path d="M24 25v17" stroke="#f2b53a" stroke-width="2.5"/>
-        <circle cx="31" cy="31" r="4" fill="#4d8ee0" stroke="#f2b53a" stroke-width="1.5"/>`,
+        <circle cx="31" cy="31" r="4.5" fill="#c45fd8" stroke="#f2b53a" stroke-width="1.5"/>
+        <path d="M31.8 27.6 29 31.6h2l-.7 3.2 3-4.4h-2z" fill="#ffd23f"/>`,
     flowerBox: `
         <rect x="8" y="22" width="32" height="18" rx="3" fill="#d6405f" stroke="#8f1f3a" stroke-width="2"/>
         <rect x="6" y="18" width="36" height="7" rx="2.5" fill="#e85a77" stroke="#8f1f3a" stroke-width="2"/>
