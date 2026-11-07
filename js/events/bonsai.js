@@ -1,14 +1,81 @@
-// Bonsai Base (盆栽基地): progress trackers for the Bonsai Blitz bar and the Merging Mates fish bar.
-// The in-game bar shows "level N  x / cost", so the player enters exactly that; totals are derived here.
+// Bonsai Base (盆栽基地): reward lists for the Bonsai Blitz bar and the Merging Mates fish bar.
+// Read-only: every level shows its reward (drawn as SVG), its cost and the running total.
 
 const DATA_URL = "./data/events/bonsai.json";
 const TEXT_URL = "./i18n/events/bonsai.json";
-const STORE_KEY = "bonsaiBaseProgress";
+const SPRITE_ID = "bonsai-icon-sprite";
 
-const TRACKERS = [
-    { id: "blitz", titleKey: "blitzTitle", descKey: "blitzDesc" },
-    { id: "fish", titleKey: "fishTitle", descKey: "fishDesc" }
+const BARS = [
+    { id: "blitz", titleKey: "blitzTitle", descKey: "blitzDesc", currency: "lotus" },
+    { id: "fish", titleKey: "fishTitle", descKey: "fishDesc", currency: "fish" }
 ];
+
+// Hand-drawn icons, styled after the in-game art. Static markup only (no user data).
+const COIN = `
+    <circle cx="24" cy="24" r="20" fill="#f5b82e" stroke="#b97f00" stroke-width="3"/>
+    <circle cx="24" cy="24" r="14.5" fill="#ffd862"/>
+    <path d="M12 17a14 14 0 0 1 9-7" fill="none" stroke="#fff6c7" stroke-width="3" stroke-linecap="round"/>`;
+
+const ICONS = {
+    bamboo: `${COIN}
+        <rect x="21" y="12" width="6" height="25" rx="3" fill="#3f9e4b"/>
+        <path d="M21 20h6M21 29h6" stroke="#25703a" stroke-width="2"/>
+        <path d="M27 17c5-5 10-4 11-1-4 3-8 3-11 1z" fill="#62c46e"/>
+        <path d="M21 25c-5-4-9-3-10 0 4 2 7 2 10 0z" fill="#62c46e"/>`,
+    spins: `${COIN}
+        <path d="M31 21a8 8 0 1 0 1 6" fill="none" stroke="#a5660a" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M33 14v8h-8z" fill="#a5660a"/>`,
+    thor: `
+        <circle cx="24" cy="24" r="20" fill="#4d8ee0" stroke="#24589e" stroke-width="3"/>
+        <circle cx="24" cy="27" r="9" fill="#f4c99c"/>
+        <path d="M15 28c0 9 4 12 9 12s9-3 9-12c-3 3-6 3-9 3s-6 0-9-3z" fill="#e8812f"/>
+        <path d="M14 23c0-7 4-11 10-11s10 4 10 11z" fill="#cfd9e6" stroke="#7d8da3" stroke-width="1.5"/>
+        <path d="M14 21c-5-2-7-6-6-10 3 1 6 4 7 8zM34 21c5-2 7-6 6-10-3 1-6 4-7 8z" fill="#fff" stroke="#9aa9bd" stroke-width="1.2"/>
+        <circle cx="20.5" cy="26" r="1.4" fill="#3b2a1d"/><circle cx="27.5" cy="26" r="1.4" fill="#3b2a1d"/>`,
+    monsterChest: `
+        <path d="M7 22c0-8 7-12 17-12s17 4 17 12z" fill="#8d4fd0" stroke="#4e2380" stroke-width="2"/>
+        <rect x="7" y="22" width="34" height="18" rx="3" fill="#7a3cc0" stroke="#4e2380" stroke-width="2"/>
+        <path d="M7 22h34" stroke="#f2b53a" stroke-width="4"/>
+        <path d="M13 11v29M35 11v29" stroke="#f2b53a" stroke-width="3"/>
+        <rect x="20" y="19" width="8" height="10" rx="2" fill="#ffd45c" stroke="#a96f00" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="1.6" fill="#6b4300"/>`,
+    halloweenChest: `
+        <path d="M7 22c0-8 7-12 17-12s17 4 17 12z" fill="#6a2c91" stroke="#3a1257" stroke-width="2"/>
+        <rect x="7" y="22" width="34" height="18" rx="3" fill="#5b2380" stroke="#3a1257" stroke-width="2"/>
+        <path d="M7 22h34" stroke="#f28c28" stroke-width="4"/>
+        <path d="M13 11v29M35 11v29" stroke="#f28c28" stroke-width="3"/>
+        <circle cx="24" cy="25" r="5.5" fill="#ff9a2e" stroke="#b85a00" stroke-width="1.5"/>
+        <path d="M24 19.5v-2.5" stroke="#3f8c2f" stroke-width="2" stroke-linecap="round"/>
+        <path d="M21.5 24.5l1.2-1.4 1.3 1.4M24 24.5l1.3-1.4 1.2 1.4M21.8 27.2h4.4" fill="none" stroke="#5a2a00" stroke-width="1.1"/>`,
+    smallThorBox: `
+        <path d="M8 18l16-7 16 7-16 7z" fill="#7da2c8" stroke="#3d5f86" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M8 18v16l16 8V25z" fill="#5b80a8" stroke="#3d5f86" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M40 18v16l-16 8V25z" fill="#4a6d93" stroke="#3d5f86" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M8 18l16 7 16-7" fill="none" stroke="#f2b53a" stroke-width="2.5"/>
+        <path d="M24 25v17" stroke="#f2b53a" stroke-width="2.5"/>
+        <circle cx="31" cy="31" r="4" fill="#4d8ee0" stroke="#f2b53a" stroke-width="1.5"/>`,
+    flowerBox: `
+        <rect x="8" y="22" width="32" height="18" rx="3" fill="#d6405f" stroke="#8f1f3a" stroke-width="2"/>
+        <rect x="6" y="18" width="36" height="7" rx="2.5" fill="#e85a77" stroke="#8f1f3a" stroke-width="2"/>
+        <path d="M24 18v22" stroke="#ffd45c" stroke-width="3"/>
+        <g fill="#ffb3cd" stroke="#e46a95" stroke-width="1">
+            <circle cx="14" cy="15" r="4.5"/><circle cx="24" cy="12" r="5"/><circle cx="34" cy="15" r="4.5"/>
+            <circle cx="19" cy="17" r="3.5"/><circle cx="29" cy="17" r="3.5"/>
+        </g>
+        <g fill="#ffe17a"><circle cx="14" cy="15" r="1.5"/><circle cx="24" cy="12" r="1.7"/><circle cx="34" cy="15" r="1.5"/></g>`,
+    lotus: `
+        <path d="M24 3l13 5 7 12-2 14-11 10H17L6 34 4 20l7-12z" fill="#b82f86" stroke="#e6a93a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M24 12c4 5 4 13 0 20-4-7-4-15 0-20z" fill="#ff9fd6"/>
+        <path d="M24 32c-6 0-11-4-12-11 6 0 10 4 12 11zM24 32c6 0 11-4 12-11-6 0-10 4-12 11z" fill="#ff7cc6"/>
+        <path d="M24 33c-7 1-12-1-14-5 5-2 10-1 14 5zM24 33c7 1 12-1 14-5-5-2-10-1-14 5z" fill="#f45bb2"/>`,
+    fish: `
+        <circle cx="24" cy="24" r="20" fill="#4fb3ea" stroke="#1d78b3" stroke-width="2.5"/>
+        <path d="M36 24l7-6v12z" fill="#f08a1c" stroke="#b85a00" stroke-width="1.5" stroke-linejoin="round"/>
+        <ellipse cx="24" cy="24" rx="13" ry="9" fill="#ffa62b" stroke="#b85a00" stroke-width="1.5"/>
+        <path d="M22 15c3-3 7-3 9 0z" fill="#f08a1c"/>
+        <path d="M27 20c2 2 2 6 0 8" fill="none" stroke="#d9740f" stroke-width="1.5"/>
+        <circle cx="17" cy="22" r="2.6" fill="#fff"/><circle cx="16.6" cy="22" r="1.4" fill="#1d2b3a"/>`
+};
 
 let cache = null;
 
@@ -26,23 +93,33 @@ const load = async () => {
     return cache;
 };
 
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+const ensureSprite = () => {
+    if (document.getElementById(SPRITE_ID)) return;
+
+    const sprite = document.createElementNS(SVG_NS, "svg");
+    sprite.id = SPRITE_ID;
+    sprite.setAttribute("aria-hidden", "true");
+    sprite.style.display = "none";
+    sprite.innerHTML = Object.entries(ICONS)
+        .map(([name, body]) => `<symbol id="bonsai-ico-${name}" viewBox="0 0 48 48">${body}</symbol>`)
+        .join("");
+    document.body.appendChild(sprite);
+};
+
+const icon = (name, className) => {
+    const svg = document.createElementNS(SVG_NS, "svg");
+    svg.setAttribute("class", className);
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    const use = document.createElementNS(SVG_NS, "use");
+    use.setAttribute("href", `#bonsai-ico-${ICONS[name] ? name : "bamboo"}`);
+    svg.appendChild(use);
+    return svg;
+};
+
 const fill = (template, vars) => String(template).replace(/\{(\w+)\}/g, (match, key) => (key in vars ? vars[key] : match));
-
-const readStore = () => {
-    try {
-        return JSON.parse(localStorage.getItem(STORE_KEY)) || {};
-    } catch (error) {
-        return {};
-    }
-};
-
-const writeStore = (value) => {
-    try {
-        localStorage.setItem(STORE_KEY, JSON.stringify(value));
-    } catch (error) {
-        // storage blocked (private mode): the tracker still works for this visit
-    }
-};
 
 const makeEl = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -51,220 +128,69 @@ const makeEl = (tag, className, text) => {
     return node;
 };
 
-// level: 1..N is the level being worked on, N + 1 means every reward is collected
-const sanitize = (saved, milestones) => {
-    const count = milestones.length;
-    const level = Math.min(Math.max(parseInt(saved && saved.level, 10) || 1, 1), count + 1);
-    const cost = level <= count ? milestones[level - 1].cost : 0;
-    const progress = level <= count ? Math.min(Math.max(parseInt(saved && saved.progress, 10) || 0, 0), cost - 1) : 0;
-    return { level, progress };
-};
-
-const compute = (config, entry) => {
-    const milestones = config.milestones;
-    const count = milestones.length;
-    const prefix = [];
-    milestones.reduce((sum, item, index) => (prefix[index] = sum + item.cost), 0);
-
-    const grand = prefix[count - 1];
-    const done = entry.level > count;
-    const earned = done ? grand : (entry.level > 1 ? prefix[entry.level - 2] : 0) + entry.progress;
-    const toGrand = grand - earned;
-
-    return {
-        count,
-        done,
-        collected: entry.level - 1,
-        next: done ? null : milestones[entry.level - 1],
-        toNext: done ? 0 : milestones[entry.level - 1].cost - entry.progress,
-        toGrand,
-        minTimes: Math.ceil(toGrand / config.max),
-        percent: grand ? (earned / grand) * 100 : 0
-    };
+// Thor tokens show one icon per token (as in the game chart), capped at 4
+const prizeArt = (prize) => {
+    const art = makeEl("span", "ms-art");
+    const copies = prize.type === "thor" ? Math.min(Math.max(prize.n || 1, 1), 4) : 1;
+    if (copies > 1) art.classList.add(`is-x${copies}`);
+    for (let i = 0; i < copies; i++) art.appendChild(icon(prize.type, "ms-icon"));
+    return art;
 };
 
 export async function mount(slot, core) {
     const { data, text } = await load();
-    const saved = readStore();
-    const state = {};
-
-    TRACKERS.forEach((tracker) => {
-        state[tracker.id] = sanitize(saved[tracker.id], data[tracker.id].milestones);
-    });
+    ensureSprite();
 
     const tx = () => text[core.getLang()] || text["zh-Hant"];
     const prizeLabel = (prize) => fill(tx().prizes[prize.type] || prize.type, { n: core.formatNumber(prize.n || 0) });
 
-    const buildTracker = (tracker) => {
-        const config = data[tracker.id];
-        const milestones = config.milestones;
+    const buildBar = (bar) => {
         const strings = tx();
-        const entry = state[tracker.id];
-        const idBase = `bonsai-${tracker.id}`;
+        const milestones = data[bar.id].milestones;
+        const idBase = `bonsai-${bar.id}`;
 
         const panel = makeEl("section", "panel event-panel");
         panel.setAttribute("aria-labelledby", `${idBase}-title`);
 
-        const head = makeEl("div", "panel-head");
-        const title = makeEl("h2", "panel-title", strings[tracker.titleKey]);
+        const head = makeEl("div", "panel-head event-head");
+        head.appendChild(icon(bar.currency, "event-currency"));
+        const headText = makeEl("div");
+        const title = makeEl("h2", "panel-title", strings[bar.titleKey]);
         title.id = `${idBase}-title`;
-        head.appendChild(title);
-        head.appendChild(makeEl("p", "panel-desc", strings[tracker.descKey]));
+        headText.append(title, makeEl("p", "panel-desc", strings[bar.descKey]));
+        head.appendChild(headText);
         panel.appendChild(head);
 
         const body = makeEl("div", "panel-body");
-
-        // Inputs: current level + progress inside it
-        const inputs = makeEl("div", "tracker-inputs");
-
-        const levelField = makeEl("div", "field");
-        const levelLabel = makeEl("label", "", strings.levelLabel);
-        levelLabel.htmlFor = `${idBase}-level`;
-        const levelSelect = makeEl("select");
-        levelSelect.id = `${idBase}-level`;
-        milestones.forEach((item, index) => {
-            const option = makeEl("option", "", fill(strings.levelOption, { n: index + 1 }));
-            option.value = String(index + 1);
-            levelSelect.appendChild(option);
-        });
-        const doneOption = makeEl("option", "", strings.allDone);
-        doneOption.value = String(milestones.length + 1);
-        levelSelect.appendChild(doneOption);
-        levelSelect.value = String(entry.level);
-        levelField.append(levelLabel, levelSelect);
-
-        const progressField = makeEl("div", "field");
-        const progressLabel = makeEl("label", "", strings.progressLabel);
-        progressLabel.htmlFor = `${idBase}-progress`;
-        const progressRow = makeEl("div", "tracker-progress");
-        const progressInput = makeEl("input", "tracker-input");
-        progressInput.type = "number";
-        progressInput.inputMode = "numeric";
-        progressInput.min = "0";
-        progressInput.id = `${idBase}-progress`;
-        progressInput.value = String(entry.progress);
-        const ofCost = makeEl("span", "tracker-of");
-        progressRow.append(progressInput, ofCost);
-        progressField.append(progressLabel, progressRow);
-
-        inputs.append(levelField, progressField);
-        body.appendChild(inputs);
-        body.appendChild(makeEl("p", "tracker-hint", strings.inputHint));
-
-        // Results
-        const results = makeEl("div", "result-list");
-        results.setAttribute("aria-live", "polite");
-
-        const makeCard = (label) => {
-            const card = makeEl("div", "result-card");
-            card.appendChild(makeEl("div", "result-label", label));
-            const value = makeEl("div", "result-value");
-            const note = makeEl("div", "result-note");
-            card.append(value, note);
-            results.appendChild(card);
-            return { card, value, note };
-        };
-
-        const collectedCard = makeCard(strings.collected);
-        const nextCard = makeCard(strings.nextReward);
-        nextCard.value.classList.add("is-text");
-        const grandCard = makeCard(strings.toGrand);
-        body.appendChild(results);
-
-        const progressBox = makeEl("div", "progress-box");
-        const progressTop = makeEl("div", "progress-top");
-        const progressName = makeEl("span", "", strings.overall);
-        const progressPct = makeEl("span");
-        progressTop.append(progressName, progressPct);
-        const track = makeEl("div", "progress-track");
-        const bar = makeEl("div", "progress-bar");
-        track.appendChild(bar);
-        progressBox.append(progressTop, track);
-        body.appendChild(progressBox);
-
-        // Milestone grid
         const grid = makeEl("ol", "ms-grid");
-        const cells = milestones.map((item, index) => {
-            const cell = makeEl("li", "ms");
-            const number = makeEl("span", "ms-n", String(index + 1));
-            if (index === milestones.length - 1) {
-                cell.classList.add("is-grand");
-                number.appendChild(makeEl("span", "ms-tag", strings.grand));
-            }
+        let total = 0;
+
+        milestones.forEach((item, index) => {
+            total += item.cost;
+            const isGrand = index === milestones.length - 1;
+            const cell = makeEl("li", isGrand ? "ms is-grand" : "ms");
+
+            const top = makeEl("span", "ms-top");
+            top.appendChild(makeEl("span", "ms-n", String(index + 1)));
+            if (isGrand) top.appendChild(makeEl("span", "ms-tag", strings.grand));
+
             cell.append(
-                number,
+                top,
+                prizeArt(item.prize),
                 makeEl("span", "ms-prize", prizeLabel(item.prize)),
-                makeEl("span", "ms-cost", fill(strings.needs, { n: core.formatNumber(item.cost) }))
+                makeEl("span", "ms-cost", fill(strings.needs, { n: core.formatNumber(item.cost) })),
+                makeEl("span", "ms-total", fill(strings.total, { n: core.formatNumber(total) }))
             );
             grid.appendChild(cell);
-            return cell;
         });
+
         body.appendChild(grid);
         panel.appendChild(body);
-
-        const update = () => {
-            const result = compute(config, entry);
-
-            ofCost.textContent = result.done ? "" : `/ ${core.formatNumber(result.next.cost)}`;
-            progressInput.disabled = result.done;
-            progressInput.max = result.done ? "0" : String(result.next.cost - 1);
-
-            collectedCard.value.textContent = `${result.collected} / ${result.count}`;
-            collectedCard.note.textContent = "";
-
-            nextCard.card.classList.toggle("missing", !result.done);
-            nextCard.card.classList.toggle("done", result.done);
-            nextCard.value.textContent = result.done ? strings.doneAll : prizeLabel(result.next.prize);
-            nextCard.note.textContent = result.done ? "" : fill(strings.toNext, { n: core.formatNumber(result.toNext) });
-
-            grandCard.value.textContent = core.formatNumber(result.toGrand);
-            grandCard.note.textContent = result.done ? "" : fill(strings.minTimes, { n: core.formatNumber(result.minTimes) });
-
-            const pct = Math.min(result.percent, 100);
-            progressPct.textContent = `${Number.isInteger(pct) ? pct : pct.toFixed(1)}%`;
-            bar.style.width = `${pct}%`;
-
-            cells.forEach((cell, index) => {
-                const level = index + 1;
-                cell.classList.toggle("is-done", level < entry.level);
-                cell.classList.toggle("is-next", level === entry.level);
-                if (level === entry.level) {
-                    cell.setAttribute("aria-current", "step");
-                } else {
-                    cell.removeAttribute("aria-current");
-                }
-            });
-        };
-
-        const save = () => {
-            const store = readStore();
-            store[tracker.id] = { level: entry.level, progress: entry.progress };
-            writeStore(store);
-        };
-
-        levelSelect.addEventListener("change", () => {
-            Object.assign(entry, sanitize({ level: levelSelect.value, progress: entry.progress }, milestones));
-            progressInput.value = String(entry.progress);
-            save();
-            update();
-        });
-
-        progressInput.addEventListener("input", () => {
-            Object.assign(entry, sanitize({ level: entry.level, progress: progressInput.value }, milestones));
-            save();
-            update();
-        });
-
-        progressInput.addEventListener("blur", () => {
-            progressInput.value = String(entry.progress);
-        });
-
-        update();
         return panel;
     };
 
     const render = () => {
-        slot.replaceChildren(...TRACKERS.map(buildTracker));
+        slot.replaceChildren(...BARS.map(buildBar));
     };
 
     const onLang = () => {

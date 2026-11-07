@@ -4,18 +4,6 @@
         "fishDesc": "和搭檔一起累積。在棋盤上合併可以拿到魚，每次最多 60 隻。",
         "blitzTitle": "盆栽閃擊賽",
         "blitzDesc": "收集粉紅代幣累積點數，每次最多 15 個。",
-        "inputHint": "照遊戲進度條上的關卡和「x / y」填入。",
-        "levelLabel": "目前關卡",
-        "progressLabel": "本關進度",
-        "levelOption": "第 {n} 關",
-        "allDone": "全部完成",
-        "collected": "已領獎勵",
-        "nextReward": "下一個獎勵",
-        "toNext": "還差 {n}",
-        "toGrand": "離大獎還差",
-        "minTimes": "最少還要 {n} 次",
-        "overall": "大獎進度",
-        "doneAll": "全部獎勵都拿到了",
         "grand": "大獎",
         "needs": "需要 {n}",
         "prizes": {
@@ -33,7 +21,7 @@
                 "points": [
                     "收集**粉紅代幣**累積點數，每次最多 **15** 個",
                     "共 24 關，最後主獎是 **70,000 次旋轉**",
-                    "在下方工具填入目前關卡和本關進度，就能看到還差多少"
+                    "下方列出每一關的獎勵、需求與累計數量"
                 ]
             },
             {
@@ -44,25 +32,14 @@
                     "共 16 關，最後大獎是 **10,000 竹子代幣**"
                 ]
             }
-        ]
+        ],
+        "total": "累計 {n}"
     },
     "en": {
         "fishTitle": "Fish bar (Merging Mates)",
         "fishDesc": "Filled together with your partner. Merging on the board gives fish, up to 60 at a time.",
         "blitzTitle": "Bonsai Blitz",
         "blitzDesc": "Collect pink tokens to earn points, up to 15 at a time.",
-        "inputHint": "Enter the level and the “x / y” shown on the in-game bar.",
-        "levelLabel": "Current level",
-        "progressLabel": "Level progress",
-        "levelOption": "Level {n}",
-        "allDone": "All done",
-        "collected": "Rewards collected",
-        "nextReward": "Next reward",
-        "toNext": "{n} to go",
-        "toGrand": "To the grand prize",
-        "minTimes": "At least {n} more times",
-        "overall": "Grand prize progress",
-        "doneAll": "All rewards collected",
         "grand": "Grand prize",
         "needs": "Needs {n}",
         "prizes": {
@@ -80,7 +57,7 @@
                 "points": [
                     "Collect **pink tokens** to earn points, up to **15** at a time",
                     "24 levels; the main prize is **70,000 spins**",
-                    "Enter your current level and progress in the tool below to see what's left"
+                    "Below you'll find every level's reward, cost and running total"
                 ]
             },
             {
@@ -91,25 +68,14 @@
                     "16 levels; the grand prize is **10,000 bamboo tokens**"
                 ]
             }
-        ]
+        ],
+        "total": "Total {n}"
     },
     "vi": {
         "fishTitle": "Thanh cá (Bạn hợp nhất)",
         "fishDesc": "Cùng bạn đồng hành tích lũy. Hợp nhất trên bàn để nhận cá, tối đa 60 con mỗi lần.",
         "blitzTitle": "Bonsai Blitz",
         "blitzDesc": "Thu thập token hồng để tích điểm, tối đa 15 mỗi lần.",
-        "inputHint": "Nhập cấp và “x / y” hiển thị trên thanh trong game.",
-        "levelLabel": "Cấp hiện tại",
-        "progressLabel": "Tiến độ cấp",
-        "levelOption": "Cấp {n}",
-        "allDone": "Đã hoàn thành",
-        "collected": "Phần thưởng đã nhận",
-        "nextReward": "Phần thưởng tiếp theo",
-        "toNext": "Còn thiếu {n}",
-        "toGrand": "Còn đến giải lớn",
-        "minTimes": "Ít nhất {n} lần nữa",
-        "overall": "Tiến độ giải lớn",
-        "doneAll": "Đã nhận hết phần thưởng",
         "grand": "Giải lớn",
         "needs": "Cần {n}",
         "prizes": {
@@ -127,7 +93,7 @@
                 "points": [
                     "Thu thập **token hồng** để tích điểm, tối đa **15** mỗi lần",
                     "Có 24 cấp, giải chính là **70,000 lượt quay**",
-                    "Nhập cấp hiện tại và tiến độ vào công cụ bên dưới để xem còn thiếu bao nhiêu"
+                    "Bên dưới liệt kê phần thưởng, yêu cầu và tổng tích lũy của từng cấp"
                 ]
             },
             {
@@ -138,25 +104,14 @@
                     "Có 16 cấp, giải lớn là **10,000 token tre**"
                 ]
             }
-        ]
+        ],
+        "total": "Tổng {n}"
     },
     "ja": {
         "fishTitle": "魚バー（合成パートナー）",
         "fishDesc": "パートナーと一緒に貯めます。ボードで合成すると魚がもらえ、1回最大60匹。",
         "blitzTitle": "盆栽ブリッツ",
         "blitzDesc": "ピンクトークンを集めてポイントを貯めます。1回最大15個。",
-        "inputHint": "ゲーム内バーに表示されるレベルと「x / y」を入力してください。",
-        "levelLabel": "現在のレベル",
-        "progressLabel": "レベル進行度",
-        "levelOption": "レベル {n}",
-        "allDone": "すべて完了",
-        "collected": "受け取った報酬",
-        "nextReward": "次の報酬",
-        "toNext": "あと {n}",
-        "toGrand": "大賞まであと",
-        "minTimes": "最低あと {n} 回",
-        "overall": "大賞までの進行度",
-        "doneAll": "すべての報酬を獲得",
         "grand": "大賞",
         "needs": "必要 {n}",
         "prizes": {
@@ -174,7 +129,7 @@
                 "points": [
                     "**ピンクトークン**を集めてポイントを貯める。1回最大 **15** 個",
                     "全24レベル、メイン賞品は **70,000 スピン**",
-                    "下のツールに現在のレベルと進行度を入れると残りがわかります"
+                    "下に各レベルの報酬・必要数・累計をまとめています"
                 ]
             },
             {
@@ -185,25 +140,14 @@
                     "全16レベル、大賞は **竹トークン 10,000**"
                 ]
             }
-        ]
+        ],
+        "total": "累計 {n}"
     },
     "ko": {
         "fishTitle": "물고기 바(합성 파트너)",
         "fishDesc": "파트너와 함께 모읍니다. 보드에서 합성하면 물고기를 얻고, 한 번에 최대 60마리.",
         "blitzTitle": "분재 블리츠",
         "blitzDesc": "핑크 토큰을 모아 포인트를 쌓습니다. 한 번에 최대 15개.",
-        "inputHint": "게임 내 바에 표시된 레벨과 “x / y”를 입력하세요.",
-        "levelLabel": "현재 레벨",
-        "progressLabel": "레벨 진행도",
-        "levelOption": "레벨 {n}",
-        "allDone": "모두 완료",
-        "collected": "받은 보상",
-        "nextReward": "다음 보상",
-        "toNext": "{n} 남음",
-        "toGrand": "대상까지 남은 양",
-        "minTimes": "최소 {n}번 더",
-        "overall": "대상 진행도",
-        "doneAll": "모든 보상 획득",
         "grand": "대상",
         "needs": "필요 {n}",
         "prizes": {
@@ -221,7 +165,7 @@
                 "points": [
                     "**핑크 토큰**을 모아 포인트 적립, 한 번에 최대 **15**개",
                     "총 24레벨, 메인 보상은 **스핀 70,000회**",
-                    "아래 도구에 현재 레벨과 진행도를 넣으면 남은 양을 알 수 있음"
+                    "아래에 레벨별 보상, 필요량, 누적량을 정리했습니다"
                 ]
             },
             {
@@ -232,25 +176,14 @@
                     "총 16레벨, 대상은 **대나무 토큰 10,000**"
                 ]
             }
-        ]
+        ],
+        "total": "누적 {n}"
     },
     "th": {
         "fishTitle": "แถบปลา (คู่หูรวมไอเทม)",
         "fishDesc": "สะสมร่วมกับคู่หู รวมไอเทมบนกระดานเพื่อรับปลา ได้สูงสุดครั้งละ 60 ตัว",
         "blitzTitle": "บอนไซบลิตซ์",
         "blitzDesc": "สะสมโทเคนสีชมพูเพื่อเก็บแต้ม ได้สูงสุดครั้งละ 15",
-        "inputHint": "กรอกเลเวลและ “x / y” ที่แสดงบนแถบในเกม",
-        "levelLabel": "เลเวลปัจจุบัน",
-        "progressLabel": "ความคืบหน้าเลเวลนี้",
-        "levelOption": "เลเวล {n}",
-        "allDone": "ครบแล้ว",
-        "collected": "รางวัลที่รับแล้ว",
-        "nextReward": "รางวัลถัดไป",
-        "toNext": "ขาดอีก {n}",
-        "toGrand": "ขาดอีกถึงรางวัลใหญ่",
-        "minTimes": "อย่างน้อยอีก {n} ครั้ง",
-        "overall": "ความคืบหน้ารางวัลใหญ่",
-        "doneAll": "รับรางวัลครบแล้ว",
         "grand": "รางวัลใหญ่",
         "needs": "ต้องการ {n}",
         "prizes": {
@@ -268,7 +201,7 @@
                 "points": [
                     "สะสม **โทเคนสีชมพู** เพื่อเก็บแต้ม ได้สูงสุดครั้งละ **15**",
                     "มีทั้งหมด 24 เลเวล รางวัลหลักคือ **70,000 สปิน**",
-                    "กรอกเลเวลและความคืบหน้าในเครื่องมือด้านล่างเพื่อดูว่ายังขาดเท่าไร"
+                    "ด้านล่างแสดงรางวัล จำนวนที่ต้องใช้ และยอดสะสมของแต่ละเลเวล"
                 ]
             },
             {
@@ -279,25 +212,14 @@
                     "มีทั้งหมด 16 เลเวล รางวัลใหญ่คือ **โทเคนไผ่ 10,000**"
                 ]
             }
-        ]
+        ],
+        "total": "รวม {n}"
     },
     "id": {
         "fishTitle": "Bilah ikan (Teman Gabung)",
         "fishDesc": "Diisi bersama partner. Menggabung di papan memberi ikan, maksimal 60 sekali.",
         "blitzTitle": "Bonsai Blitz",
         "blitzDesc": "Kumpulkan token pink untuk poin, maksimal 15 sekali.",
-        "inputHint": "Masukkan level dan “x / y” yang tampil di bilah dalam game.",
-        "levelLabel": "Level saat ini",
-        "progressLabel": "Progres level",
-        "levelOption": "Level {n}",
-        "allDone": "Semua selesai",
-        "collected": "Hadiah diterima",
-        "nextReward": "Hadiah berikutnya",
-        "toNext": "Kurang {n}",
-        "toGrand": "Menuju hadiah utama",
-        "minTimes": "Minimal {n} kali lagi",
-        "overall": "Progres hadiah utama",
-        "doneAll": "Semua hadiah sudah diterima",
         "grand": "Hadiah utama",
         "needs": "Butuh {n}",
         "prizes": {
@@ -315,7 +237,7 @@
                 "points": [
                     "Kumpulkan **token pink** untuk poin, maksimal **15** sekali",
                     "Ada 24 level, hadiah utama **70,000 spin**",
-                    "Masukkan level dan progres saat ini di alat di bawah untuk melihat sisanya"
+                    "Di bawah ada hadiah, kebutuhan, dan total kumulatif setiap level"
                 ]
             },
             {
@@ -326,25 +248,14 @@
                     "Ada 16 level, hadiah utama **10,000 token bambu**"
                 ]
             }
-        ]
+        ],
+        "total": "Total {n}"
     },
     "es": {
         "fishTitle": "Barra de peces (Compañeros de fusión)",
         "fishDesc": "Se llena junto con tu compañero. Fusionar en el tablero da peces, hasta 60 cada vez.",
         "blitzTitle": "Bonsai Blitz",
         "blitzDesc": "Junta fichas rosas para sumar puntos, hasta 15 cada vez.",
-        "inputHint": "Introduce el nivel y el “x / y” que muestra la barra en el juego.",
-        "levelLabel": "Nivel actual",
-        "progressLabel": "Progreso del nivel",
-        "levelOption": "Nivel {n}",
-        "allDone": "Todo completado",
-        "collected": "Recompensas obtenidas",
-        "nextReward": "Siguiente recompensa",
-        "toNext": "Faltan {n}",
-        "toGrand": "Para el gran premio",
-        "minTimes": "Al menos {n} veces más",
-        "overall": "Progreso al gran premio",
-        "doneAll": "Todas las recompensas obtenidas",
         "grand": "Gran premio",
         "needs": "Requiere {n}",
         "prizes": {
@@ -362,7 +273,7 @@
                 "points": [
                     "Junta **fichas rosas** para sumar puntos, hasta **15** cada vez",
                     "Son 24 niveles; el premio principal es **70,000 tiradas**",
-                    "Introduce tu nivel y progreso en la herramienta de abajo para ver lo que falta"
+                    "Abajo verás la recompensa, el costo y el total acumulado de cada nivel"
                 ]
             },
             {
@@ -373,25 +284,14 @@
                     "Son 16 niveles; el gran premio es **10,000 fichas de bambú**"
                 ]
             }
-        ]
+        ],
+        "total": "Total {n}"
     },
     "pt": {
         "fishTitle": "Barra de peixes (Parceiros de fusão)",
         "fishDesc": "Preenchida junto com seu parceiro. Fundir no tabuleiro dá peixes, até 60 por vez.",
         "blitzTitle": "Bonsai Blitz",
         "blitzDesc": "Junte fichas rosa para somar pontos, até 15 por vez.",
-        "inputHint": "Digite o nível e o “x / y” mostrado na barra do jogo.",
-        "levelLabel": "Nível atual",
-        "progressLabel": "Progresso do nível",
-        "levelOption": "Nível {n}",
-        "allDone": "Tudo concluído",
-        "collected": "Recompensas recebidas",
-        "nextReward": "Próxima recompensa",
-        "toNext": "Faltam {n}",
-        "toGrand": "Até o grande prêmio",
-        "minTimes": "Pelo menos mais {n} vezes",
-        "overall": "Progresso até o grande prêmio",
-        "doneAll": "Todas as recompensas recebidas",
         "grand": "Grande prêmio",
         "needs": "Requer {n}",
         "prizes": {
@@ -409,7 +309,7 @@
                 "points": [
                     "Junte **fichas rosa** para somar pontos, até **15** por vez",
                     "São 24 níveis; o prêmio principal é **70,000 giros**",
-                    "Digite seu nível e progresso na ferramenta abaixo para ver o que falta"
+                    "Abaixo estão a recompensa, o custo e o total acumulado de cada nível"
                 ]
             },
             {
@@ -420,6 +320,7 @@
                     "São 16 níveis; o grande prêmio é **10,000 fichas de bambu**"
                 ]
             }
-        ]
+        ],
+        "total": "Total {n}"
     }
 }
