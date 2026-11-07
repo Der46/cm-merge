@@ -135,7 +135,12 @@
                     "完成後先把所有可合成物品合完再退出，避免漏領獎勵"
                 ]
             }
-        }
+        },
+        "eventNavLabel": "活動",
+        "eventIsland": "合併島嶼",
+        "eventBonsai": "盆栽基地",
+        "eventGameCenter": "遊戲中心",
+        "comingSoon": "即將推出"
     },
     "en": {
         "pageTitle": "Merge Islands Matrix Lightning Calculator",
@@ -273,7 +278,12 @@
                     "After finishing, merge everything before exiting so no reward is missed"
                 ]
             }
-        }
+        },
+        "eventNavLabel": "Events",
+        "eventIsland": "Merge Islands",
+        "eventBonsai": "Bonsai Base",
+        "eventGameCenter": "Game Center",
+        "comingSoon": "Coming soon"
     },
     "vi": {
         "pageTitle": "Máy Tính Tia Sét Ma Trận Merge Islands",
@@ -411,7 +421,12 @@
                     "Hoàn thành xong hợp nhất hết rồi mới thoát để không lỡ phần thưởng"
                 ]
             }
-        }
+        },
+        "eventNavLabel": "Sự kiện",
+        "eventIsland": "Đảo hợp nhất",
+        "eventBonsai": "Căn cứ Bonsai",
+        "eventGameCenter": "Trung tâm trò chơi",
+        "comingSoon": "Sắp ra mắt"
     },
     "ja": {
         "pageTitle": "マージアイランド・マトリックス雷計算機",
@@ -549,7 +564,12 @@
                     "完成後は全部合成してから退出し、報酬の取り漏れを防ぐ"
                 ]
             }
-        }
+        },
+        "eventNavLabel": "イベント",
+        "eventIsland": "合成アイランド",
+        "eventBonsai": "盆栽ベース",
+        "eventGameCenter": "ゲームセンター",
+        "comingSoon": "近日公開"
     },
     "ko": {
         "pageTitle": "머지 아일랜드 매트릭스 번개 계산기",
@@ -687,7 +707,12 @@
                     "완료 후 모두 합성하고 나가서 보상 누락 방지"
                 ]
             }
-        }
+        },
+        "eventNavLabel": "이벤트",
+        "eventIsland": "합성 섬",
+        "eventBonsai": "분재 기지",
+        "eventGameCenter": "게임 센터",
+        "comingSoon": "곧 출시"
     },
     "th": {
         "pageTitle": "เครื่องคำนวณสายฟ้าแบบตาราง Merge Islands",
@@ -825,7 +850,12 @@
                     "จบแล้วรวมทุกอย่างก่อนออก เพื่อไม่พลาดรางวัล"
                 ]
             }
-        }
+        },
+        "eventNavLabel": "กิจกรรม",
+        "eventIsland": "เกาะรวมไอเทม",
+        "eventBonsai": "ฐานบอนไซ",
+        "eventGameCenter": "เกมเซ็นเตอร์",
+        "comingSoon": "เร็วๆ นี้"
     },
     "id": {
         "pageTitle": "Kalkulator Petir Matriks Merge Islands",
@@ -963,7 +993,12 @@
                     "Setelah selesai, gabungkan semua dulu baru keluar agar hadiah tidak terlewat"
                 ]
             }
-        }
+        },
+        "eventNavLabel": "Event",
+        "eventIsland": "Pulau Gabung",
+        "eventBonsai": "Markas Bonsai",
+        "eventGameCenter": "Pusat Game",
+        "comingSoon": "Segera hadir"
     },
     "es": {
         "pageTitle": "Calculadora de Rayos en Matriz de Merge Islands",
@@ -1101,7 +1136,12 @@
                     "Al terminar, fusiona todo antes de salir para no perder recompensas"
                 ]
             }
-        }
+        },
+        "eventNavLabel": "Eventos",
+        "eventIsland": "Islas de fusión",
+        "eventBonsai": "Base Bonsái",
+        "eventGameCenter": "Centro de juegos",
+        "comingSoon": "Próximamente"
     },
     "pt": {
         "pageTitle": "Calculadora de Raios em Matriz do Merge Islands",
@@ -1239,6 +1279,11 @@
                     "Ao concluir, funda tudo antes de sair para não perder recompensas"
                 ]
             }
-        }
+        },
+        "eventNavLabel": "Eventos",
+        "eventIsland": "Ilhas de fusão",
+        "eventBonsai": "Base Bonsai",
+        "eventGameCenter": "Central de jogos",
+        "comingSoon": "Em breve"
     }
 }

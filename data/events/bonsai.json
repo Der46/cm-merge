@@ -1,0 +1,289 @@
+{
+    "fish": {
+        "max": 60,
+        "milestones": [
+            {
+                "cost": 10,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 100
+                }
+            },
+            {
+                "cost": 20,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 200
+                }
+            },
+            {
+                "cost": 40,
+                "prize": {
+                    "type": "flowerBox",
+                    "n": 1
+                }
+            },
+            {
+                "cost": 60,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 350
+                }
+            },
+            {
+                "cost": 100,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 600
+                }
+            },
+            {
+                "cost": 150,
+                "prize": {
+                    "type": "flowerBox",
+                    "n": 5
+                }
+            },
+            {
+                "cost": 200,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 900
+                }
+            },
+            {
+                "cost": 250,
+                "prize": {
+                    "type": "flowerBox",
+                    "n": 6
+                }
+            },
+            {
+                "cost": 300,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 1300
+                }
+            },
+            {
+                "cost": 350,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 2000
+                }
+            },
+            {
+                "cost": 400,
+                "prize": {
+                    "type": "flowerBox",
+                    "n": 6
+                }
+            },
+            {
+                "cost": 500,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 3000
+                }
+            },
+            {
+                "cost": 600,
+                "prize": {
+                    "type": "flowerBox",
+                    "n": 7
+                }
+            },
+            {
+                "cost": 850,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 4500
+                }
+            },
+            {
+                "cost": 1000,
+                "prize": {
+                    "type": "flowerBox",
+                    "n": 7
+                }
+            },
+            {
+                "cost": 1400,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 10000
+                }
+            }
+        ]
+    },
+    "blitz": {
+        "max": 15,
+        "milestones": [
+            {
+                "cost": 5,
+                "prize": {
+                    "type": "spins",
+                    "n": 150
+                }
+            },
+            {
+                "cost": 10,
+                "prize": {
+                    "type": "monsterChest"
+                }
+            },
+            {
+                "cost": 20,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 20
+                }
+            },
+            {
+                "cost": 30,
+                "prize": {
+                    "type": "thor",
+                    "n": 1
+                }
+            },
+            {
+                "cost": 40,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 75
+                }
+            },
+            {
+                "cost": 60,
+                "prize": {
+                    "type": "thor",
+                    "n": 1
+                }
+            },
+            {
+                "cost": 80,
+                "prize": {
+                    "type": "spins",
+                    "n": 1000
+                }
+            },
+            {
+                "cost": 110,
+                "prize": {
+                    "type": "thor",
+                    "n": 1
+                }
+            },
+            {
+                "cost": 130,
+                "prize": {
+                    "type": "spins",
+                    "n": 2000
+                }
+            },
+            {
+                "cost": 160,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 200
+                }
+            },
+            {
+                "cost": 185,
+                "prize": {
+                    "type": "smallThorBox"
+                }
+            },
+            {
+                "cost": 220,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 350
+                }
+            },
+            {
+                "cost": 265,
+                "prize": {
+                    "type": "thor",
+                    "n": 2
+                }
+            },
+            {
+                "cost": 315,
+                "prize": {
+                    "type": "spins",
+                    "n": 3000
+                }
+            },
+            {
+                "cost": 340,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 750
+                }
+            },
+            {
+                "cost": 375,
+                "prize": {
+                    "type": "spins",
+                    "n": 10000
+                }
+            },
+            {
+                "cost": 425,
+                "prize": {
+                    "type": "halloweenChest"
+                }
+            },
+            {
+                "cost": 475,
+                "prize": {
+                    "type": "thor",
+                    "n": 2
+                }
+            },
+            {
+                "cost": 575,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 1000
+                }
+            },
+            {
+                "cost": 675,
+                "prize": {
+                    "type": "spins",
+                    "n": 15000
+                }
+            },
+            {
+                "cost": 825,
+                "prize": {
+                    "type": "bamboo",
+                    "n": 1500
+                }
+            },
+            {
+                "cost": 1000,
+                "prize": {
+                    "type": "spins",
+                    "n": 25000
+                }
+            },
+            {
+                "cost": 1200,
+                "prize": {
+                    "type": "thor",
+                    "n": 4
+                }
+            },
+            {
+                "cost": 1400,
+                "prize": {
+                    "type": "spins",
+                    "n": 70000
+                }
+            }
+        ]
+    }
+}
