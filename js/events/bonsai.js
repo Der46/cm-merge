@@ -22,9 +22,19 @@ const ICONS = {
         <path d="M21 20h6M21 29h6" stroke="#25703a" stroke-width="2"/>
         <path d="M27 17c5-5 10-4 11-1-4 3-8 3-11 1z" fill="#62c46e"/>
         <path d="M21 25c-5-4-9-3-10 0 4 2 7 2 10 0z" fill="#62c46e"/>`,
-    spins: `${COIN}
-        <path d="M31 21a8 8 0 1 0 1 6" fill="none" stroke="#a5660a" stroke-width="3.5" stroke-linecap="round"/>
-        <path d="M33 14v8h-8z" fill="#a5660a"/>`,
+    spins: `
+        <g transform="rotate(14 24 24)">
+            <rect x="14" y="11" width="20" height="26" rx="3" fill="#33c3e6" stroke="#167aa3" stroke-width="2"/>
+            <rect x="17" y="13" width="4" height="22" rx="2" fill="#bff3ff" opacity="0.85"/>
+            <rect x="29" y="13" width="2.5" height="22" rx="1.25" fill="#1d97c4" opacity="0.6"/>
+            <path d="M26.5 14.5 19.5 25h5l-2 9 7.5-11.5h-5.2z" fill="#fff" stroke="#9be7fb" stroke-width="0.8" stroke-linejoin="round"/>
+            <rect x="11.5" y="4" width="25" height="10" rx="4.5" fill="#a8622c" stroke="#5e3215" stroke-width="2"/>
+            <rect x="14" y="5.8" width="17" height="2.6" rx="1.3" fill="#d89356"/>
+            <path d="M11.5 11.5h25" stroke="#7a4219" stroke-width="2"/>
+            <rect x="11.5" y="34" width="25" height="10" rx="4.5" fill="#a8622c" stroke="#5e3215" stroke-width="2"/>
+            <rect x="14" y="38.6" width="17" height="2.6" rx="1.3" fill="#d89356"/>
+            <path d="M11.5 36.5h25" stroke="#7a4219" stroke-width="2"/>
+        </g>`,
     thor: `
         <circle cx="24" cy="24" r="20" fill="#c45fd8" stroke="#7d2a99" stroke-width="3"/>
         <circle cx="24" cy="24" r="14.5" fill="#e08ef0"/>
