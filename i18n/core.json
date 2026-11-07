@@ -139,8 +139,7 @@
         "eventNavLabel": "活動",
         "eventIsland": "合併島嶼",
         "eventBonsai": "盆栽基地",
-        "eventGameCenter": "遊戲中心",
-        "comingSoon": "即將推出"
+        "eventGameCenter": "遊戲中心"
     },
     "en": {
         "pageTitle": "Merge Islands Matrix Lightning Calculator",
@@ -282,8 +281,7 @@
         "eventNavLabel": "Events",
         "eventIsland": "Merge Islands",
         "eventBonsai": "Bonsai Base",
-        "eventGameCenter": "Game Center",
-        "comingSoon": "Coming soon"
+        "eventGameCenter": "Game Center"
     },
     "vi": {
         "pageTitle": "Máy Tính Tia Sét Ma Trận Merge Islands",
@@ -425,8 +423,7 @@
         "eventNavLabel": "Sự kiện",
         "eventIsland": "Đảo hợp nhất",
         "eventBonsai": "Căn cứ Bonsai",
-        "eventGameCenter": "Trung tâm trò chơi",
-        "comingSoon": "Sắp ra mắt"
+        "eventGameCenter": "Trung tâm trò chơi"
     },
     "ja": {
         "pageTitle": "マージアイランド・マトリックス雷計算機",
@@ -568,8 +565,7 @@
         "eventNavLabel": "イベント",
         "eventIsland": "合成アイランド",
         "eventBonsai": "盆栽ベース",
-        "eventGameCenter": "ゲームセンター",
-        "comingSoon": "近日公開"
+        "eventGameCenter": "ゲームセンター"
     },
     "ko": {
         "pageTitle": "머지 아일랜드 매트릭스 번개 계산기",
@@ -711,8 +707,7 @@
         "eventNavLabel": "이벤트",
         "eventIsland": "합성 섬",
         "eventBonsai": "분재 기지",
-        "eventGameCenter": "게임 센터",
-        "comingSoon": "곧 출시"
+        "eventGameCenter": "게임 센터"
     },
     "th": {
         "pageTitle": "เครื่องคำนวณสายฟ้าแบบตาราง Merge Islands",
@@ -854,8 +849,7 @@
         "eventNavLabel": "กิจกรรม",
         "eventIsland": "เกาะรวมไอเทม",
         "eventBonsai": "ฐานบอนไซ",
-        "eventGameCenter": "เกมเซ็นเตอร์",
-        "comingSoon": "เร็วๆ นี้"
+        "eventGameCenter": "เกมเซ็นเตอร์"
     },
     "id": {
         "pageTitle": "Kalkulator Petir Matriks Merge Islands",
@@ -997,8 +991,7 @@
         "eventNavLabel": "Event",
         "eventIsland": "Pulau Gabung",
         "eventBonsai": "Markas Bonsai",
-        "eventGameCenter": "Pusat Game",
-        "comingSoon": "Segera hadir"
+        "eventGameCenter": "Pusat Game"
     },
     "es": {
         "pageTitle": "Calculadora de Rayos en Matriz de Merge Islands",
@@ -1140,8 +1133,7 @@
         "eventNavLabel": "Eventos",
         "eventIsland": "Islas de fusión",
         "eventBonsai": "Base Bonsái",
-        "eventGameCenter": "Centro de juegos",
-        "comingSoon": "Próximamente"
+        "eventGameCenter": "Centro de juegos"
     },
     "pt": {
         "pageTitle": "Calculadora de Raios em Matriz do Merge Islands",
@@ -1283,7 +1275,6 @@
         "eventNavLabel": "Eventos",
         "eventIsland": "Ilhas de fusão",
         "eventBonsai": "Base Bonsai",
-        "eventGameCenter": "Central de jogos",
-        "comingSoon": "Em breve"
+        "eventGameCenter": "Central de jogos"
     }
 }

@@ -1,0 +1,299 @@
+{
+    "frenzy": {
+        "milestones": [
+            {
+                "cost": 5,
+                "prize": {
+                    "type": "coinFrenzy",
+                    "pct": 150,
+                    "min": 30
+                }
+            },
+            {
+                "cost": 10,
+                "prize": {
+                    "type": "rangeChest",
+                    "range": "170–1.7K"
+                }
+            },
+            {
+                "cost": 20,
+                "prize": {
+                    "type": "tetris",
+                    "n": 20
+                }
+            },
+            {
+                "cost": 30,
+                "prize": {
+                    "type": "seasonSmall",
+                    "cards": 4
+                }
+            },
+            {
+                "cost": 40,
+                "prize": {
+                    "type": "tetris",
+                    "n": 75
+                }
+            },
+            {
+                "cost": 60,
+                "prize": {
+                    "type": "spins",
+                    "n": 1000
+                }
+            },
+            {
+                "cost": 80,
+                "prize": {
+                    "type": "seasonGold",
+                    "cards": 8
+                }
+            },
+            {
+                "cost": 110,
+                "prize": {
+                    "type": "tetris",
+                    "n": 100
+                }
+            },
+            {
+                "cost": 130,
+                "prize": {
+                    "type": "seasonGold",
+                    "cards": 8
+                }
+            },
+            {
+                "cost": 160,
+                "prize": {
+                    "type": "tetris",
+                    "n": 200
+                }
+            },
+            {
+                "cost": 185,
+                "prize": {
+                    "type": "spins",
+                    "n": 2500
+                }
+            },
+            {
+                "cost": 220,
+                "prize": {
+                    "type": "tetris",
+                    "n": 250
+                }
+            },
+            {
+                "cost": 265,
+                "prize": {
+                    "type": "tetris",
+                    "n": 400
+                }
+            },
+            {
+                "cost": 315,
+                "prize": {
+                    "type": "spins",
+                    "n": 5000
+                }
+            },
+            {
+                "cost": 340,
+                "prize": {
+                    "type": "tetris",
+                    "n": 600
+                }
+            },
+            {
+                "cost": 375,
+                "prize": {
+                    "type": "spins",
+                    "n": 10000
+                }
+            },
+            {
+                "cost": 425,
+                "prize": {
+                    "type": "rangeChest",
+                    "range": "4.5K–55K"
+                }
+            },
+            {
+                "cost": 475,
+                "prize": {
+                    "type": "tetris",
+                    "n": 1000
+                }
+            },
+            {
+                "cost": 525,
+                "prize": {
+                    "type": "thor",
+                    "n": 3
+                }
+            },
+            {
+                "cost": 625,
+                "prize": {
+                    "type": "spins",
+                    "n": 15000
+                }
+            },
+            {
+                "cost": 775,
+                "prize": {
+                    "type": "tetris",
+                    "n": 1200
+                }
+            },
+            {
+                "cost": 925,
+                "prize": {
+                    "type": "spins",
+                    "n": 25000
+                }
+            },
+            {
+                "cost": 1100,
+                "prize": {
+                    "type": "rangeChest",
+                    "range": "5K–99K"
+                }
+            },
+            {
+                "cost": 1350,
+                "prize": {
+                    "type": "spins",
+                    "n": 70000
+                }
+            }
+        ]
+    },
+    "shop": {
+        "bonus": {
+            "type": "thor",
+            "n": 12
+        },
+        "stands": [
+            [
+                {
+                    "cost": 50,
+                    "prize": {
+                        "type": "seasonSmall"
+                    }
+                },
+                {
+                    "cost": 100,
+                    "prize": {
+                        "type": "seasonLarge"
+                    }
+                },
+                {
+                    "cost": 200,
+                    "prize": {
+                        "type": "goldCard"
+                    }
+                },
+                {
+                    "cost": 300,
+                    "prize": {
+                        "type": "diamondCard"
+                    }
+                }
+            ],
+            [
+                {
+                    "cost": 100,
+                    "prize": {
+                        "type": "spins",
+                        "n": 500
+                    }
+                },
+                {
+                    "cost": 200,
+                    "prize": {
+                        "type": "spins",
+                        "n": 2000
+                    }
+                },
+                {
+                    "cost": 350,
+                    "prize": {
+                        "type": "spins",
+                        "n": 5000
+                    }
+                },
+                {
+                    "cost": 800,
+                    "prize": {
+                        "type": "spins",
+                        "n": 15000
+                    }
+                }
+            ],
+            [
+                {
+                    "cost": 300,
+                    "prize": {
+                        "type": "thor",
+                        "n": 1
+                    }
+                },
+                {
+                    "cost": 450,
+                    "prize": {
+                        "type": "smallThorBox",
+                        "range": "1–4"
+                    }
+                },
+                {
+                    "cost": 600,
+                    "prize": {
+                        "type": "thor",
+                        "n": 3
+                    }
+                },
+                {
+                    "cost": 1000,
+                    "prize": {
+                        "type": "largeThorBox",
+                        "range": "2–8"
+                    }
+                }
+            ],
+            [
+                {
+                    "cost": 150,
+                    "prize": {
+                        "type": "rangeChest",
+                        "range": "200–6K"
+                    }
+                },
+                {
+                    "cost": 300,
+                    "prize": {
+                        "type": "rangeChest",
+                        "range": "1.6K–16K"
+                    }
+                },
+                {
+                    "cost": 400,
+                    "prize": {
+                        "type": "rangeChest",
+                        "range": "2.8K–28K"
+                    }
+                },
+                {
+                    "cost": 700,
+                    "prize": {
+                        "type": "rangeChest",
+                        "range": "5K–99K"
+                    }
+                }
+            ]
+        ]
+    }
+}

@@ -18,7 +18,7 @@
 - **多語系**：中文、English、Tiếng Việt、日本語、한국어、ไทย、Bahasa Indonesia、Español、Português。
 - **行動裝置友善**：支援觸控拖曳，可加入主畫面當作 App 使用。
 - **攻略小幫手**：右下角的圓形按鈕打開合併攻略，內容會依語言和活動切換。
-- **活動切換**：標題下方可切換「合併島嶼」與「盆栽基地」；合併計算器是共用的，切換活動不會清掉矩陣。
+- **活動切換**：標題下方可切換「合併島嶼」、「盆栽基地」與「遊戲中心」；合併計算器是共用的，切換活動不會清掉矩陣。
 
 ## 活動
 
@@ -26,7 +26,7 @@
 | --- | --- | --- |
 | 合併島嶼 | `#island`（預設） | 無，只有合併計算器 |
 | 盆栽基地 | `#bonsai` | 盆栽閃擊賽（24 關）與合併搭檔魚兒進度條（16 關）的獎勵一覽：每關獎勵（SVG 繪製）、需求與累計數量 |
-| 遊戲中心 | 即將推出 | |
+| 遊戲中心 | `#game-center` | 遊戲狂熱（24 關）獎勵一覽，以及遊戲區兌換（4 個兌換台 × 4 項，用方塊代幣依序兌換） |
 
 ## 計算方式
 
@@ -59,10 +59,14 @@ python -m http.server 8000
 | `css/style.css` | 全站樣式 |
 | `js/merge-core.js` | 合併計算器與攻略（所有活動共用），並提供 `window.MergeCore` 給活動模組使用 |
 | `js/app.js` | 依網址 `#活動` 載入對應的活動模組 |
-| `js/events/bonsai.js` | 盆栽基地的獎勵一覽與獎勵圖示（SVG） |
+| `js/events/reward-kit.js` | 各活動共用：獎勵圖示（SVG）、獎勵名稱、關卡格子 |
+| `js/events/bonsai.js` | 盆栽基地的獎勵一覽 |
+| `js/events/game-center.js` | 遊戲中心的獎勵一覽與兌換台 |
 | `data/events/bonsai.json` | 盆栽基地各關卡需求與獎勵（每關的需求，不是累計） |
 | `i18n/core.json` | 共用文字（9 種語言） |
 | `i18n/events/bonsai.json` | 盆栽基地文字與攻略（9 種語言） |
+| `data/events/game-center.json` | 遊戲中心關卡與兌換台資料 |
+| `i18n/events/game-center.json` | 遊戲中心文字與攻略（9 種語言） |
 | `icon.svg` | App icon / favicon |
 | `manifest.webmanifest` | PWA 設定，讓網頁可加入主畫面 |
 

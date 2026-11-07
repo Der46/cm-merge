@@ -1,0 +1,398 @@
+{
+    "zh-Hant": {
+        "barTitle": "遊戲狂熱",
+        "barDesc": "在遊戲中心拉霸累積點數，共 24 關。",
+        "shopTitle": "遊戲區兌換",
+        "shopDesc": "用方塊代幣兌換獎勵。每個兌換台有 4 項，要依序兌換。",
+        "stand": "兌換台 {n}",
+        "bonus": "16 項全部兌換完成，再得",
+        "needs": "需要 {n}",
+        "total": "累計 {n}",
+        "grand": "大獎",
+        "cardsSuffix": "（{cards} 張卡）",
+        "prizes": {
+            "spins": "{n} 次旋轉",
+            "tetris": "{n} 方塊代幣",
+            "thor": "雷神代幣 ×{n}",
+            "coinFrenzy": "金幣狂熱 {pct}%（{min} 分鐘）",
+            "rangeChest": "寶箱（{range} 次旋轉）",
+            "seasonSmall": "小型賽季寶箱",
+            "seasonLarge": "大型賽季寶箱",
+            "seasonGold": "黃金賽季寶箱",
+            "goldCard": "新賽季金卡",
+            "diamondCard": "新賽季鑽石卡",
+            "smallThorBox": "小型雷神代幣箱 {range}",
+            "largeThorBox": "大型雷神代幣箱 {range}"
+        },
+        "guide": [
+            {
+                "title": "遊戲狂熱",
+                "points": [
+                    "在遊戲中心拉霸累積點數，共 **24** 關",
+                    "最後大獎是 **70,000 次旋轉**",
+                    "進度條會給大量**方塊代幣**，可拿去遊戲區兌換"
+                ]
+            },
+            {
+                "title": "遊戲區兌換",
+                "points": [
+                    "用**方塊代幣**兌換，共 4 個兌換台、每台 4 項",
+                    "每台的獎勵要**依序**兌換",
+                    "16 項全部換完，再得 **雷神代幣 ×12**"
+                ]
+            }
+        ]
+    },
+    "en": {
+        "barTitle": "Game Frenzy",
+        "barDesc": "Spin the Game Center slot to earn points. 24 levels.",
+        "shopTitle": "Game Zone shop",
+        "shopDesc": "Trade tetris tokens for rewards. Each stand has 4 items, bought in order.",
+        "stand": "Stand {n}",
+        "bonus": "Buy all 16 items to also get",
+        "needs": "Needs {n}",
+        "total": "Total {n}",
+        "grand": "Grand prize",
+        "cardsSuffix": " ({cards} cards)",
+        "prizes": {
+            "spins": "{n} spins",
+            "tetris": "{n} tetris tokens",
+            "thor": "Thor token ×{n}",
+            "coinFrenzy": "Coin Frenzy {pct}% ({min} min)",
+            "rangeChest": "Chest ({range} spins)",
+            "seasonSmall": "Small season chest",
+            "seasonLarge": "Large season chest",
+            "seasonGold": "Golden season chest",
+            "goldCard": "New-season gold card",
+            "diamondCard": "New-season diamond card",
+            "smallThorBox": "Small Thor token box {range}",
+            "largeThorBox": "Large Thor token box {range}"
+        },
+        "guide": [
+            {
+                "title": "Game Frenzy",
+                "points": [
+                    "Spin the Game Center slot to earn points, **24** levels",
+                    "The grand prize is **70,000 spins**",
+                    "The bar gives lots of **tetris tokens** to spend in the Game Zone shop"
+                ]
+            },
+            {
+                "title": "Game Zone shop",
+                "points": [
+                    "Trade **tetris tokens**: 4 stands with 4 items each",
+                    "Each stand's items are bought **in order**",
+                    "Buy all 16 to also get **Thor token ×12**"
+                ]
+            }
+        ]
+    },
+    "vi": {
+        "barTitle": "Cuồng nhiệt trò chơi",
+        "barDesc": "Quay máy ở Trung tâm trò chơi để tích điểm. 24 cấp.",
+        "shopTitle": "Đổi thưởng Khu trò chơi",
+        "shopDesc": "Dùng token xếp hình để đổi thưởng. Mỗi quầy có 4 món, đổi theo thứ tự.",
+        "stand": "Quầy {n}",
+        "bonus": "Đổi đủ 16 món còn nhận thêm",
+        "needs": "Cần {n}",
+        "total": "Tổng {n}",
+        "grand": "Giải lớn",
+        "cardsSuffix": " ({cards} thẻ)",
+        "prizes": {
+            "spins": "{n} lượt quay",
+            "tetris": "{n} token xếp hình",
+            "thor": "Token Thor ×{n}",
+            "coinFrenzy": "Cơn sốt xu {pct}% ({min} phút)",
+            "rangeChest": "Rương ({range} lượt quay)",
+            "seasonSmall": "Rương mùa nhỏ",
+            "seasonLarge": "Rương mùa lớn",
+            "seasonGold": "Rương mùa vàng",
+            "goldCard": "Thẻ vàng mùa mới",
+            "diamondCard": "Thẻ kim cương mùa mới",
+            "smallThorBox": "Hộp token Thor nhỏ {range}",
+            "largeThorBox": "Hộp token Thor lớn {range}"
+        },
+        "guide": [
+            {
+                "title": "Cuồng nhiệt trò chơi",
+                "points": [
+                    "Quay máy ở Trung tâm trò chơi để tích điểm, **24** cấp",
+                    "Giải lớn là **70,000 lượt quay**",
+                    "Thanh tiến độ cho nhiều **token xếp hình** để đổi ở Khu trò chơi"
+                ]
+            },
+            {
+                "title": "Đổi thưởng Khu trò chơi",
+                "points": [
+                    "Dùng **token xếp hình** để đổi: 4 quầy, mỗi quầy 4 món",
+                    "Các món trong một quầy phải đổi **theo thứ tự**",
+                    "Đổi đủ 16 món nhận thêm **Token Thor ×12**"
+                ]
+            }
+        ]
+    },
+    "ja": {
+        "barTitle": "ゲームフィーバー",
+        "barDesc": "ゲームセンターのスロットを回してポイントを貯めます。全24レベル。",
+        "shopTitle": "ゲームゾーン交換所",
+        "shopDesc": "テトリストークンで報酬と交換。各スタンドに4品、順番に交換します。",
+        "stand": "スタンド {n}",
+        "bonus": "16品すべて交換するとさらに",
+        "needs": "必要 {n}",
+        "total": "累計 {n}",
+        "grand": "大賞",
+        "cardsSuffix": "（カード{cards}枚）",
+        "prizes": {
+            "spins": "{n} スピン",
+            "tetris": "テトリストークン {n}",
+            "thor": "トールトークン ×{n}",
+            "coinFrenzy": "コインフィーバー {pct}%（{min}分）",
+            "rangeChest": "宝箱（{range} スピン）",
+            "seasonSmall": "シーズン宝箱（小）",
+            "seasonLarge": "シーズン宝箱（大）",
+            "seasonGold": "ゴールドシーズン宝箱",
+            "goldCard": "新シーズン ゴールドカード",
+            "diamondCard": "新シーズン ダイヤカード",
+            "smallThorBox": "トールトークン小箱 {range}",
+            "largeThorBox": "トールトークン大箱 {range}"
+        },
+        "guide": [
+            {
+                "title": "ゲームフィーバー",
+                "points": [
+                    "ゲームセンターのスロットでポイントを貯める。全 **24** レベル",
+                    "大賞は **70,000 スピン**",
+                    "バーから **テトリストークン** がたくさんもらえ、ゲームゾーンで使える"
+                ]
+            },
+            {
+                "title": "ゲームゾーン交換所",
+                "points": [
+                    "**テトリストークン**で交換。4スタンド×各4品",
+                    "各スタンドの品は **順番に** 交換",
+                    "16品すべて交換で **トールトークン ×12** も獲得"
+                ]
+            }
+        ]
+    },
+    "ko": {
+        "barTitle": "게임 피버",
+        "barDesc": "게임 센터 슬롯을 돌려 포인트를 모읍니다. 총 24레벨.",
+        "shopTitle": "게임 존 교환소",
+        "shopDesc": "테트리스 토큰으로 보상을 교환합니다. 진열대마다 4개, 순서대로 교환합니다.",
+        "stand": "진열대 {n}",
+        "bonus": "16개를 모두 교환하면 추가로",
+        "needs": "필요 {n}",
+        "total": "누적 {n}",
+        "grand": "대상",
+        "cardsSuffix": " (카드 {cards}장)",
+        "prizes": {
+            "spins": "스핀 {n}회",
+            "tetris": "테트리스 토큰 {n}",
+            "thor": "토르 토큰 ×{n}",
+            "coinFrenzy": "코인 피버 {pct}% ({min}분)",
+            "rangeChest": "상자 (스핀 {range})",
+            "seasonSmall": "소형 시즌 상자",
+            "seasonLarge": "대형 시즌 상자",
+            "seasonGold": "황금 시즌 상자",
+            "goldCard": "새 시즌 골드 카드",
+            "diamondCard": "새 시즌 다이아몬드 카드",
+            "smallThorBox": "작은 토르 토큰 상자 {range}",
+            "largeThorBox": "큰 토르 토큰 상자 {range}"
+        },
+        "guide": [
+            {
+                "title": "게임 피버",
+                "points": [
+                    "게임 센터 슬롯으로 포인트 적립, 총 **24**레벨",
+                    "대상은 **스핀 70,000회**",
+                    "진행 바에서 **테트리스 토큰**을 많이 받아 게임 존에서 사용"
+                ]
+            },
+            {
+                "title": "게임 존 교환소",
+                "points": [
+                    "**테트리스 토큰**으로 교환: 진열대 4개, 각 4개 품목",
+                    "진열대 품목은 **순서대로** 교환",
+                    "16개 모두 교환하면 **토르 토큰 ×12** 추가 획득"
+                ]
+            }
+        ]
+    },
+    "th": {
+        "barTitle": "เกมฟีเวอร์",
+        "barDesc": "หมุนสล็อตในเกมเซ็นเตอร์เพื่อเก็บแต้ม มีทั้งหมด 24 เลเวล",
+        "shopTitle": "ร้านแลกโซนเกม",
+        "shopDesc": "ใช้โทเคนเตตริสแลกรางวัล แต่ละซุ้มมี 4 ชิ้น ต้องแลกตามลำดับ",
+        "stand": "ซุ้ม {n}",
+        "bonus": "แลกครบ 16 ชิ้นได้เพิ่มอีก",
+        "needs": "ต้องการ {n}",
+        "total": "รวม {n}",
+        "grand": "รางวัลใหญ่",
+        "cardsSuffix": " ({cards} การ์ด)",
+        "prizes": {
+            "spins": "{n} สปิน",
+            "tetris": "โทเคนเตตริส {n}",
+            "thor": "โทเคนธอร์ ×{n}",
+            "coinFrenzy": "เหรียญฟีเวอร์ {pct}% ({min} นาที)",
+            "rangeChest": "หีบ ({range} สปิน)",
+            "seasonSmall": "หีบซีซันเล็ก",
+            "seasonLarge": "หีบซีซันใหญ่",
+            "seasonGold": "หีบซีซันทองคำ",
+            "goldCard": "การ์ดทองซีซันใหม่",
+            "diamondCard": "การ์ดเพชรซีซันใหม่",
+            "smallThorBox": "กล่องโทเคนธอร์เล็ก {range}",
+            "largeThorBox": "กล่องโทเคนธอร์ใหญ่ {range}"
+        },
+        "guide": [
+            {
+                "title": "เกมฟีเวอร์",
+                "points": [
+                    "หมุนสล็อตในเกมเซ็นเตอร์เพื่อเก็บแต้ม มี **24** เลเวล",
+                    "รางวัลใหญ่คือ **70,000 สปิน**",
+                    "แถบนี้ให้ **โทเคนเตตริส** จำนวนมาก ใช้แลกที่โซนเกม"
+                ]
+            },
+            {
+                "title": "ร้านแลกโซนเกม",
+                "points": [
+                    "ใช้ **โทเคนเตตริส** แลก มี 4 ซุ้ม ซุ้มละ 4 ชิ้น",
+                    "ของในแต่ละซุ้มต้องแลก **ตามลำดับ**",
+                    "แลกครบ 16 ชิ้นได้ **โทเคนธอร์ ×12** เพิ่ม"
+                ]
+            }
+        ]
+    },
+    "id": {
+        "barTitle": "Demam Game",
+        "barDesc": "Putar slot Pusat Game untuk mengumpulkan poin. 24 level.",
+        "shopTitle": "Tukar di Zona Game",
+        "shopDesc": "Tukar token tetris dengan hadiah. Tiap stan punya 4 item, ditukar berurutan.",
+        "stand": "Stan {n}",
+        "bonus": "Tukar semua 16 item untuk tambahan",
+        "needs": "Butuh {n}",
+        "total": "Total {n}",
+        "grand": "Hadiah utama",
+        "cardsSuffix": " ({cards} kartu)",
+        "prizes": {
+            "spins": "{n} spin",
+            "tetris": "{n} token tetris",
+            "thor": "Token Thor ×{n}",
+            "coinFrenzy": "Demam Koin {pct}% ({min} menit)",
+            "rangeChest": "Peti ({range} spin)",
+            "seasonSmall": "Peti musim kecil",
+            "seasonLarge": "Peti musim besar",
+            "seasonGold": "Peti musim emas",
+            "goldCard": "Kartu emas musim baru",
+            "diamondCard": "Kartu berlian musim baru",
+            "smallThorBox": "Kotak token Thor kecil {range}",
+            "largeThorBox": "Kotak token Thor besar {range}"
+        },
+        "guide": [
+            {
+                "title": "Demam Game",
+                "points": [
+                    "Putar slot Pusat Game untuk poin, **24** level",
+                    "Hadiah utama **70,000 spin**",
+                    "Bilah ini memberi banyak **token tetris** untuk ditukar di Zona Game"
+                ]
+            },
+            {
+                "title": "Tukar di Zona Game",
+                "points": [
+                    "Tukar **token tetris**: 4 stan, masing-masing 4 item",
+                    "Item tiap stan ditukar **berurutan**",
+                    "Tukar semua 16 item untuk tambahan **Token Thor ×12**"
+                ]
+            }
+        ]
+    },
+    "es": {
+        "barTitle": "Locura por los Juegos",
+        "barDesc": "Gira la tragamonedas del Centro de juegos para sumar puntos. 24 niveles.",
+        "shopTitle": "Tienda de la Zona de Juego",
+        "shopDesc": "Canjea fichas de Tetris por premios. Cada puesto tiene 4 artículos que se canjean en orden.",
+        "stand": "Puesto {n}",
+        "bonus": "Canjea los 16 artículos y recibe además",
+        "needs": "Requiere {n}",
+        "total": "Total {n}",
+        "grand": "Gran premio",
+        "cardsSuffix": " ({cards} cartas)",
+        "prizes": {
+            "spins": "{n} tiradas",
+            "tetris": "{n} fichas de Tetris",
+            "thor": "Ficha de Thor ×{n}",
+            "coinFrenzy": "Fiebre de Monedas {pct}% ({min} min)",
+            "rangeChest": "Cofre ({range} tiradas)",
+            "seasonSmall": "Cofre de temporada pequeño",
+            "seasonLarge": "Cofre de temporada grande",
+            "seasonGold": "Cofre de temporada dorado",
+            "goldCard": "Carta de oro de nueva temporada",
+            "diamondCard": "Carta de diamante de nueva temporada",
+            "smallThorBox": "Caja pequeña de fichas de Thor {range}",
+            "largeThorBox": "Caja grande de fichas de Thor {range}"
+        },
+        "guide": [
+            {
+                "title": "Locura por los Juegos",
+                "points": [
+                    "Gira la tragamonedas del Centro de juegos para sumar puntos, **24** niveles",
+                    "El gran premio es **70,000 tiradas**",
+                    "La barra da muchas **fichas de Tetris** para la Zona de Juego"
+                ]
+            },
+            {
+                "title": "Tienda de la Zona de Juego",
+                "points": [
+                    "Canjea **fichas de Tetris**: 4 puestos con 4 artículos cada uno",
+                    "Los artículos de cada puesto se canjean **en orden**",
+                    "Canjea los 16 y recibe además **Ficha de Thor ×12**"
+                ]
+            }
+        ]
+    },
+    "pt": {
+        "barTitle": "Loucura dos Jogos",
+        "barDesc": "Gire o caça-níquel da Central de jogos para somar pontos. 24 níveis.",
+        "shopTitle": "Loja da Zona de Jogo",
+        "shopDesc": "Troque fichas de Tetris por prêmios. Cada balcão tem 4 itens, trocados em ordem.",
+        "stand": "Balcão {n}",
+        "bonus": "Troque os 16 itens e ganhe também",
+        "needs": "Requer {n}",
+        "total": "Total {n}",
+        "grand": "Grande prêmio",
+        "cardsSuffix": " ({cards} cartas)",
+        "prizes": {
+            "spins": "{n} giros",
+            "tetris": "{n} fichas de Tetris",
+            "thor": "Ficha de Thor ×{n}",
+            "coinFrenzy": "Febre de Moedas {pct}% ({min} min)",
+            "rangeChest": "Baú ({range} giros)",
+            "seasonSmall": "Baú de temporada pequeno",
+            "seasonLarge": "Baú de temporada grande",
+            "seasonGold": "Baú de temporada dourado",
+            "goldCard": "Carta de ouro da nova temporada",
+            "diamondCard": "Carta de diamante da nova temporada",
+            "smallThorBox": "Caixa pequena de fichas de Thor {range}",
+            "largeThorBox": "Caixa grande de fichas de Thor {range}"
+        },
+        "guide": [
+            {
+                "title": "Loucura dos Jogos",
+                "points": [
+                    "Gire o caça-níquel da Central de jogos para somar pontos, **24** níveis",
+                    "O grande prêmio é **70,000 giros**",
+                    "A barra dá muitas **fichas de Tetris** para a Zona de Jogo"
+                ]
+            },
+            {
+                "title": "Loja da Zona de Jogo",
+                "points": [
+                    "Troque **fichas de Tetris**: 4 balcões com 4 itens cada",
+                    "Os itens de cada balcão são trocados **em ordem**",
+                    "Troque os 16 e ganhe também **Ficha de Thor ×12**"
+                ]
+            }
+        ]
+    }
+}

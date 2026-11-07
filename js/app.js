@@ -4,7 +4,8 @@
 
 const EVENTS = {
     island: { module: null },
-    bonsai: { module: "./events/bonsai.js" }
+    bonsai: { module: "./events/bonsai.js" },
+    "game-center": { module: "./events/game-center.js" }
 };
 const DEFAULT_EVENT = "island";
 
