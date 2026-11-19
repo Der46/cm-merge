@@ -138,7 +138,9 @@
         "eventNavLabel": "活動",
         "eventIsland": "合併島嶼",
         "eventBonsai": "盆栽基地",
-        "eventGameCenter": "遊戲中心"
+        "eventGameCenter": "遊戲中心",
+        "contactLink": "聯絡網頁開發者",
+        "contactHint": "加入 LINE 社群後，請標記 @CSL"
     },
     "en": {
         "pageTitle": "Merge Islands Matrix Lightning Calculator",
@@ -279,7 +281,9 @@
         "eventNavLabel": "Events",
         "eventIsland": "Merge Islands",
         "eventBonsai": "Bonsai Base",
-        "eventGameCenter": "Game Center"
+        "eventGameCenter": "Game Center",
+        "contactLink": "Contact the developer",
+        "contactHint": "Join the LINE group, then tag @CSL"
     },
     "vi": {
         "pageTitle": "Máy Tính Tia Sét Ma Trận Merge Islands",
@@ -420,7 +424,9 @@
         "eventNavLabel": "Sự kiện",
         "eventIsland": "Đảo hợp nhất",
         "eventBonsai": "Căn cứ Bonsai",
-        "eventGameCenter": "Trung tâm trò chơi"
+        "eventGameCenter": "Trung tâm trò chơi",
+        "contactLink": "Liên hệ nhà phát triển",
+        "contactHint": "Tham gia nhóm LINE rồi gắn thẻ @CSL"
     },
     "ja": {
         "pageTitle": "マージアイランド・マトリックス雷計算機",
@@ -561,7 +567,9 @@
         "eventNavLabel": "イベント",
         "eventIsland": "合成アイランド",
         "eventBonsai": "盆栽ベース",
-        "eventGameCenter": "ゲームセンター"
+        "eventGameCenter": "ゲームセンター",
+        "contactLink": "開発者に連絡",
+        "contactHint": "LINEグループに参加して @CSL をメンションしてください"
     },
     "ko": {
         "pageTitle": "머지 아일랜드 매트릭스 번개 계산기",
@@ -702,7 +710,9 @@
         "eventNavLabel": "이벤트",
         "eventIsland": "합성 섬",
         "eventBonsai": "분재 기지",
-        "eventGameCenter": "게임 센터"
+        "eventGameCenter": "게임 센터",
+        "contactLink": "개발자에게 문의",
+        "contactHint": "LINE 그룹에 참여한 뒤 @CSL 을 태그해 주세요"
     },
     "th": {
         "pageTitle": "เครื่องคำนวณสายฟ้าแบบตาราง Merge Islands",
@@ -843,7 +853,9 @@
         "eventNavLabel": "กิจกรรม",
         "eventIsland": "เกาะรวมไอเทม",
         "eventBonsai": "ฐานบอนไซ",
-        "eventGameCenter": "เกมเซ็นเตอร์"
+        "eventGameCenter": "เกมเซ็นเตอร์",
+        "contactLink": "ติดต่อผู้พัฒนา",
+        "contactHint": "เข้ากลุ่ม LINE แล้วแท็ก @CSL"
     },
     "id": {
         "pageTitle": "Kalkulator Petir Matriks Merge Islands",
@@ -984,7 +996,9 @@
         "eventNavLabel": "Event",
         "eventIsland": "Pulau Gabung",
         "eventBonsai": "Markas Bonsai",
-        "eventGameCenter": "Pusat Game"
+        "eventGameCenter": "Pusat Game",
+        "contactLink": "Hubungi pengembang",
+        "contactHint": "Gabung grup LINE lalu tandai @CSL"
     },
     "es": {
         "pageTitle": "Calculadora de Rayos en Matriz de Merge Islands",
@@ -1125,7 +1139,9 @@
         "eventNavLabel": "Eventos",
         "eventIsland": "Islas de fusión",
         "eventBonsai": "Base Bonsái",
-        "eventGameCenter": "Centro de juegos"
+        "eventGameCenter": "Centro de juegos",
+        "contactLink": "Contactar al desarrollador",
+        "contactHint": "Únete al grupo de LINE y etiqueta a @CSL"
     },
     "pt": {
         "pageTitle": "Calculadora de Raios em Matriz do Merge Islands",
@@ -1266,6 +1282,8 @@
         "eventNavLabel": "Eventos",
         "eventIsland": "Ilhas de fusão",
         "eventBonsai": "Base Bonsai",
-        "eventGameCenter": "Central de jogos"
+        "eventGameCenter": "Central de jogos",
+        "contactLink": "Falar com o desenvolvedor",
+        "contactHint": "Entre no grupo do LINE e marque @CSL"
     }
 }
