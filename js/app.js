@@ -90,22 +90,14 @@ const start = () => {
     });
 };
 
-// Sticky title bar: shrink it once the page scrolls (with a gap between the on/off points so it never flickers)
+// Compact title bar: a fixed bar (no effect on page height) shown while the hero is scrolled out of view.
+// Observing the hero instead of resizing it avoids the layout feedback loop that made the old sticky hero flicker.
 const hero = document.getElementById("hero");
-let heroStuck = false;
+const topbar = document.getElementById("topbar");
 
-const syncHero = () => {
-    const y = window.scrollY;
-    const next = heroStuck ? y > 24 : y > 72;
-
-    if (next !== heroStuck) {
-        heroStuck = next;
-        hero.classList.toggle("is-stuck", heroStuck);
-    }
-};
-
-window.addEventListener("scroll", syncHero, { passive: true });
-syncHero();
+new IntersectionObserver(([entry]) => {
+    topbar.classList.toggle("is-visible", !entry.isIntersecting);
+}, { rootMargin: "-56px 0px 0px 0px" }).observe(hero);
 
 if (window.MergeCore && window.MergeCore.ready) {
     start();
