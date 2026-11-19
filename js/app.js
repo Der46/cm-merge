@@ -90,6 +90,23 @@ const start = () => {
     });
 };
 
+// Sticky title bar: shrink it once the page scrolls (with a gap between the on/off points so it never flickers)
+const hero = document.getElementById("hero");
+let heroStuck = false;
+
+const syncHero = () => {
+    const y = window.scrollY;
+    const next = heroStuck ? y > 24 : y > 72;
+
+    if (next !== heroStuck) {
+        heroStuck = next;
+        hero.classList.toggle("is-stuck", heroStuck);
+    }
+};
+
+window.addEventListener("scroll", syncHero, { passive: true });
+syncHero();
+
 if (window.MergeCore && window.MergeCore.ready) {
     start();
 } else {

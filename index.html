@@ -18,7 +18,7 @@
 
 <body>
     <main class="app">
-        <section class="hero">
+        <section id="hero" class="hero">
             <svg class="hero-bolt" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                 <path fill="currentColor" stroke="#d99100" stroke-width="1" stroke-linejoin="round"
                     d="M13.5 1.5 4.5 13.5h6l-1.5 9 9.5-12.5h-6.2z" />
@@ -26,11 +26,15 @@
             <div class="hero-badge" data-i18n="heroBadge">合併島嶼工具</div>
             <div class="hero-title-row">
                 <h1 data-i18n="heroTitle">矩陣式閃電計算器</h1>
-                <span class="hero-credit" data-i18n="heroCredit">大佬群CSL製作</span>
+                <span class="hero-credit">
+                    <svg class="hero-credit-crown" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M3 8.5l4.5 3.5L12 5l4.5 7L21 8.5 19 18H5z" fill="currentColor" stroke="#8a5600" stroke-width="1.4" stroke-linejoin="round" />
+                        <circle cx="3" cy="8" r="1.6" fill="currentColor" /><circle cx="12" cy="4.5" r="1.6" fill="currentColor" /><circle cx="21" cy="8" r="1.6" fill="currentColor" />
+                        <path d="M6 20.5h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <span data-i18n="heroCredit">大佬群CSL製作</span>
+                </span>
             </div>
-            <p data-i18n="heroDesc">
-                選擇本次目標物件 11、12、13 個或自行輸入，將目前棋盤上的物件拖曳到下方 7 × 7 矩陣中，會即時計算目前折算值、還缺多少閃電與完成度。
-            </p>
             <svg class="hero-wave" viewBox="0 0 400 26" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                 <path fill="currentColor" d="M0 14 C 50 2, 100 2, 150 12 S 250 24, 300 12 S 370 4, 400 10 V26 H0 Z" />
             </svg>
