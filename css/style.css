@@ -83,10 +83,10 @@ body.is-dragging {
 
 .hero-bolt {
     position: absolute;
-    right: 14px;
-    top: 10px;
-    width: 96px;
-    height: 96px;
+    right: 16px;
+    top: 52px;
+    width: 76px;
+    height: 76px;
     color: var(--bolt);
     opacity: 0.9;
     transform: rotate(8deg);
@@ -218,18 +218,88 @@ h1 {
     filter: drop-shadow(0 3px 8px rgba(255, 200, 61, 0.35));
 }
 
-/* ---------- Toolbar ---------- */
-.toolbar {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
-    gap: 12px;
-    margin-top: 12px;
-    padding: 14px;
-    border-radius: var(--radius-xl);
-    background: var(--card);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
-    align-items: end;
+/* ---------- Title-bar language picker ---------- */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.hero-top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.hero-top .hero-badge {
+    margin-bottom: 0;
+}
+
+.hero-lang {
+    position: relative;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.hero-lang-icon {
+    position: absolute;
+    left: 10px;
+    width: 16px;
+    height: 16px;
+    color: #dff5f1;
+    pointer-events: none;
+}
+
+.hero-lang select {
+    width: auto;
+    max-width: 170px;
+    height: 36px;
+    padding: 6px 10px 6px 32px;
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.hero-lang select:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.hero-lang select:focus-visible {
+    border-color: var(--bolt);
+    box-shadow: 0 0 0 3px rgba(255, 200, 61, 0.35);
+}
+
+.hero-lang option {
+    color: var(--ink);
+    background: #fff;
+}
+
+/* ---------- Target picker inside the live calculation panel ---------- */
+.result-controls {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.result-controls .field {
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .field label {
@@ -1249,10 +1319,10 @@ body.is-dragging .guide-fab {
     }
 
     .hero-bolt {
-        width: 64px;
-        height: 64px;
-        right: 8px;
-        top: 8px;
+        width: 46px;
+        height: 46px;
+        right: 10px;
+        top: 46px;
     }
 
     .hero-wave {
@@ -1298,12 +1368,26 @@ body.is-dragging .guide-fab {
         height: 24px;
     }
 
-    .toolbar {
-        grid-template-columns: 1fr;
-        margin-top: 8px;
-        padding: 10px;
+    .hero-top {
+        margin-bottom: 8px;
+    }
+
+    .hero-lang select {
+        max-width: 130px;
+        height: 32px;
+        padding: 4px 8px 4px 28px;
+        font-size: 12px;
+    }
+
+    .hero-lang-icon {
+        left: 8px;
+        width: 14px;
+        height: 14px;
+    }
+
+    .result-controls {
         gap: 8px;
-        border-radius: 18px;
+        margin-bottom: 8px;
     }
 
     select,
@@ -1483,11 +1567,6 @@ body.is-dragging .guide-fab {
 
     .hero {
         padding: 12px 12px 26px;
-    }
-
-    .toolbar {
-        grid-template-columns: 1fr;
-        padding: 8px;
     }
 
     .result-card {

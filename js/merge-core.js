@@ -128,7 +128,7 @@ const getSelectedTargetCount = () => {
 
 const renderTargetOptions = () => {
     const selectedValue = targetSelect.value || String(state.targetCount || 13);
-    const counts = [11, 12, 13];
+    const counts = [13];
 
     targetSelect.innerHTML = "";
 
